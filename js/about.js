@@ -1,6 +1,8 @@
 /* About · constellation behaviour.
-   Lighting a star dims the rest of the sky (CSS), and — for field stars that
-   name a photo — washes that photo in behind the constellation.
+   Lighting a star dims the rest of the sky (CSS), and — for any star that
+   names a photo — washes that photo in behind the constellation. Nothing here
+   reads data-side, so work stars and field stars behave identically; both
+   carry photos.
 
    Photos are optional by design: a star whose image is missing simply lights
    without a wash, so the section works before any photography is dropped in. */

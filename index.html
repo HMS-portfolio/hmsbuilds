@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hamza AlSalamat · Don't be afraid to have style</title>
+  <title>Do it in style - it don't gotta make sense to anyone else</title>
   <meta name="description" content="Hamza AlSalamat. Founder of Nama Site Intelligence, and hands-on with the rest: an engine that reads land, a car welded from steel, an agent that learns to write." />
   <meta name="theme-color" content="#eae8e0" />
   <link rel="canonical" href="https://hmsbuilds.com/" />
@@ -20,7 +20,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Hamza AlSalamat" />
   <meta property="og:url" content="https://hmsbuilds.com/" />
-  <meta property="og:title" content="Hamza AlSalamat · Don't be afraid to have style" />
+  <meta property="og:title" content="Do it in style - it don't gotta make sense to anyone else" />
   <meta property="og:description" content="Founder of Nama Site Intelligence, and hands-on with the rest: an engine that reads land, a car welded from steel, an agent that learns to write." />
   <meta property="og:image" content="https://hmsbuilds.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -29,7 +29,7 @@
   <meta property="og:locale" content="en_US" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hamza AlSalamat · Don't be afraid to have style" />
+  <meta name="twitter:title" content="Do it in style - it don't gotta make sense to anyone else" />
   <meta name="twitter:description" content="Founder of Nama Site Intelligence, and hands-on with the rest: an engine that reads land, a car welded from steel, an agent that learns to write." />
   <meta name="twitter:image" content="https://hmsbuilds.com/assets/og-card.jpg" />
 
@@ -668,7 +668,9 @@
 
     <!-- constellation — two skies, one discipline.
          Every star reads at a glance; hovering one lights it, dims the rest of
-         the sky, and (for field stars) washes its photo in behind everything. -->
+         the sky, and — for any star that names one — washes its photo in
+         behind everything. Both skies carry photos now: the field has the
+         arena shots, the work side has Paperly and the MISTI car. -->
     <section class="constellation" aria-labelledby="const-head">
       <header class="const-head">
         <p class="kicker rise">The whole of it</p>
@@ -676,7 +678,9 @@
       </header>
 
       <div class="const-stage" data-const>
-        <!-- atmospheric photo wash, faded in on hover (field stars only) -->
+        <!-- atmospheric photo wash, faded in on hover by any star with a
+             data-photo. Photos stay optional: about.js probes the file first
+             and skips the wash silently if it is missing. -->
         <div class="const-wash" data-const-wash aria-hidden="true"></div>
 
         <!-- the unnamed field. about.js fills this with faint dust at authored
@@ -709,7 +713,7 @@
         <!-- ---- the work ----
              --mag varies the glyph size. A chart where every star is the same
              size is a diagram; magnitude is what makes it a sky. -->
-        <button class="c-star" type="button" data-side="work" style="--x:17%; --y:13%; --mag:1.20">
+        <button class="c-star" type="button" data-side="work" data-photo="assets/paperly/paperly-1.jpeg, assets/paperly/paperly-2.jpeg" style="--x:17%; --y:13%; --mag:1.20">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">AI native builds</span>
           <span class="c-note">tools · systems · agents</span>
@@ -724,7 +728,7 @@
           <span class="c-name">Marketing</span>
           <span class="c-note">written to land</span>
         </button>
-        <button class="c-star" type="button" data-side="work" style="--x:36%; --y:61%; --mag:1.02">
+        <button class="c-star" type="button" data-side="work" data-photo="assets/misti/misti-1.jpg, assets/misti/misti-9.jpg, assets/misti/misti-4.jpg" style="--x:36%; --y:61%; --mag:1.02">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">STEM &amp; engineering</span>
           <span class="c-note">CAD to codebase</span>
@@ -750,54 +754,56 @@
         <!-- the combat trio replaces the single "MMA" star: he competes in
              three named disciplines, so they carry the sky's top magnitude and
              are bound by the closed triangle above. -->
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/mma.jpg, assets/arenas/mma-2.jpg" style="--x:63%; --y:12%; --mag:1.16">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/mma.webp, assets/arenas/mma-2.webp" style="--x:63%; --y:12%; --mag:1.16">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Wrestling</span>
           <span class="c-note">on the mat</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/mma.jpg, assets/arenas/mma-2.jpg" style="--x:81%; --y:20%; --mag:1.16">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/mma.webp, assets/arenas/mma-2.webp" style="--x:81%; --y:20%; --mag:1.16">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Jiu-jitsu</span>
           <span class="c-note">rolling</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/mma.jpg, assets/arenas/mma-2.jpg" style="--x:68%; --y:31%; --mag:1.16">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/mma.webp, assets/arenas/mma-2.webp" style="--x:68%; --y:31%; --mag:1.16">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Kickboxing</span>
           <span class="c-note">in stand up</span>
         </button>
 
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/horsemanship.jpg, assets/arenas/horsemanship-2.jpg, assets/arenas/horsemanship-3.jpg" style="--x:88%; --y:39%; --mag:1.14">
+        <!-- the three sharpest frames lead, so the first hover is the one that
+             holds up; the three originals still take their turn behind them. -->
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/horsemanship-4.webp, assets/arenas/horsemanship-5.webp, assets/arenas/horsemanship-6.webp, assets/arenas/horsemanship.webp, assets/arenas/horsemanship-2.webp, assets/arenas/horsemanship-3.webp" style="--x:88%; --y:39%; --mag:1.14">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Horsemanship</span>
           <span class="c-note">in the saddle</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/archery.jpg" style="--x:65%; --y:47%; --mag:1.04">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/archery.webp" style="--x:65%; --y:47%; --mag:1.04">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Archery</span>
           <span class="c-note">bow hunting · target</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/hunting.jpg" style="--x:83%; --y:56%; --mag:1.06">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/hunting.webp" style="--x:83%; --y:56%; --mag:1.06">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Hunting</span>
           <span class="c-note">in the mountains</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/wildlife.jpg" style="--x:62%; --y:68%; --mag:1.10">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/outdoors.webp, assets/arenas/outdoors-2.webp, assets/arenas/outdoors-3.webp, assets/arenas/outdoors-4.webp" style="--x:62%; --y:68%; --mag:1.10">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
-          <span class="c-name">Wildlife</span>
-          <span class="c-note">watched, not read about</span>
+          <span class="c-name">Wildlife &amp; Outdoors</span>
+          <span class="c-note">experienced, not watched</span>
         </button>
 
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/soccer.jpg" style="--x:87%; --y:73%; --mag:0.88">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/soccer.webp" style="--x:87%; --y:73%; --mag:0.88">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Soccer</span>
           <span class="c-note">on the pitch</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/tennis.jpg" style="--x:69%; --y:84%; --mag:0.86">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/tennis.webp" style="--x:69%; --y:84%; --mag:0.86">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Tennis</span>
           <span class="c-note">point by point</span>
         </button>
-        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/golf.jpg" style="--x:88%; --y:88%; --mag:0.88">
+        <button class="c-star" type="button" data-side="field" data-photo="assets/arenas/golf.webp" style="--x:88%; --y:88%; --mag:0.88">
           <span class="c-mark js-star" data-star="7" aria-hidden="true"></span>
           <span class="c-name">Golf</span>
           <span class="c-note">the long game</span>
@@ -945,11 +951,11 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
 
-  <script src="js/router.js?v=13"></script>
+  <script src="js/router.js?v=14"></script>
   <script src="js/film.js?v=19"></script>
   <script src="js/hero.js?v=22"></script>
   <script src="js/work.js?v=9"></script>
   <script src="js/heritage.js?v=13"></script>
-  <script src="js/about.js?v=3"></script>
+  <script src="js/about.js?v=4"></script>
 </body>
 </html>

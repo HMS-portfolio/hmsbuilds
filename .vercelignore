@@ -23,6 +23,10 @@ assets/hero/shot-b-eye.png
 # other hosts, excluded here so it cannot imply it is doing something.
 _headers
 
+# Camera originals behind assets/arenas/*.webp (14MB). Kept on disk so a future
+# re-crop never has to go back to the phone; nothing loads them at runtime.
+assets/arenas/_originals/
+
 # Local noise
 .DS_Store
 **/.DS_Store

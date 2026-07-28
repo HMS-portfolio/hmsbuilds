@@ -26,3 +26,10 @@ assets/hero/shot-b-eye.png
 reference/
 .vercel
 .env*
+
+# Camera originals for the arena wash photos (14MB). js/about.js loads only
+# the .webp files built from these; keeping the originals on disk means a
+# future re-crop or re-encode never has to go back to the phone, but they must
+# not ship: Vercel clones the whole repo, so anything committed is stored
+# forever in history.
+assets/arenas/_originals/
