@@ -1,0 +1,312 @@
+/* ============================================================
+   type.css — the site-wide typographic system.
+
+   Its OWN sheet, loaded LAST, for two reasons:
+   1. a site-wide type layer has to win over every other sheet, and
+   2. it used to live at the end of about.css, which ANOTHER SESSION
+      owns for the About/Contact layout work. Keep it here.
+
+   THREE ROLES, three families:
+     display  Bebas Neue   page headlines. CAPS ONLY — no lowercase
+                           exists in this face, and it ships a single
+                           weight (400). Never ask it for 700.
+     title    EB Garamond  card titles, dossier titles, AND the ledes.
+                           Same Garamond lineage as the original Cormorant,
+                           drawn sturdier. This is where the personal,
+                           calligraphic character lives.
+     body     Inter        everything read at length, plus all labels.
+
+   ITALIC RULE: EB Garamond has a REAL italic, so ledes and card blurbs
+   may use font-style: italic. Bebas and Inter do NOT, so the headline
+   <em> device stays colour-only. font-synthesis: none is what enforces
+   this — ask Bebas or Inter for italic and you get nothing, not a fake.
+   ============================================================ */
+
+:root {
+  /* modular scale, major third (1.25), fluid between 360px and 1440px */
+  --step--2: clamp(0.66rem, 0.65rem + 0.04vw, 0.69rem);
+  --step--1: clamp(0.75rem, 0.74rem + 0.06vw, 0.79rem);
+  --step-0:  clamp(0.89rem, 0.88rem + 0.08vw, 0.96rem);
+  --step-1:  clamp(0.99rem, 0.96rem + 0.15vw, 1.09rem);
+  --step-2:  clamp(1.13rem, 1.07rem + 0.25vw, 1.32rem);
+  --step-3:  clamp(1.29rem, 1.19rem + 0.42vw, 1.62rem);
+  --step-4:  clamp(1.47rem, 1.33rem + 0.62vw, 1.98rem);
+  --step-5:  clamp(1.68rem, 1.47rem + 0.92vw, 2.44rem);
+  --step-6:  clamp(1.92rem, 1.62rem + 1.32vw, 3.00rem);
+  /* Bebas is condensed, so it needs more size than a normal-width face
+     to carry the same visual weight across a column */
+  --step-7:  clamp(2.40rem, 1.86rem + 2.30vw, 3.95rem);   /* 5.30 -> 4.50 -> 3.95: second pass down */
+
+  --leading-display: 0.94;   /* caps only: no descenders to clear */
+  --leading-title: 1.18;
+  --leading-body: 1.62;
+  --track-display: 0.012em;  /* caps always want a little air */
+  --track-title: -0.004em;   /* Garamond is already snug; barely pull it */
+  --track-caps: 0.22em;
+}
+
+/* metric-matched fallbacks so the swap does not shove the layout */
+@font-face {
+  font-family: "Slab Fallback";
+  src: local("Georgia"), local("Times New Roman");
+  size-adjust: 97%; ascent-override: 92%; descent-override: 24%;
+}
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Helvetica Neue"), local("Arial");
+  size-adjust: 99%; ascent-override: 95%; descent-override: 24%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  /* none of the three faces has an italic or extra weights to interpolate;
+     without this the browser invents them and the result looks amateur */
+  font-synthesis: none;
+}
+
+/* ---- 1 · PAGE HEADLINES — Bebas, uppercase by design ---- */
+.work-title, .certs-title, .contact-title, .about-head, .outro-line {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: var(--step-7);
+  line-height: var(--leading-display);
+  letter-spacing: var(--track-display);
+  text-wrap: balance;
+}
+
+/* the em device: colour, not slant. No face here owns an italic. */
+em, i,
+.work-title em, .certs-title em, .contact-title em,
+.about-head em, .outro-line em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ---- 2 · TITLES AND SUBHEADS — EB Garamond, the personal hand ---- */
+.dossier-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: var(--step-4);
+  line-height: var(--leading-title);
+  letter-spacing: var(--track-title);
+}
+.card-body h3, .cert-meta h4, .contact-v, .branch-t, .arenas-label {
+  font-family: var(--font-title);
+  font-style: normal;
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: var(--leading-title);
+  letter-spacing: var(--track-title);
+}
+.nama-strap { font-family: var(--font-body); }
+
+/* ---- 3 · READ AT LENGTH — Inter, upright, never italic ---- */
+/* the signature italic lede, restored. EB Garamond owns a true italic, so
+   this is a drawn face and not a sheared upright. */
+.work-sub, .certs-sub, .about-lede, .contact-sub, .dossier-lede {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--step-2);
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+.card-body p, .cert-meta p, .dossier-body, .contact-note,
+.contact-primary-note, .arena-note, .outro-note,
+.film-hint, .deck-hint, .outro-foot, .contact-why li, .now-list li {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--leading-body);
+}
+.card-body p, .cert-meta p {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: var(--step-1);
+  line-height: 1.42;
+}
+.contact-why li, .now-list li { font-size: var(--step-0); }
+
+/* About running prose. The opening paragraph keeps .about-lede's larger step so
+   the column has a natural entry point; the rest steps down one. */
+.about-para {
+  font-family: var(--font-body);
+  font-weight: 400;
+  /* step-1 against the 700px column lands ~74 characters per line. At step-0 it
+     ran past 90, which is well outside a comfortable measure. */
+  font-size: var(--step-1);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+.page--about .about-lede { font-size: var(--step-2); line-height: 1.42; }
+
+/* the beat. Bebas is caps-only and ships one weight, so it carries the
+   transform and the display tracking explicitly rather than inheriting them. */
+.about-beat {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-5);
+  line-height: 0.98;
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+}
+.about-beat em { font-style: normal; color: var(--accent); }
+
+/* ---- small caps labels — Inter, always ---- */
+.kicker, .card-tag, .cert-date, .cert-open, .nav-tabs a, .cta,
+.contact-k, .contact-why-head, .dossier-idx, .dossier-facts span,
+.branch-k, .card-index, .card-open-cue, .now-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+}
+.card-tag, .dossier-facts span, .contact-why-head { font-size: var(--step--2); }
+
+/* ---- Arabic is Aref Ruqaa everywhere. The Nama mark inherited the
+       display token, which would have dropped نماء onto a fallback
+       the moment display became a Latin-only caps face. ---- */
+.nama-mark, .sig-arabic, .work-arabic, .about-arabic,
+.contact-arabic, .outro-arabic {
+  font-family: "Aref Ruqaa", serif;
+}
+
+/* ============================================================
+   THE SWAP-IN — `fonts-ready` is set by the boot script in <head>,
+   or forced after 1.2s so text is never held hostage by a slow or
+   failed font fetch. Headlines settle the last of their tracking,
+   so the substitution reads as intent rather than as a flash.
+   ============================================================ */
+.work-title, .certs-title, .contact-title, .about-head, .outro-line {
+  letter-spacing: calc(var(--track-display) + 0.014em);
+  transition: letter-spacing 0.6s cubic-bezier(0.35, 0.1, 0.45, 0.95);
+}
+html.fonts-ready .work-title,
+html.fonts-ready .certs-title,
+html.fonts-ready .contact-title,
+html.fonts-ready .about-head,
+html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
+
+/* interactive type moves, never jumps */
+.nav-tabs a, .cta, .card-body h3, .contact-v, .branch-t, .cert-meta h4 {
+  transition: color 0.35s ease, letter-spacing 0.35s ease, opacity 0.3s ease;
+}
+.work-card:hover .card-body h3,
+.cert-card:hover .cert-meta h4 { letter-spacing: -0.004em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .work-title, .certs-title, .contact-title, .about-head, .outro-line {
+    transition: none;
+    letter-spacing: var(--track-display);
+  }
+}
+
+/* ---- the constellation belongs to another session's about.css, whose
+       `.const-converge em` rule (0,2,0) outranks a bare `em` selector no
+       matter the load order. Match its specificity from here instead of
+       editing their file. Bebas is caps-only, so a sentence fragment set
+       in it mid-paragraph reads wrong: send it to the body face. ---- */
+.const-converge { font-family: var(--font-body); font-weight: 400; }
+.const-converge em { font-style: normal; font-weight: 600; color: var(--accent); }
+.const-sky { font-family: var(--font-body); letter-spacing: var(--track-caps); }
+.c-name { font-family: var(--font-title); font-weight: 700; letter-spacing: var(--track-title); }
+.c-note { font-family: var(--font-body); font-weight: 400; }
+
+
+/* ============================================================
+   CARD POLISH
+   Lives here, not in work.css, because work.css loads BEFORE
+   heritage.css and heritage.css already owns .work-card's border
+   and shadow. type.css is the last sheet, so this is the only
+   place these can win. Not typography, but it needs the last word.
+   ============================================================ */
+
+/* 1 · RAGGED BOTTOM EDGES — the main culprit.
+      Cards measured 550 / 575 / 550 / 550px because a card whose blurb
+      wraps to two lines grew taller than its neighbours, so the row's
+      bottom edge stepped. Make the card a flex column, let the body
+      absorb the slack, and pin the tag to a shared baseline. */
+.work-grid, .certs-grid, .contact-grid { align-items: stretch; }
+.work-card, .cert-card, .contact-card { display: flex; flex-direction: column; height: 100%; }
+.card-media { flex: none; }
+.card-body { flex: 1; display: flex; flex-direction: column; }
+.card-tag { margin-top: auto; padding-top: 14px; }
+
+/* 2 · RADIUS — 22px on a 290px card reads bubbly and consumer.
+      Tightening it is most of the difference between soft and premium. */
+:root { --radius-card: 15px; }
+.card-media {
+  border-radius: calc(var(--radius-card) - 1px) calc(var(--radius-card) - 1px) 0 0;
+}
+
+/* 3 · SHADOW — a single wide blur reads flat. Real depth is layered:
+      a tight contact shadow, a mid lift, then a wide ambient. */
+.work-card, .cert-card, .contact-card, .branch-card, .proof-tile, .arena-tile {
+  box-shadow:
+    0 1px 1px rgba(28, 31, 26, 0.04),
+    0 4px 8px rgba(28, 31, 26, 0.05),
+    0 16px 32px rgba(28, 31, 26, 0.07);
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+              border-color 0.35s ease;
+}
+.work-card:hover, .cert-card:hover, .contact-card:hover, .branch-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 2px 3px rgba(28, 31, 26, 0.05),
+    0 10px 20px rgba(28, 31, 26, 0.07),
+    0 30px 60px rgba(28, 31, 26, 0.12);
+}
+
+
+/* ============================================================
+   NAV — measured 60.7px tall, which is a lot of furniture for a
+   capsule that floats over everything. Trimmed to ~46px.
+   Lives here (last sheet) because .nav's box is set in styles.css
+   and its colours in heritage.css, both of which another session
+   is editing; overriding from here avoids touching either.
+   ============================================================ */
+.nav {
+  top: 13px;
+  gap: clamp(8px, 1.6vw, 18px);
+  padding: 4px 7px 4px 13px;
+}
+.nav-tabs a {
+  padding: 7px 12px;
+  font-size: var(--step--2);
+  letter-spacing: 0.19em;
+}
+
+/* the wordmark is fine white line art: at 32px on a dark capsule the
+   strokes went thin and grey. Slightly smaller, fully opaque, and given
+   a soft drop shadow so the hairlines separate from the ink behind. */
+.nav-logo img {
+  height: 27px;
+  opacity: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+}
+.nav-logo { display: flex; align-items: center; }
+.nav-logo:hover img { opacity: 1; transform: scale(1.04); }
+.nav-logo img { transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); }
+
+@media (max-width: 720px) {
+  .nav { top: 10px; padding: 3px 6px; }
+  .nav-tabs a { padding: 10px 8px; font-size: 0.56rem; letter-spacing: 0.1em; }
+}
+
+/* ---- the outro headline sits on the INK field, not on paper ----
+   The em-device rule near the top of this sheet paints every headline em with
+   var(--accent), which is the PAPER accent. styles.css already corrects the
+   outro to var(--ink-accent), but this sheet loads last and was quietly
+   overriding it, so the gold half of the footer headline measured 2.69:1
+   against the footer's rgb(30,36,28) — under the 3:1 floor for large text, and
+   the whole point of that line is the second half lifting off the field.
+   --ink-accent measures 9.01:1 there. The other headline ems stay on --accent:
+   they sit on paper, where that token is the correct one. */
+.outro-line em { color: var(--ink-accent); }

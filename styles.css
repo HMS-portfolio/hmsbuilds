@@ -1,0 +1,1208 @@
+/* ======== Hamza AlSalamat — light paper, ink splashes ========
+   The page is light. Dark is not the ground, it is a DEVICE: used in a few
+   deliberate places (the nav capsule, the card media plates, the closing band,
+   the email plate) so each one lands as a graphic event on paper.
+
+   Two token sets, and mixing them is the way to break this:
+   - on paper  -> --text / --muted / --accent / --rose / --line
+   - on a splash -> --ink-text / --ink-accent / --ink-rose / --ink-line       */
+
+:root {
+  /* --- paper --- */
+  --bg: #eae8e0;             /* the ground: low-saturation warm grey, not beige */
+  --surface: #fffdf8;        /* cards, near-white so they lift off the ground */
+  --text: #33362e;           /* near-black, carries a trace of the film's green */
+  --muted: #5f6359;
+  --line: rgba(28, 31, 26, 0.16);
+  --accent: #8a5a18;         /* gold for type on paper, 5.9:1 */
+  --accent-2: #5a3a0c;
+  --brass: #7a5214;
+  --rose: #9e3b26;
+  --accent-soft: rgba(122, 82, 20, 0.4);
+  --glow: rgba(122, 82, 20, 0.15);
+
+  /* --- the splashes: the film's moss taken to near-black --- */
+  --ink: #1e241c;
+  --mat: #20261e;            /* media plates */
+  --ink-text: #f3f1e6;
+  --ink-accent: #e6bd7c;     /* the iris gold, only ever against ink */
+  --ink-rose: #d98f68;
+  --ink-line: rgba(243, 241, 230, 0.16);
+
+  --font-display: "Bebas Neue", Impact, sans-serif;      /* headlines, CAPS ONLY */
+  --font-title: "EB Garamond", Georgia, serif;           /* titles, and the italic lede */
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-card: 22px;
+  --ease-pen: cubic-bezier(0.35, 0.1, 0.45, 0.95);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+/* ---------- floating capsule nav with tabs ---------- */
+.nav {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 30px);
+  padding: 8px 12px 8px 20px;
+  border-radius: 999px;
+  background: rgba(247, 244, 236, 0.82);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 40px rgba(45, 42, 34, 0.119);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nav:hover {
+  border-color: rgba(128, 80, 13, 0.35);
+  box-shadow: 0 12px 44px rgba(128, 80, 13, 0.08);
+}
+
+.nav-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+  /* the art is white; inverted it reads as ink on the paper capsule.
+     Shown by default: no code ever set .wordmark-on, so the gated version
+     of this rule left the logo invisible on every page. */
+  opacity: 0.78;
+  transition: opacity 0.9s ease;
+  filter: invert(1);
+  mix-blend-mode: multiply;
+}
+
+.nav-logo:hover img { opacity: 1; }
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+/* tab pills — rounded cards that highlight */
+.nav-tabs a {
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: opacity 0.3s ease, color 0.3s ease,
+              background 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-tabs a:hover,
+.nav-tabs a:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+  background: rgba(128, 80, 13, 0.07);
+}
+
+.nav-tabs a.active {
+  opacity: 1;
+  color: var(--accent);
+  background: rgba(128, 80, 13, 0.12);
+  border-color: rgba(128, 80, 13, 0.3);
+}
+
+a:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+
+/* ---------- the opening film ---------- */
+.film {
+  position: relative;
+  height: 440vh; /* flight ~296vh, settle ~39vh, then a long ~106vh hold so the signature dwells */
+  background: #000;
+}
+
+/* loader: a subtle brass pulse over the pre-first-frame blank; fades once the poster paints */
+.film-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.film-loader span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-soft);
+  animation: film-pulse 1.1s ease-in-out infinite;
+}
+.film.ready .film-loader { opacity: 0; visibility: hidden; }
+@keyframes film-pulse {
+  0%, 100% { transform: scale(0.55); opacity: 0.3; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+/* ============ ABOUT — compact teaser (Home) + dedicated hub page ============ */
+
+/* compact teaser at the foot of Home */
+.about-teaser {
+  position: relative;
+  padding: clamp(70px, 12vh, 130px) 24px clamp(80px, 14vh, 150px);
+  text-align: center;
+  background: var(--bg);
+  overflow: hidden;
+}
+.about-teaser-inner { position: relative; max-width: 640px; margin: 0 auto; }
+.about-more { margin-top: 30px; }
+
+/* dedicated About page */
+.page--about { background: var(--bg); }
+.page--about .about { padding: clamp(40px, 7vh, 90px) 24px clamp(24px, 4vh, 50px); }
+
+/* About lead: headline left, prose right.
+   The shared 720px column left the whole right half of the fold empty and
+   pushed the italic serif prose out to a ~75 character measure, which is well
+   past comfortable for an italic. Splitting it fills the fold and brings the
+   measure back under 50. */
+.page--about .about-inner { max-width: 1100px; }
+
+/* ABOUT — one narrow editorial column.
+   THE MEASURE IS THE WHOLE TRICK: the headline and the prose share a width, so
+   the page reads as someone talking rather than as a layout. Every earlier
+   version ran a WIDE headline over a NARROW column, which is what left the
+   right half empty and pushed me into two-column and then labelled-chapter
+   fixes. Narrowing the container fixes the cause instead of the symptom.
+   Do not widen .about-inner back to 1100px without also widening the prose. */
+.page--about .about-inner { max-width: 700px; }
+.page--about .about-head { margin-bottom: clamp(28px, 5vh, 50px); }
+
+.about-story > * { margin-bottom: clamp(19px, 2.8vh, 26px); }
+.about-story > *:last-child { margin-bottom: 0; }
+.about-para { color: var(--text); }
+
+/* the beat: one display line breaking the prose in half. It is the page's only
+   piece of visual punctuation, which is exactly why there is one of them. */
+.about-beat {
+  margin: clamp(36px, 6vh, 62px) 0 clamp(32px, 5.4vh, 54px);
+  text-align: center;
+  color: var(--text);
+}
+.about-beat em { color: var(--accent); font-style: normal; }
+
+/* arenas — iconned tiles, two clusters */
+.arenas {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(18px, 4vh, 46px) 24px;
+  display: grid;
+  gap: clamp(32px, 6vh, 60px);
+}
+.arenas-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+.arena-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.arena-grid--sport { grid-template-columns: repeat(auto-fill, minmax(146px, 1fr)); }
+.arena-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  transition: transform 0.4s var(--ease-pen), border-color 0.3s ease, background 0.3s ease;
+}
+.arena-tile:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-soft);
+  background: rgba(128, 80, 13, 0.08);
+}
+.arena-ico { font-size: 1.2rem; color: var(--accent); line-height: 1; }
+.arena-name { font-family: var(--font-body); font-weight: 500; font-size: 1.02rem; color: var(--text); }
+.arena-note { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.02em; }
+
+/* RIGHT NOW — a strip, deliberately not tiles.
+   Replaced four bordered stat tiles. Two problems with those: a tile is a
+   container for a fact that has stopped changing, and every fact here is still
+   moving. A rule-topped strip reads as a ledger entry, i.e. as of today. */
+.now {
+  padding: clamp(10px, 3vh, 30px) clamp(20px, 4vw, 40px) clamp(30px, 5vh, 54px);
+}
+.now-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: clamp(24px, 4vw, 34px);
+  border-top: 1px solid var(--line);
+}
+.now-label { margin: 0 0 clamp(18px, 3vw, 26px); color: var(--accent); }
+.now-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(18px, 3vw, 38px);
+}
+.now-list li {
+  padding-top: 13px;
+  /* a gold hairline over each item instead of a box around it. Works on both
+     axes, so the mobile stack needs no separate rule. */
+  border-top: 1px solid rgba(138, 90, 24, 0.4);
+  color: var(--text);
+}
+
+/* branches — About as a hub into the rest of the site */
+.branches {
+  max-width: 1000px;
+  margin: clamp(24px, 5vh, 56px) auto clamp(40px, 7vh, 90px);
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.branch-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 26px 24px;
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-pen), background 0.3s ease, box-shadow 0.35s ease;
+}
+.branch-card:hover {
+  transform: translateY(-4px);
+  background: rgba(128, 80, 13, 0.1);
+  box-shadow: 0 14px 44px rgba(128, 80, 13, 0.1);
+}
+.branch-k { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); }
+.branch-t { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--accent); }
+
+.film-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+#filmCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* speed cue: dark edges that close in as the dive accelerates (driven by film.js) */
+/* warm umber veil that completes the dive into the pupil */
+.film-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70% 70% at 50% 50%, #1a0f05, #0c0703);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.film-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: rgba(236, 229, 213, 0.75);
+  text-shadow: 0 1px 14px rgba(45, 42, 34, 0.238);
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- hero: the signature is the whole story ---------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* warm light waiting under the ink */
+.ember {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% 42%, rgba(233, 174, 76, 0.34), transparent 70%),
+    radial-gradient(35% 30% at 68% 60%, rgba(214, 126, 44, 0.26), transparent 70%),
+    radial-gradient(45% 40% at 30% 65%, rgba(233, 174, 76, 0.16), transparent 70%),
+    #402a10;
+}
+
+/* the eye fills the hero, zoomed to the iris, pupil at center stage */
+.hero-eye {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 51.2% 51.4%;
+  transform: scale(1.9);
+  transform-origin: 51.2% 51.4%;
+  filter: brightness(0.72) saturate(1.08);
+  animation: eye-breathe 16s ease-in-out infinite;
+}
+
+@keyframes eye-breathe {
+  0%, 100% { transform: scale(1.9); }
+  50%      { transform: scale(1.98); }
+}
+
+/* warm vignette keeps the signature legible over the iris */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(58% 52% at 50% 50%, rgba(10, 6, 2, 0.55), rgba(10, 6, 2, 0.82) 78%, rgba(8, 5, 2, 0.92));
+}
+
+#ink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1000px, 94vw);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* parallax target — JS lerps this toward the cursor */
+.sig-wrap {
+  will-change: transform;
+}
+
+#sig {
+  width: min(760px, 88vw);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+  transform: scale(1.04);
+  transition: transform 1.6s var(--ease-pen);
+}
+
+.hero.written #sig {
+  transform: scale(1);
+  animation: sig-breathe 9s ease-in-out 1.8s infinite;
+}
+
+/* a slow breath once the ink is dry */
+@keyframes sig-breathe {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50%      { transform: scale(1.012) translateY(-7px); }
+}
+
+.sig-art path {
+  fill: #f7f1e3;
+  filter: drop-shadow(0 0 7px rgba(128, 80, 13, 0.22));
+  transition: filter 1.2s ease;
+}
+
+.hero.written .sig-art path {
+  filter: drop-shadow(0 0 11px rgba(128, 80, 13, 0.34));
+}
+
+.mask-stroke {
+  fill: none;
+  stroke: #fff;
+  /* stroke-width comes from each path's attribute — the two brush strokes differ */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1; /* JS animates this to 0, segment by segment */
+}
+
+/* two qalam dots above the long line — the pen's final act */
+.sig-dots path {
+  fill: var(--accent);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.9s ease, transform 0.9s var(--ease-pen);
+  filter: drop-shadow(0 0 8px var(--accent-soft));
+}
+
+#sig.dots-on .sig-dots path { opacity: 1; transform: translateY(0); }
+
+#sig.dots-on .sig-dots path:nth-child(2) { transition-delay: 0.24s; }
+
+/* ---------- hints & cues ---------- */
+.ink-hint {
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  right: clamp(24px, 4vw, 56px);
+  bottom: 30px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 1.4s ease 0.8s;
+  z-index: 3;
+}
+
+.hero.written .ink-hint { opacity: 0.6; }
+
+/* a single thread of ink, falling — the scroll cue */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 52px;
+  overflow: hidden;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 1.2s ease 1.2s;
+}
+
+.hero.written .scroll-cue { opacity: 1; }
+
+.scroll-cue span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  animation: cue-fall 2.6s var(--ease-pen) infinite;
+}
+
+@keyframes cue-fall {
+  0%   { transform: translateY(-100%); }
+  60%  { transform: translateY(100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* ---------- rounded card actions (used across inner pages) ---------- */
+.cta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.74rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent);
+  background: rgba(128, 80, 13, 0.09);
+  border: 1px solid rgba(128, 80, 13, 0.45);
+  padding: 15px 34px;
+  border-radius: 999px;
+  transition: background 0.3s ease, box-shadow 0.35s ease,
+              transform 0.3s var(--ease-pen), border-color 0.3s ease;
+}
+
+.cta:hover {
+  background: rgba(128, 80, 13, 0.18);
+  box-shadow: 0 10px 36px rgba(128, 80, 13, 0.18);
+  transform: translateY(-2px);
+}
+
+.cta.ghost {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--line);
+}
+
+.cta.ghost:hover {
+  border-color: rgba(128, 80, 13, 0.5);
+  color: var(--accent);
+  box-shadow: 0 10px 36px rgba(128, 80, 13, 0.1);
+}
+
+/* staged reveal hook (kept for inner sections) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s var(--ease-pen);
+}
+
+.hero.written .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- placeholder section ---------- */
+.section-next {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+}
+
+.mono-label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- reduced motion: resolve to the finished state ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .mask-stroke { stroke-dashoffset: 0 !important; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .ink-hint { display: none; }
+  .scroll-cue { display: none; }
+  .sig-dots path { opacity: 1 !important; transform: none !important; }
+  #sig { transform: none !important; animation: none !important; }
+}
+
+/* short viewports: the cue would crowd the signature */
+@media (max-height: 700px) {
+  .scroll-cue { display: none; }
+}
+
+/* ---------- marquee: the story drifting past ---------- */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  padding: 26px 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-drift 46s linear infinite;
+}
+
+.marquee-track span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  color: var(--muted);
+  white-space: nowrap;
+  padding-right: 0.5em;
+}
+
+.marquee-track i {
+  color: var(--accent);
+  font-style: normal;
+}
+
+@keyframes marquee-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---------- selected work ---------- */
+.kicker {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.work {
+  background: var(--bg);
+  padding: clamp(90px, 12vw, 150px) clamp(22px, 6vw, 80px);
+}
+
+.work-head {
+  max-width: 1200px;
+  margin: 0 auto clamp(48px, 6vw, 80px);
+}
+
+.work-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.05;
+}
+
+.work-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.work-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: clamp(18px, 2.5vw, 30px);
+}
+
+.work-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.4s ease, transform 0.45s var(--ease-pen),
+              box-shadow 0.45s ease;
+}
+
+.work-card:hover {
+  border-color: rgba(128, 80, 13, 0.45);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(45, 42, 34, 0.153), 0 8px 40px rgba(128, 80, 13, 0.08);
+}
+
+.card-media {
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--mat);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.88) contrast(1.02);
+  transition: transform 0.8s var(--ease-pen), filter 0.6s ease;
+}
+
+.work-card:hover .card-media img {
+  transform: scale(1.05);
+  filter: saturate(1) contrast(1.04);
+}
+
+/* Nama: typographic card until the product face exists */
+.card-media--nama {
+  background:
+    radial-gradient(70% 90% at 50% 10%, rgba(128, 80, 13, 0.16), transparent 70%),
+    var(--mat);
+}
+
+.nama-mark {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 6rem);
+  color: var(--accent);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 18px rgba(128, 80, 13, 0.25));
+  transition: transform 0.8s var(--ease-pen);
+}
+
+.work-card:hover .nama-mark { transform: scale(1.06); }
+
+.card-body {
+  padding: 22px 24px 26px;
+  border-top: 1px solid var(--line);
+}
+
+.card-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+
+.card-body p {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin-bottom: 14px;
+}
+
+.card-tag {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card-tag .soon { color: var(--accent); opacity: 0.85; }
+
+/* ---------- outro ---------- */
+.outro {
+  background: var(--bg);
+  text-align: center;
+  padding: clamp(100px, 14vw, 170px) 24px clamp(60px, 8vw, 90px);
+}
+
+.outro-line {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 1.03;
+  margin-bottom: 40px;
+}
+
+.outro-line em { font-style: italic; color: var(--accent); }
+
+.outro-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 70px;
+}
+
+.outro-foot {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* ---------- filmic grain ---------- */
+.grain {
+  position: fixed;
+  inset: -100%;
+  z-index: 90;
+  pointer-events: none;
+  /* multiply SUBTRACTS light, which muddies the blacks of the film and the
+     ink band and reads as a quality drop on the hero. soft-light textures the
+     paper without crushing dark content. */
+  opacity: 0.045;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(2) infinite;
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(1.2%, -0.8%); }
+  50%  { transform: translate(-0.9%, 1.1%); }
+  75%  { transform: translate(0.7%, 0.6%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ---------- custom cursor: a drop of ink ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(128, 80, 13, 0.5);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+body.cursor-on .cursor-dot,
+body.cursor-on .cursor-ring { opacity: 1; }
+
+body.cursor-grow .cursor-ring {
+  width: 58px;
+  height: 58px;
+  border-color: rgba(128, 80, 13, 0.85);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ---------- reveal-on-scroll for sections ---------- */
+.rise {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 1s ease, transform 1s var(--ease-pen);
+}
+
+.rise.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 560px) {
+  .nav { gap: 10px; padding: 6px 8px 6px 14px; }
+  .nav-logo img { height: 24px; }
+  .nav-tabs a { padding: 8px 12px; font-size: 0.62rem; }
+  .ink-hint { display: none; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .grain { animation: none; }
+  .rise { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ============================================================
+   CONTACT — a page of its own, the details laid out plainly
+   ============================================================ */
+.page--contact { padding-top: clamp(74px, 10vh, 104px); }
+
+.contact {
+  position: relative;
+  background: var(--bg);
+  padding: clamp(50px, 8vw, 96px) clamp(22px, 6vw, 80px) clamp(60px, 9vw, 110px);
+  overflow: hidden;
+}
+
+.contact-arabic {
+  position: absolute;
+  top: clamp(20px, 4vw, 54px);
+  right: clamp(-8px, 2vw, 46px);
+  font-family: "Aref Ruqaa", var(--font-display), serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8vw, 6rem);
+  line-height: 1;
+  color: rgba(158, 59, 38, 0.09);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.contact-inner { position: relative; z-index: 1; max-width: 940px; margin: 0 auto; }
+
+.contact-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5.4vw, 3.7rem);
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.contact-title em { font-style: italic; color: var(--accent); }
+
+.contact-sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--muted);
+  max-width: 52ch;
+  margin-bottom: clamp(34px, 5vw, 54px);
+}
+
+/* --- the one that matters, given its own weight --- */
+.contact-primary {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px clamp(16px, 3vw, 40px);
+  padding: clamp(26px, 4vw, 40px) clamp(24px, 4vw, 44px);
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius-card);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(128, 80, 13, 0.1), transparent 62%),
+    var(--surface);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.4s var(--ease-pen), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+.contact-primary:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 18px 48px rgba(128, 80, 13, 0.16);
+}
+.contact-k {
+  grid-column: 1;
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.contact-primary-v {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.6vw, 2.2rem);
+  line-height: 1.15;
+  color: var(--accent);
+  word-break: break-word;
+}
+.contact-primary-note {
+  grid-column: 1;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.contact-go {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  font-size: 1.5rem;
+  color: var(--accent);
+  transition: transform 0.4s var(--ease-pen);
+}
+.contact-primary:hover .contact-go { transform: translateX(6px); }
+
+/* --- the other channels --- */
+.contact-grid {
+  list-style: none;
+  margin: clamp(16px, 2.5vw, 22px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(236px, 1fr));
+  gap: clamp(14px, 2vw, 20px);
+}
+
+.contact-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 24px 24px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.4s var(--ease-pen), border-color 0.3s ease, box-shadow 0.4s ease;
+}
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-soft);
+  box-shadow: 0 16px 40px rgba(128, 80, 13, 0.12);
+}
+.contact-card .arena-ico { margin-bottom: 3px; }
+.contact-v {
+  font-family: var(--font-display);
+  font-size: 1.32rem;
+  line-height: 1.2;
+  color: var(--accent);
+  word-break: break-word;
+}
+.contact-note { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+.contact-card--soon { cursor: default; }
+.contact-card--soon:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.contact-card--soon .contact-v { color: var(--muted); }
+
+/* --- what people usually write about ---
+   This replaced a Languages / Availability / Open to list, which answered
+   questions nobody asks. The thing standing between a visitor and an email is
+   not missing information, it is not knowing what to open with. */
+.contact-why {
+  margin: clamp(30px, 5vw, 52px) 0 0;
+  padding-top: clamp(24px, 4vw, 36px);
+  border-top: 1px solid var(--line);
+}
+.contact-why-head {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+.contact-why ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* 320px min lands four items as a balanced 2x2 on desktop. At 258px they
+     fell into three columns and left the fourth hanging alone on its own row. */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px clamp(20px, 4vw, 56px);
+}
+.contact-why li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--text);
+}
+/* a short rule instead of a bullet: quieter, and it echoes the tatreez hems */
+.contact-why li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.66em;
+  width: 8px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ============================================================
+   PHONES — the site is read on one far more often than not
+   ============================================================ */
+
+/* the fixed capsule must never overlap an anchored section */
+html { scroll-padding-top: clamp(78px, 12vh, 112px); }
+
+/* hover-reveal cues never fire on touch, so show them outright */
+@media (hover: none), (pointer: coarse) {
+  .card-open-cue { opacity: 1; transform: none; }
+  .najmeh-mark { opacity: 0.8; }
+}
+
+@media (max-width: 720px) {
+  /* capsule spans the top and its tabs scroll if a language runs long */
+  .nav {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    transform: none;
+    gap: 8px;
+    padding: 5px 7px 5px 12px;
+    justify-content: space-between;
+  }
+  /* five tabs need the room more than the wordmark does */
+  .nav-logo { display: none; }
+  .nav-tabs {
+    flex: 1;
+    /* flex-end/center CLIP the first item when a scroll container overflows,
+       leaving "Home" permanently unreachable. `safe` falls back to flex-start
+       the moment content stops fitting. */
+    justify-content: flex-start;
+    justify-content: safe center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tabs a {
+    padding: 13px 9px;   /* 44px tall: a real thumb target */
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* a 440vh scrub is a long thumb journey on a phone */
+  .film { height: 340vh; }
+  .film-hint { font-size: 0.88rem; bottom: 26px; }
+
+  /* comfortable targets */
+  .cta { padding: 15px 26px; font-size: 0.7rem; }
+  .deck-nav { width: 44px; height: 44px; }
+  .dossier-close,
+  .cert-viewer-close { width: 44px; height: 44px; }
+}
+
+@media (max-width: 560px) {
+  .about-teaser { padding-inline: 20px; }
+  .outro-links { gap: 10px; }
+  .outro-links .cta { flex: 1 1 100%; text-align: center; }
+  .contact-primary { grid-template-columns: 1fr; }
+  .contact-go { grid-column: 1; grid-row: auto; margin-top: 10px; }
+  .contact { padding-inline: 20px; }
+  .arena-grid { grid-template-columns: 1fr; }
+  .arena-grid--sport { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* stacked dossier facts: an 88px label rail squeezes the value on a phone */
+@media (max-width: 460px) {
+  .dossier-facts li { grid-template-columns: 1fr; gap: 2px; }
+}
+
+.outro-note {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.02rem, 2vw, 1.25rem);
+  color: var(--muted);
+  max-width: 44ch;
+  margin: -18px auto 40px;
+}
+
+/* ============================================================
+   THE INK BAND — the closing invitation goes dark.
+   Two light paper tones cannot be pushed far apart without going
+   muddy, so the page gets its editorial rhythm from one deliberate
+   dark close instead, bookending the dark film at the top.
+   Type here sits on --ink, so it uses the ink token family and must
+   never inherit --text.
+   ============================================================ */
+.outro {
+  background: var(--ink);
+  color: var(--ink-text);
+}
+.outro .kicker { color: var(--ink-accent); opacity: 0.9; }
+.outro-line { color: var(--ink-text); }
+.outro-line em { color: var(--ink-accent); }
+.outro-note { color: rgba(243, 235, 218, 0.6); }
+.outro-foot { color: rgba(243, 235, 218, 0.45); opacity: 1; }
+.outro .outro-arabic {
+  color: #d98f68;                       /* terracotta lifts against ink */
+  filter: drop-shadow(0 0 14px rgba(217, 143, 104, 0.35));
+}
+
+/* the buttons need the bright iris gold, not the paper gold */
+.outro .cta {
+  color: var(--ink-accent);
+  background: rgba(230, 193, 125, 0.1);
+  border-color: rgba(230, 193, 125, 0.42);
+}
+.outro .cta:hover {
+  background: rgba(230, 193, 125, 0.19);
+  box-shadow: 0 10px 36px rgba(230, 193, 125, 0.14);
+}
+.outro .cta.ghost {
+  color: var(--ink-text);
+  background: transparent;
+  border-color: rgba(243, 235, 218, 0.24);
+}
+.outro .cta.ghost:hover {
+  color: var(--ink-accent);
+  border-color: rgba(230, 193, 125, 0.5);
+}
+
+/* the hem directly above becomes the seam into the band */
+.outro-seam { background: var(--ink) !important; }
+.outro-seam .js-star { color: var(--ink-accent); opacity: 0.75; }
+
+
+/* NOTE: the on-field overrides live at the END of heritage.css, not here.
+   styles.css -> work.css -> heritage.css is the load order, so rules placed
+   here are clobbered by the paper-tuned rules in the two later sheets. */

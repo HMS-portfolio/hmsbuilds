@@ -1,0 +1,569 @@
+/* ============ Heritage layer — Jordanian / Levantine, woven in ============
+   Arabic companion signature · seven-point star · tatreez cross-stitch · qabbeh
+   Petra rose is reserved for this layer only — brass stays the site's accent. */
+
+/* --rose and --rose-soft now live in styles.css :root (single source) */
+
+/* ---------- Arabic companion signature (Home) ---------- */
+.sig-arabic {
+  font-family: "Aref Ruqaa", serif;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.2vw, 2.8rem);
+  color: var(--rose);
+  text-align: center;
+  line-height: 1;
+  margin-top: clamp(6px, 2vw, 22px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1.1s ease 0.35s, transform 1.1s var(--ease-pen) 0.35s;
+  filter: drop-shadow(0 0 14px rgba(158, 59, 38, 0.42));
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero.written .sig-arabic { opacity: 0.92; transform: translateY(0); }
+
+/* ---------- seven-point star (scroll cue + inline marks) ---------- */
+.js-star { display: inline-flex; line-height: 0; }
+.js-star svg { display: block; }
+
+/* the star replaces the old falling-thread scroll cue */
+.scroll-cue {
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+.scroll-cue .js-star {
+  color: var(--brass);
+  filter: drop-shadow(0 0 8px rgba(128, 80, 13, 0.4));
+  animation: star-bob 2.8s var(--ease-pen) infinite;
+}
+
+@keyframes star-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(7px); opacity: 1; }
+}
+
+/* ---------- najmeh star — embroidered maker's mark on work cards ---------- */
+.najmeh-mark {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 26px;
+  height: 26px;
+  color: var(--rose);
+  opacity: 0.5;
+  z-index: 3;
+  pointer-events: none;
+  transition: color 0.4s ease, opacity 0.4s ease, transform 0.5s var(--ease-pen);
+}
+.najmeh-mark svg { width: 100%; height: 100%; display: block; }
+
+.work-card:hover .najmeh-mark {
+  color: var(--brass);
+  opacity: 0.95;
+  transform: rotate(90deg);
+}
+
+/* ---------- tatreez stitched hem (section dividers + footer) ---------- */
+.heritage-hem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 26px);
+  padding: clamp(28px, 5vw, 46px) 20px;
+  background: var(--bg);
+}
+.heritage-hem .hem-band {
+  width: min(560px, 64vw);
+  height: 30px;
+}
+.heritage-hem .js-star {
+  color: var(--brass);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(128, 80, 13, 0.3));
+}
+
+/* ---------- About: the heaviest heritage ---------- */
+.about {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: clamp(24px, 5vw, 64px);
+  padding: clamp(80px, 11vw, 150px) clamp(22px, 6vw, 80px);
+}
+
+/* qabbeh — the embroidered chest-panel column down the side.
+   height stays auto so the grid's align-self:stretch gives it the row height
+   (a percentage height would collapse against the auto-sized row). */
+.qabbeh {
+  width: 56px;
+  height: auto;
+  min-height: 340px;
+  opacity: 0.85;
+  align-self: stretch;
+}
+
+.about-inner {
+  position: relative;
+  max-width: 720px;
+}
+
+/* Arabic name, large, faint — the watermark behind the story */
+.about-arabic {
+  position: absolute;
+  top: -0.35em;
+  right: -0.1em;
+  font-family: "Aref Ruqaa", serif;
+  font-size: clamp(4rem, 13vw, 9rem);
+  line-height: 0.9;
+  color: var(--rose);
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.about-inner > *:not(.about-arabic) { position: relative; z-index: 1; }
+
+.about-head {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.3rem, 5.5vw, 3.9rem);
+  line-height: 1.04;
+  margin-bottom: 22px;
+}
+.about-head em { font-style: italic; color: var(--rose); }
+
+.about-lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.12rem, 2.1vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 54ch;
+  margin-bottom: 34px;
+}
+
+.threads {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+.threads li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+.threads .js-star { color: var(--rose); flex: none; }
+
+/* ---------- footer Arabic sign-off ---------- */
+.outro-arabic {
+  display: block;
+  font-family: "Aref Ruqaa", serif;
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+  color: var(--rose);
+  opacity: 0.85;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 12px rgba(158, 59, 38, 0.42));
+}
+
+/* ============ page router — each section its own view ============ */
+/* JS off → everything visible (graceful). JS on → one page at a time. */
+.has-router .page { display: none; }
+.has-router .page.is-active { display: block; }
+
+/* CTA that carries you to the next page */
+.page-cta {
+  display: flex;
+  justify-content: center;
+  padding: clamp(50px, 8vw, 90px) 20px clamp(70px, 10vw, 120px);
+  background: var(--bg);
+}
+
+/* ---------- the signature, built INSIDE the eye ---------- */
+.eye-sig {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+  pointer-events: none;
+}
+.eye-sig::before {         /* soft darkening so the ink reads over the iris */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(52% 46% at 50% 50%, rgba(10,6,2,0.35), rgba(10,6,2,0.72) 82%);
+  z-index: -1;
+}
+.film.eye-open .eye-sig { opacity: 1; }
+
+/* the film veil sits BEHIND the signature, never fully covering the eye */
+.film-veil { z-index: 2; }
+
+.eye-sig .sig-wrap { will-change: transform; }
+.eye-sig #sig { width: min(680px, 82vw); }
+
+/* name tucked close beneath the signature */
+.eye-sig .sig-arabic {
+  margin-top: clamp(-34px, -4vw, -14px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease 0.2s, transform 1s var(--ease-pen) 0.2s;
+}
+.film.eye-open .eye-sig .sig-arabic { opacity: 0.94; transform: translateY(0); }
+
+/* the "see the work" cue, revealed after the name lands */
+.eye-cta {
+  margin-top: clamp(26px, 4vw, 44px);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.9s ease 0.6s, transform 0.9s var(--ease-pen) 0.6s,
+              background 0.3s ease, box-shadow 0.35s ease;
+}
+.film.eye-open .eye-cta { opacity: 1; transform: translateY(0); }
+
+/* hide the scroll hint once the eye opens */
+.film.eye-open .film-hint { opacity: 0 !important; }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sig-arabic { opacity: 0.92 !important; transform: none !important; transition: none !important; }
+  .scroll-cue .js-star { animation: none; opacity: 0.8; }
+  .najmeh-mark { transition: none; }
+  .eye-sig { opacity: 1; }
+  .eye-sig .sig-arabic, .eye-cta { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 680px) {
+  .about { grid-template-columns: 1fr; }
+  .qabbeh { display: none; }
+  .about-arabic { font-size: clamp(3.2rem, 22vw, 6rem); opacity: 0.06; }
+}
+
+/* ---------- the signature sits inside a dark pupil: heritage colour must
+     lift there, since the page palette is now paper ---------- */
+.eye-sig .sig-arabic {
+  color: #e0a077;
+  filter: drop-shadow(0 0 16px rgba(224, 160, 119, 0.45));
+}
+
+/* najmeh as the standing maker's mark: certificates and arena tiles now carry
+   the same eight-point star as the work cards, instead of assorted glyphs */
+.cert-icon,
+.arena-ico {
+  display: inline-flex;
+  line-height: 0;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.cert-icon svg,
+.arena-ico svg { width: 100%; height: 100%; display: block; }
+
+.cert-icon { width: 30px; height: 30px; }
+.cert-card .cert-icon { width: 40px; height: 40px; }
+.arena-ico { width: 19px; height: 19px; color: var(--rose); }
+.arena-grid--sport .arena-ico { width: 16px; height: 16px; }
+.arena-tile:hover .arena-ico { color: var(--accent); }
+
+@media (max-width: 680px) {
+  .about { padding-inline: clamp(20px, 6vw, 40px); }
+}
+
+
+/* ============================================================
+   THE INK SPLASHES — the page is paper; these few places are not.
+   Lives at the end of heritage.css because the load order is
+   styles.css -> work.css -> heritage.css -> about.css, and these
+   must win over the paper-tuned rules in the earlier sheets.
+   Anything inside a splash uses the --ink-* tokens, never --text.
+   ============================================================ */
+
+/* 1 · the nav: a dark capsule floating on paper.
+      The wordmark art is white, so on ink it needs NO invert at all. */
+.nav {
+  background: rgba(30, 36, 28, 0.9);
+  border-color: rgba(243, 241, 230, 0.14);
+  box-shadow: 0 14px 40px rgba(28, 31, 26, 0.22);
+}
+.nav:hover { border-color: rgba(230, 189, 124, 0.4); }
+.nav-logo img { filter: none; mix-blend-mode: normal; opacity: 0.9; }
+.nav-tabs a { color: var(--ink-text); }
+.nav-tabs a:hover,
+.nav-tabs a:focus-visible { color: var(--ink-accent); background: rgba(230, 189, 124, 0.12); }
+.nav-tabs a.active {
+  color: var(--ink-accent);
+  background: rgba(230, 189, 124, 0.18);
+  border-color: rgba(230, 189, 124, 0.42);
+}
+
+/* 2 · the card media plates: four dark rectangles give the grid its punch */
+.card-media { background: var(--ink); }
+.card-media--nama {
+  background: radial-gradient(70% 90% at 50% 10%, rgba(230, 189, 124, 0.2), transparent 70%), var(--ink);
+}
+.nama-mark { color: var(--ink-accent); filter: drop-shadow(0 0 22px rgba(230, 189, 124, 0.3)); }
+.card-index { color: var(--ink-text); opacity: 0.55; }
+.najmeh-mark { color: var(--ink-rose); opacity: 0.72; }
+.work-card:hover .najmeh-mark { color: var(--ink-accent); opacity: 1; }
+.card-open-cue {
+  color: var(--ink-accent);
+  background: linear-gradient(to top, rgba(20, 25, 19, 0.92), transparent);
+}
+/* the portrait letterboxes, so its blurred backfill IS the plate: it has to
+   sit as dark as the solid plates or card 02 reads grey next to card 01 */
+.card-media--misti::after { filter: blur(26px) brightness(0.3) saturate(1.15); }
+
+/* 3 · the case files read cinematic: dark media pane, light reading pane */
+.dossier-media { background: var(--ink); }
+.dossier-nama-face {
+  background: radial-gradient(70% 80% at 50% 20%, rgba(230, 189, 124, 0.2), transparent 68%), var(--ink);
+}
+.deck-card { background: var(--mat); border-color: rgba(243, 241, 230, 0.12); }
+.deck-hint, .deck-count { color: rgba(243, 241, 230, 0.6); }
+.deck-nav, .deck-sound {
+  color: var(--ink-text);
+  background: rgba(20, 25, 19, 0.6);
+  border-color: rgba(243, 241, 230, 0.18);
+}
+.deck-nav:hover, .deck-sound:hover { color: var(--ink-accent); border-color: rgba(230, 189, 124, 0.5); }
+
+/* 4 · the email plate: the one thing on Contact that must be unmissable */
+.contact-primary {
+  background: var(--ink);
+  border-color: rgba(243, 241, 230, 0.14);
+}
+.contact-primary .contact-k { color: rgba(243, 241, 230, 0.55); }
+.contact-primary-v { color: var(--ink-accent); }
+.contact-primary-note { color: rgba(243, 241, 230, 0.62); }
+.contact-primary .contact-go { color: var(--ink-accent); }
+.contact-primary:hover { border-color: rgba(230, 189, 124, 0.5); }
+
+/* 5 · cards lift off the paper */
+.work-card, .cert-card, .branch-card, .contact-card {
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(28, 31, 26, 0.05), 0 12px 30px rgba(28, 31, 26, 0.09);
+}
+.work-card:hover, .cert-card:hover, .branch-card:hover, .contact-card:hover {
+  box-shadow: 0 3px 6px rgba(28, 31, 26, 0.07), 0 20px 46px rgba(28, 31, 26, 0.14);
+}
+
+
+/* ============================================================
+   6 · CONTACT — the ink band, the closing room of the site
+   ============================================================
+   The page ground is already dark moss, so dropping to --ink is only a
+   modest step down. The drama comes from what LEAVES: the three cream
+   channel cards become lifted ink panes, so the whole page reads as one
+   unlit room with gold type in it, instead of paper floating on moss.
+
+   Everything below must draw from the ink family. --text and --muted are
+   tuned for cream cards and go dark-on-dark here. */
+
+.page--contact { background: var(--ink); }
+.contact--ink { background: var(--ink); }
+
+/* the watermark has to lift off ink rather than sink into it */
+.contact--ink .contact-arabic { color: rgba(217, 143, 104, 0.1); }
+
+.contact--ink .kicker { color: var(--ink-accent); opacity: 0.9; }
+.contact--ink .contact-title { color: var(--ink-text); }
+.contact--ink .contact-title em { color: var(--ink-accent); }
+.contact--ink .contact-sub { color: rgba(243, 241, 230, 0.62); }
+
+/* ---- the email: the one thing this page exists for ---- */
+.contact--ink .contact-primary {
+  background: rgba(243, 241, 230, 0.045);
+  border-color: rgba(230, 189, 124, 0.32);
+  box-shadow: none;
+}
+.contact--ink .contact-primary:hover {
+  background: rgba(230, 189, 124, 0.07);
+  border-color: rgba(230, 189, 124, 0.6);
+}
+
+/* set large: at this size the address is the headline of the lower half */
+.contact--ink .contact-primary-v {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 4.6vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+  color: var(--ink-accent);
+}
+
+.contact--ink .contact-primary .contact-go {
+  position: static;
+  font-size: 0.5em;
+  transition: transform 0.4s var(--ease-pen);
+}
+.contact--ink .contact-primary:hover .contact-go { transform: translateX(8px); }
+
+/* ---- the channels: lifted ink panes, not cream cards ---- */
+.contact--ink .contact-card {
+  background: rgba(243, 241, 230, 0.035);
+  border-color: rgba(243, 241, 230, 0.12);
+  box-shadow: none;
+}
+.contact--ink a.contact-card:hover {
+  background: rgba(230, 189, 124, 0.06);
+  border-color: rgba(230, 189, 124, 0.34);
+  box-shadow: none;
+}
+
+.contact--ink .contact-k { color: rgba(243, 241, 230, 0.55); }
+.contact--ink .contact-v { color: var(--ink-text); }
+.contact--ink .contact-note { color: rgba(243, 241, 230, 0.55); }
+.contact--ink .contact-card .arena-ico { color: var(--ink-rose); }
+.contact--ink a.contact-card:hover .arena-ico { color: var(--ink-accent); }
+
+.contact--ink .contact-card--soon { background: transparent; }
+.contact--ink .contact-card--soon .contact-v { color: rgba(243, 241, 230, 0.42); }
+
+/* ---- the facts ---- */
+.contact--ink .contact-why { border-color: rgba(243, 241, 230, 0.14); }
+.contact--ink .contact-why-head { color: var(--ink-accent); }
+.contact--ink .contact-why li { color: rgba(243, 241, 230, 0.78); }
+.contact--ink .contact-why li::before { background: var(--ink-accent); }
+
+/* ---- the seam hems ----
+   `.heritage-hem .js-star` earlier in THIS file outranks the
+   `.outro-seam .js-star` rule in styles.css: equal specificity, later sheet.
+   So every seam star was painting paper-gold on ink and vanishing, on Home's
+   outro as well as here. Two classes on the one element wins it back. */
+.heritage-hem.outro-seam .js-star { color: var(--ink-accent); opacity: 0.8; }
+
+/* the band's stitches are drawn onto canvas by heritage.js from hard-coded
+   paper tones (BRASS #80500d, ROSE #9e3b26), so CSS cannot recolour them.
+   Lifting them optically is what keeps the tatreez legible on ink. */
+.heritage-hem.outro-seam .hem-band { filter: brightness(2.15) saturate(0.92); }
+
+/* ---- THE CREAM PLATE ----
+   One near-white card lifted out of the ink band, carrying the address and
+   every other route. This is where the page gets its energy: the band alone
+   was five identical stacked blocks, and dropping paper onto ink is the same
+   graphic move the rest of the site already runs on.
+
+   It is deliberately WIDER than the prose above it, so it reads as breaking
+   out of the text column rather than continuing it.
+
+   Everything inside returns to the PAPER token set, which means every ink
+   override written above has to be answered here at higher specificity
+   (.contact--ink .contact-plate X = 3 classes, beating 2). */
+.contact-plate {
+  position: relative;
+  z-index: 1;
+  margin: clamp(34px, 6vw, 68px) calc(clamp(0px, 2vw, 34px) * -1) 0;
+  padding: clamp(24px, 4vw, 46px);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: 0 4px 14px rgba(8, 10, 7, 0.34), 0 34px 90px rgba(8, 10, 7, 0.46);
+}
+
+/* the address: a plain typographic line on paper now, not a bordered plate.
+   The plate around it is already doing the containing. */
+.contact--ink .contact-plate .contact-primary {
+  display: block;
+  padding: 0 0 clamp(20px, 3vw, 30px);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.contact--ink .contact-plate .contact-primary:hover {
+  background: transparent;
+  border-color: var(--line);
+}
+
+.contact--ink .contact-plate .contact-k { color: var(--muted); }
+.contact--ink .contact-plate .contact-primary-v { color: var(--accent); }
+.contact--ink .contact-plate .contact-primary-note { color: var(--muted); }
+.contact--ink .contact-plate .contact-primary:hover .contact-primary-v { color: var(--accent-2); }
+
+.contact--ink .contact-plate .contact-grid { margin-top: clamp(20px, 3vw, 30px); }
+
+/* the three routes: outlined on paper, so they sit under the address rather
+   than competing with it */
+.contact--ink .contact-plate .contact-card {
+  background: transparent;
+  border-color: var(--line);
+  box-shadow: none;
+}
+.contact--ink .contact-plate a.contact-card:hover {
+  background: rgba(122, 82, 20, 0.06);
+  border-color: rgba(122, 82, 20, 0.32);
+  box-shadow: none;
+}
+.contact--ink .contact-plate .contact-v { color: var(--text); }
+.contact--ink .contact-plate .contact-note { color: var(--muted); }
+.contact--ink .contact-plate .contact-card .arena-ico { color: var(--rose); }
+.contact--ink .contact-plate a.contact-card:hover .arena-ico { color: var(--accent); }
+.contact--ink .contact-plate .contact-card--soon { background: transparent; }
+.contact--ink .contact-plate .contact-card--soon .contact-v { color: var(--muted); opacity: 0.75; }
+
+/* on a phone the plate should not hang off the edges */
+@media (max-width: 640px) {
+  .contact-plate { margin-left: 0; margin-right: 0; }
+}
+
+/* ---- THE SIGN-OFF, on every page ----
+   Home closed with the Arabic name over "Hamza AlSalamat, signed by hand."
+   and no other page had anything. This is that same pairing, made reusable.
+
+   It has to work on BOTH grounds: Projects, Certs and About are paper, and
+   Contact is the ink band. Paper is the default here and ink overrides below,
+   because three pages use paper and one uses ink.
+
+   The Arabic is aria-hidden and the English line carries the name, so a
+   screen reader announces it exactly once. */
+.page-sign {
+  margin: clamp(40px, 7vw, 80px) auto 0;
+  padding-bottom: clamp(36px, 6vw, 72px);
+  text-align: center;
+}
+
+.page-sign-ar {
+  display: block;
+  font-family: "Aref Ruqaa", serif;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  line-height: 1;
+  color: var(--rose);
+  opacity: 0.85;
+}
+
+/* --font-display is Bebas Neue, a caps-only face with no lowercase at all.
+   This line must stay in the body face or it renders as cramped uppercase. */
+.page-sign-en {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* on ink, both lines move to the ink token family */
+.contact--ink .page-sign-ar { color: var(--ink-rose); opacity: 0.9; }
+.contact--ink .page-sign-en { color: rgba(243, 241, 230, 0.5); }

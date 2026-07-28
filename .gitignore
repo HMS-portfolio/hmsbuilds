@@ -1,0 +1,26 @@
+# Superseded hero frame exports (~140MB), kept on disk as backups but never
+# committed. js/film.js loads only two sets at runtime:
+#   const FRAME_DIR = PHONE ? "dive-720" : "dive";
+# so dive/ and dive-720/ are tracked and everything below is local-only.
+# This matters more for Git than for the CLI: Vercel's Git integration clones
+# the whole repo, so anything committed here ships and is stored forever in
+# history. .vercelignore cannot undo that.
+assets/hero/frames-4k/
+assets/hero/frames-25mb/
+assets/hero/frames-v2-backup/
+assets/hero/frames-v3-720p/
+assets/hero/frames-v3-backup/
+
+# Unreferenced source plates for the frame renders (15.7MB); no hit in
+# index.html, js/ or *.css.
+assets/hero/shot-a-hunter.png
+assets/hero/shot-b-eye.png
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Local tooling and working notes
+.claude/
+.vercel/
+reference/

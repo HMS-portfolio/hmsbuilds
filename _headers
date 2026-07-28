@@ -1,0 +1,26 @@
+# Cache-Control policy for static hosts that read a `_headers` file
+# (Netlify, Cloudflare Pages). Inert on hosts that don't — safe to keep.
+#
+# Why this exists: the hero film broke once because browsers kept running a
+# STALE js/film.js after an update (it still pointed at the old elk frames).
+# The site already cache-busts scripts/frames with ?v=N in index.html; these
+# headers are the belt-and-suspenders so a browser NEVER serves stale code or
+# markup even if someone forgets to bump ?v=.
+
+# HTML documents: always revalidate so copy/markup changes land immediately.
+/
+  Cache-Control: no-cache
+/*.html
+  Cache-Control: no-cache
+
+# Scripts & styles: cache briefly but force a revalidation on every use, so a
+# changed file is picked up within the hour even without a ?v bump.
+/js/*
+  Cache-Control: public, max-age=3600, must-revalidate
+/*.css
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Media (frames, images, video): these are versioned via ?v=N and their bytes
+# never change under a given URL, so cache them hard for a year.
+/assets/*
+  Cache-Control: public, max-age=31536000

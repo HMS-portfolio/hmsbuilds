@@ -1,0 +1,31 @@
+# Keep the deploy to what the site actually loads.
+#
+# js/film.js picks its frame directory at runtime:
+#   const FRAME_DIR = PHONE ? "dive-720" : "dive";
+# so `dive/` (42MB) and `dive-720/` (9.5MB) are the ONLY frame sets that ship.
+# Everything below is a superseded export kept locally as a backup — together
+# they are ~140MB of dead weight that would otherwise be uploaded on every
+# deploy and served from the edge for no reason.
+
+assets/hero/frames-4k/
+assets/hero/frames-25mb/
+assets/hero/frames-v2-backup/
+assets/hero/frames-v3-720p/
+assets/hero/frames-v3-backup/
+
+# Unreferenced stills (15.7MB). Grep of index.html, js/ and *.css finds no
+# use of either; they are source plates for the frame renders.
+assets/hero/shot-a-hunter.png
+assets/hero/shot-b-eye.png
+
+# Netlify/Cloudflare cache-header format. Vercel does not read this file —
+# the policy it describes now lives in vercel.json. Kept in the repo for the
+# other hosts, excluded here so it cannot imply it is doing something.
+_headers
+
+# Local noise
+.DS_Store
+**/.DS_Store
+.claude/
+reference/
+BRIEF.md
