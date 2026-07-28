@@ -28,7 +28,7 @@
          "<view> · Hamza AlSalamat", and og:site_name plus the Person node in
          the JSON-LD graph both carry it, so a search for the name still has
          somewhere to land. */
-      title: "Do it in style - it don't gotta make sense to anyone else",
+      title: "Do it in style - it doesn't have to make sense to anyone else",
       desc: "Founder of Nama Site Intelligence, and hands-on with the rest: an engine that reads land, a car welded from steel, an agent that learns to write.",
     },
     projects: {
