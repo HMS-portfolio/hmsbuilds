@@ -24,3 +24,5 @@ assets/hero/shot-b-eye.png
 .claude/
 .vercel/
 reference/
+.vercel
+.env*
