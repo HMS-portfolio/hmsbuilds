@@ -176,6 +176,11 @@ a:focus-visible {
   overflow: hidden;
 }
 .about-teaser-inner { position: relative; max-width: 640px; margin: 0 auto; }
+/* Same trap as .certs-sub: the lede is capped at 54ch, so inside this centred
+   640px column its box hugs the left while the heading spans the full width.
+   Scoped to the teaser on purpose — on the About page .about-lede opens a
+   left-aligned run of prose and must stay where it is. */
+.about-teaser .about-lede { margin-left: auto; margin-right: auto; }
 .about-more { margin-top: 30px; }
 
 /* dedicated About page */

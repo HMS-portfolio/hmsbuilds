@@ -861,6 +861,14 @@
   text-align: center;
 }
 
+/* text-align centres the words, not the box. .certs-sub is capped at 52ch, so
+   without an auto margin its box sits flush left inside the 820px header while
+   the title spans the full width, and the two centres do not line up. */
+.certs-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .certs-title {
   font-size: clamp(2.8rem, 7vw, 5rem);
   font-weight: 600;
