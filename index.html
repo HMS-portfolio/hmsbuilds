@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="icon" id="favicon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23e7e5db'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="styles.css?v=34" />
+  <link rel="stylesheet" href="styles.css?v=35" />
   <link rel="stylesheet" href="work.css?v=15" />
   <link rel="stylesheet" href="heritage.css?v=19" />
   <link rel="stylesheet" href="about.css?v=8" />
@@ -54,25 +54,58 @@
       setTimeout(ready, 1200);
     })();
   </script>
+
+  <!-- Structured data. Tells Google who this site is about rather than making
+       it infer from prose, which is what makes a person eligible for a
+       knowledge panel and helps the name resolve to the right Hamza. Every
+       claim here is also stated visibly on the page. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://hmsbuilds.com/#hamza",
+        "name": "Hamza AlSalamat",
+        "alternateName": "حمزة السلامات",
+        "url": "https://hmsbuilds.com/",
+        "jobTitle": "Founder",
+        "description": "Founder of Nama Site Intelligence. Builds an engine that reads land, an electric car welded from steel, and an agent that learns to write.",
+        "image": "https://hmsbuilds.com/assets/og-card.jpg",
+        "sameAs": ["https://github.com/HMS-portfolio"],
+        "knowsLanguage": ["en", "ar"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://hmsbuilds.com/#website",
+        "url": "https://hmsbuilds.com/",
+        "name": "Hamza AlSalamat",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://hmsbuilds.com/#hamza" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
   <header class="nav">
-    <a class="nav-logo" href="#top" aria-label="Hamza AlSalamat, back to the top">
+    <a class="nav-logo" href="/" aria-label="Hamza AlSalamat, back to the top">
       <img src="assets/wordmark.svg" alt="" />
     </a>
     <nav class="nav-tabs" aria-label="Primary">
-      <a href="#top" class="active" aria-current="page">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#certs">Certs</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="/" class="active" aria-current="page">Home</a>
+      <a href="/projects">Projects</a>
+      <a href="/certs">Certs</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
     </nav>
   </header>
 
   <main>
     <!-- ============ PAGE · HOME — the falcon film, and the signature inside its eye ============ -->
     <div class="page page--home is-active" id="page-home" data-page="home">
+    <h1 class="sr-only">Hamza AlSalamat</h1>
     <section class="film" id="top" aria-label="Opening film: a falcon soars, then the camera dives into its hunter's eye">
       <div class="film-stage">
         <canvas id="filmCanvas"></canvas>
@@ -173,7 +206,7 @@
         <p class="kicker rise">About</p>
         <h2 class="about-head rise">Curious by nature, <em>hands-on by habit</em>.</h2>
         <p class="about-lede rise">The subject changes more than I do. Lately it has been AI native software, with the marketing and engineering that sit around it. Just as often it is a mat, a saddle, or a bow. What runs underneath all of them stays the same: pay attention, put in the reps, and keep getting better.</p>
-        <a class="cta about-more rise" href="#about">The longer version&nbsp;→</a>
+        <a class="cta about-more rise" href="/about">The longer version&nbsp;→</a>
       </div>
     </section>
 
@@ -190,8 +223,8 @@
       <h2 class="outro-line">No introduction <em>needed.</em></h2>
       <p class="outro-note">A line or two is plenty. If there is something in it, I will write back.</p>
       <div class="outro-links">
-        <a class="cta" href="#contact">Write to me</a>
-        <a class="cta ghost" href="#projects">See the work</a>
+        <a class="cta" href="/contact">Write to me</a>
+        <a class="cta ghost" href="/projects">See the work</a>
       </div>
       <span class="outro-arabic" aria-hidden="true" lang="ar" dir="rtl">حمزة السلامات</span>
       <p class="outro-foot">Hamza AlSalamat, signed by hand.</p>
@@ -200,6 +233,7 @@
 
     <!-- ============ PAGE · WORK ============ -->
     <div class="page page--work" id="page-work" data-page="work">
+    <h1 class="sr-only">Projects: things I built, start to finish</h1>
     <!-- tatreez hem — the same self-stitching heritage as Home -->
     <div class="heritage-hem" aria-hidden="true">
       <span class="js-star" data-star="7"></span>
@@ -404,7 +438,7 @@
           </ul>
 
           <div class="dossier-cta-row">
-            <a class="cta ghost dossier-certs-link" href="#certs" data-certs-link>See the certifications →</a>
+            <a class="cta ghost dossier-certs-link" href="/certs" data-certs-link>See the certifications →</a>
           </div>
         </div>
       </div>
@@ -528,7 +562,7 @@
       <span class="js-star" data-star="7"></span>
     </div>
 
-    <div class="page-cta"><a class="cta" href="#about">Where all of this comes from&nbsp;→</a></div>
+    <div class="page-cta"><a class="cta" href="/about">Where all of this comes from&nbsp;→</a></div>
 
     <div class="page-sign rise">
       <span class="page-sign-ar" lang="ar" dir="rtl" aria-hidden="true">حمزة السلامات</span>
@@ -538,6 +572,7 @@
 
     <!-- ============ PAGE · CERTIFICATIONS ============ -->
     <div class="page page--certs" id="page-certs" data-page="certs">
+    <h1 class="sr-only">Certifications</h1>
       <section class="certs">
         <header class="certs-head">
           <p class="kicker">Certifications</p>
@@ -575,7 +610,7 @@
         </div>
       </section>
 
-      <div class="page-cta"><a class="cta" href="#projects">See what they led to&nbsp;→</a></div>
+      <div class="page-cta"><a class="cta" href="/projects">See what they led to&nbsp;→</a></div>
 
     <div class="page-sign rise">
       <span class="page-sign-ar" lang="ar" dir="rtl" aria-hidden="true">حمزة السلامات</span>
@@ -585,6 +620,7 @@
 
     <!-- ============ PAGE · ABOUT — the full story, and a hub into the rest ============ -->
     <div class="page page--about" id="page-about" data-page="about">
+    <h1 class="sr-only">About Hamza AlSalamat</h1>
     <div class="heritage-hem" aria-hidden="true">
       <span class="js-star" data-star="7"></span>
       <canvas class="hem-band" data-stitch="hem"></canvas>
@@ -788,15 +824,15 @@
 
     <!-- branch out — About as a hub into the rest of the site -->
     <section class="branches">
-      <a class="branch-card" href="#projects">
+      <a class="branch-card" href="/projects">
         <span class="branch-k">Projects</span>
         <span class="branch-t">See what came of it&nbsp;→</span>
       </a>
-      <a class="branch-card" href="#certs">
+      <a class="branch-card" href="/certs">
         <span class="branch-k">Certifications</span>
         <span class="branch-t">Earned, not claimed&nbsp;→</span>
       </a>
-      <a class="branch-card" href="#contact">
+      <a class="branch-card" href="/contact">
         <span class="branch-k">Contact</span>
         <span class="branch-t">Straight to me&nbsp;→</span>
       </a>
@@ -821,6 +857,7 @@
          --ink-line, --ink-surface). Inheriting --text or --accent here puts dark
          type on a dark ground. The hems carry .outro-seam so they join the band. -->
     <div class="page page--contact" id="page-contact" data-page="contact">
+    <h1 class="sr-only">Contact Hamza AlSalamat</h1>
     <div class="heritage-hem outro-seam" aria-hidden="true">
       <span class="js-star" data-star="7"></span>
       <canvas class="hem-band" data-stitch="hem"></canvas>
@@ -908,7 +945,7 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
 
-  <script src="js/router.js?v=11"></script>
+  <script src="js/router.js?v=13"></script>
   <script src="js/film.js?v=19"></script>
   <script src="js/hero.js?v=22"></script>
   <script src="js/work.js?v=9"></script>

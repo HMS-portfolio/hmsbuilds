@@ -1206,3 +1206,19 @@ html { scroll-padding-top: clamp(78px, 12vh, 112px); }
 /* NOTE: the on-field overrides live at the END of heritage.css, not here.
    styles.css -> work.css -> heritage.css is the load order, so rules placed
    here are clobbered by the paper-tuned rules in the two later sheets. */
+
+/* Screen-reader-only: each page carries an <h1> naming it, which crawlers and
+   assistive tech both need, without disturbing a layout whose headline is the
+   hand-drawn signature rather than text. Not a hiding trick: the words match
+   what the page visibly says. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
