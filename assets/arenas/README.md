@@ -8,8 +8,8 @@ behind the constellation.
 |-------------------------------------|--------------------------------------------------------------------|------------|
 | Horsemanship                        | `horsemanship-4/-5/-6.webp` then `horsemanship.webp` · `-2` · `-3`  | live (6)   |
 | Wrestling · Jiu-jitsu · Kickboxing  | `mma.webp` · `mma-2.webp`                                           | live (2)   |
-| Wildlife & Outdoors                 | `outdoors.webp` · `-2` · `-3` · `-4`                                | live (4)   |
-| Hunting                             | `hunting.webp`                                                      | live (1)   |
+| Wildlife & Outdoors                 | `outdoors.webp` · `-2` · `-3` · `-4` · `-5`                         | live (5)   |
+| Hunting                             | `hunting.webp` · `hunting-2.webp`                                   | live (2)   |
 | Archery                             | `archery.webp`                                                      | empty slot |
 | Soccer                              | `soccer.webp`                                                       | empty slot |
 | Golf                                | `golf.webp`                                                         | empty slot |
@@ -67,6 +67,13 @@ they are not obvious:
   subject, so `cover` has nothing left to crop. That is why the skulls in
   `hunting.webp` sit centred rather than falling out of the bottom of the frame,
   which is where a plain centre crop would have left them.
+- **Where in the source you take that crop is a decision, not a default.**
+  `horsemanship-6.webp` was first cut off the TOP of its 1179×1469 original,
+  which put the mountain in shot and severed the horse at the knees; riding is
+  the subject, so it is now taken bottom-aligned (y 676–1469) and reaches the
+  hooves. `hunting-2.webp` is y 160–779 of its portrait original, which holds
+  the horns and the full quiver and drops a foreground of grass that reads as
+  mush at 30% opacity anyway.
 - **WebP, quality 92**, encoded once from the camera original — visually
   indistinguishable from the source on photographic content, at roughly half the
   bytes of the equivalent JPEG.

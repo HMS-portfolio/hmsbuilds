@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-route="certs">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,10 @@
 
        Route titles and descriptions live in js/routes.js, which both the
        generator and the browser router read, so the two can never disagree. -->
-  <title>Do it... death ain't goin no where - It'll either be a great idea, or a great story</title>
-  <meta name="description" content="Hamza AlSalamat. I have to find things out for myself. It runs through all of it: the AI work, the mat, the mountains. What the habit has built so far lives here." />
+  <title>Certifications · Hamza AlSalamat</title>
+  <meta name="description" content="Certifications and programs, including MIT Global Teaching Labs." />
   <meta name="theme-color" content="#eae8e0" />
-  <link rel="canonical" href="https://hmsbuilds.com/" />
+  <link rel="canonical" href="https://hmsbuilds.com/certs" />
 
   <!-- Document freshness is handled at the edge now: vercel.json sets
        Cache-Control: max-age=0, must-revalidate on / and *.html, which keeps
@@ -27,9 +27,9 @@
        a relative path against. -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Hamza AlSalamat" />
-  <meta property="og:url" content="https://hmsbuilds.com/" />
-  <meta property="og:title" content="Do it... death ain't goin no where - It'll either be a great idea, or a great story" />
-  <meta property="og:description" content="I have to find things out for myself. It runs through all of it: the AI work, the mat, the mountains. What the habit has built so far lives here." />
+  <meta property="og:url" content="https://hmsbuilds.com/certs" />
+  <meta property="og:title" content="Certifications · Hamza AlSalamat" />
+  <meta property="og:description" content="Certifications and programs, including MIT Global Teaching Labs." />
   <meta property="og:image" content="https://hmsbuilds.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -37,8 +37,8 @@
   <meta property="og:locale" content="en_US" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Do it... death ain't goin no where - It'll either be a great idea, or a great story" />
-  <meta name="twitter:description" content="I have to find things out for myself. It runs through all of it: the AI work, the mat, the mountains. What the habit has built so far lives here." />
+  <meta name="twitter:title" content="Certifications · Hamza AlSalamat" />
+  <meta name="twitter:description" content="Certifications and programs, including MIT Global Teaching Labs." />
   <meta name="twitter:image" content="https://hmsbuilds.com/assets/og-card.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -111,6 +111,45 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://hmsbuilds.com/certs#webpage",
+          "url": "https://hmsbuilds.com/certs",
+          "name": "Certifications · Hamza AlSalamat",
+          "description": "Certifications and programs, including MIT Global Teaching Labs.",
+          "isPartOf": {
+            "@id": "https://hmsbuilds.com/#website"
+          },
+          "about": {
+            "@id": "https://hmsbuilds.com/#hamza"
+          },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://hmsbuilds.com/certs#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hmsbuilds.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Certifications",
+              "item": "https://hmsbuilds.com/certs"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
 
@@ -119,9 +158,9 @@
       <img src="assets/wordmark.svg" alt="" />
     </a>
     <nav class="nav-tabs" aria-label="Primary">
-      <a href="/" class="active" aria-current="page">Home</a>
+      <a href="/">Home</a>
       <a href="/projects">Projects</a>
-      <a href="/certs">Certs</a>
+      <a href="/certs" class="active" aria-current="page">Certs</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
     </nav>
@@ -129,7 +168,7 @@
 
   <main>
     <!-- ============ PAGE · HOME — the falcon film, and the signature inside its eye ============ -->
-    <div class="page page--home is-active" id="page-home" data-page="home">
+    <div class="page page--home" id="page-home" data-page="home">
     <h1 class="sr-only">Hamza AlSalamat</h1>
     <section class="film" id="top" aria-label="Opening film: a falcon soars, then the camera dives into its hunter's eye">
       <div class="film-stage">
@@ -600,7 +639,7 @@
     </div><!-- /page-work -->
 
     <!-- ============ PAGE · CERTIFICATIONS ============ -->
-    <div class="page page--certs" id="page-certs" data-page="certs">
+    <div class="page page--certs is-active" id="page-certs" data-page="certs">
     <h1 class="sr-only">Certifications</h1>
       <section class="certs">
         <header class="certs-head">

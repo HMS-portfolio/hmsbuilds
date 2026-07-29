@@ -15,47 +15,18 @@
   "use strict";
 
   var SITE = "https://hmsbuilds.com";
-  var NAME = "Hamza AlSalamat";
 
-  /* route name -> the page it shows, the URL it lives at, and the title and
-     description a crawler should see for it. Distinct copy per route is the
-     whole point: five views competing as one result served nobody. */
-  var ROUTES = {
-    home: {
-      page: "page-home",
-      path: "/",
-      /* The one route whose title carries no name. The other four still read
-         "<view> · Hamza AlSalamat", and og:site_name plus the Person node in
-         the JSON-LD graph both carry it, so a search for the name still has
-         somewhere to land. */
-      title: "Do it in style - it doesn't have to make sense to anyone else",
-      desc: "Founder of Nama Site Intelligence, and hands-on with the rest: an engine that reads land, a car welded from steel, an agent that learns to write.",
-    },
-    projects: {
-      page: "page-work",
-      path: "/projects",
-      title: "Projects · " + NAME,
-      desc: "Things I built start to finish: Nama Site Intelligence, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
-    },
-    certs: {
-      page: "page-certs",
-      path: "/certs",
-      title: "Certifications · " + NAME,
-      desc: "Certifications and programs, including MIT Global Teaching Labs.",
-    },
-    about: {
-      page: "page-about",
-      path: "/about",
-      title: "About · " + NAME,
-      desc: "Where the work comes from: Jordanian and American roots, and a path through Los Angeles, Dallas, Memphis, Bahrain and Riyadh.",
-    },
-    contact: {
-      page: "page-contact",
-      path: "/contact",
-      title: "Contact · " + NAME,
-      desc: "Get in touch with " + NAME + ".",
-    },
-  };
+  /* The route table moved to js/routes.js so that tools/build-routes.mjs can
+     require the same object and bake these strings into the four static route
+     pages. Distinct copy per route is the whole point — five views competing as
+     one result served nobody — and it now reaches a crawler without this file
+     having to run at all.
+
+     If routes.js did not load there is nothing to route with. Leave the
+     document exactly as the server sent it, which for a static route page is
+     already the correct view. */
+  var ROUTES = window.SITE_ROUTES;
+  if (!ROUTES) return;
 
   /* legacy #hash names that should still resolve to a route */
   var ALIASES = { top: "home", work: "projects", "": "home" };
@@ -139,7 +110,9 @@
       var el = document.querySelector(sel);
       if (el) el.setAttribute(attr, value);
     };
-    set('meta[name="description"]', "content", route.desc);
+    /* a search result has no og:site_name line above it, so the name has to be
+       carried in the description itself where a route bothers to supply one */
+    set('meta[name="description"]', "content", route.searchDesc || route.desc);
     set('meta[property="og:title"]', "content", route.title);
     set('meta[property="og:description"]', "content", route.desc);
     set('meta[property="og:url"]', "content", SITE + route.path);

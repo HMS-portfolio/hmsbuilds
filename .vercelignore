@@ -27,6 +27,10 @@ _headers
 # re-crop never has to go back to the phone; nothing loads them at runtime.
 assets/arenas/_originals/
 
+# Build-time only. tools/build-routes.mjs generates projects/certs/about/
+# contact.html from index.html; those OUTPUTS ship, the generator does not.
+tools/
+
 # Local noise
 .DS_Store
 **/.DS_Store

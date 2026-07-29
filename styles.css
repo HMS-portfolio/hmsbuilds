@@ -808,6 +808,20 @@ a:focus-visible {
   opacity: 0.7;
 }
 
+/* the domain, set as a colophon rather than a link: upright, tracked out, and
+   a shade quieter than the signature it follows */
+.outro-domain {
+  font-style: normal;
+  letter-spacing: 0.08em;
+  font-size: 0.85em;
+  opacity: 0.6;
+}
+.outro-domain::before {
+  content: "·";
+  margin: 0 0.5em 0 0.2em;
+  opacity: 0.6;
+}
+
 /* ---------- filmic grain ---------- */
 .grain {
   position: fixed;
