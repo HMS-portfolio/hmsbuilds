@@ -21,6 +21,13 @@
  * by hand. index.html stays the single source of markup; js/routes.js stays
  * the single source of route copy.
  *
+ * vercel.json carries the other half: those rewrites are gone, replaced by
+ * "cleanUrls": true, which serves projects.html at /projects and 308s the
+ * .html spelling back to the clean path so it cannot become a second URL for
+ * the same content. That rationale lives here because vercel.json is JSON and
+ * has nowhere to put it — a "//" key fails Vercel's schema validation and
+ * fails the whole deploy.
+ *
  * Every substitution asserts it matched EXACTLY ONCE. If someone reformats the
  * head and a pattern stops matching, this exits non-zero and names it — the
  * failure mode is a loud build, never a silent page that quietly went back to

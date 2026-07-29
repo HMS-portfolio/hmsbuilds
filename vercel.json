@@ -1,17 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
-
-  "//": [
-    "cleanUrls replaces the four rewrites that used to point every route at",
-    "/index.html. Each route is now its own file, generated from index.html by",
-    "tools/build-routes.mjs, so /projects serves projects.html with ITS OWN",
-    "title, description and canonical rather than the homepage's. The rewrites",
-    "made all five URLs byte-identical, which told Google four of them were",
-    "duplicates of / and left the site with one indexable page.",
-    "cleanUrls also 308s /projects.html to /projects, so the .html spelling",
-    "cannot become a second URL for the same content."
-  ],
   "cleanUrls": true,
   "headers": [
     {
