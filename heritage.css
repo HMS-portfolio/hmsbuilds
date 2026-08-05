@@ -438,9 +438,6 @@
 .contact--ink .contact-card .arena-ico { color: var(--ink-rose); }
 .contact--ink a.contact-card:hover .arena-ico { color: var(--ink-accent); }
 
-.contact--ink .contact-card--soon { background: transparent; }
-.contact--ink .contact-card--soon .contact-v { color: rgba(243, 241, 230, 0.42); }
-
 /* ---- the facts ---- */
 .contact--ink .contact-why { border-color: rgba(243, 241, 230, 0.14); }
 .contact--ink .contact-why-head { color: var(--ink-accent); }
@@ -520,8 +517,6 @@
 .contact--ink .contact-plate .contact-note { color: var(--muted); }
 .contact--ink .contact-plate .contact-card .arena-ico { color: var(--rose); }
 .contact--ink .contact-plate a.contact-card:hover .arena-ico { color: var(--accent); }
-.contact--ink .contact-plate .contact-card--soon { background: transparent; }
-.contact--ink .contact-plate .contact-card--soon .contact-v { color: var(--muted); opacity: 0.75; }
 
 /* on a phone the plate should not hang off the edges */
 @media (max-width: 640px) {

@@ -12,7 +12,7 @@
        Route titles and descriptions live in js/routes.js, which both the
        generator and the browser router read, so the two can never disagree. -->
   <title>Projects · Hamza AlSalamat</title>
-  <meta name="description" content="Things I built start to finish: Nama Site Intelligence, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site." />
+  <meta name="description" content="Things I built start to finish: Nama Site Intelligence, now in private beta with the waitlist open, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site." />
   <meta name="theme-color" content="#eae8e0" />
   <link rel="canonical" href="https://hmsbuilds.com/projects" />
 
@@ -29,7 +29,7 @@
   <meta property="og:site_name" content="Hamza AlSalamat" />
   <meta property="og:url" content="https://hmsbuilds.com/projects" />
   <meta property="og:title" content="Projects · Hamza AlSalamat" />
-  <meta property="og:description" content="Things I built start to finish: Nama Site Intelligence, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site." />
+  <meta property="og:description" content="Things I built start to finish: Nama Site Intelligence, now in private beta with the waitlist open, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site." />
   <meta property="og:image" content="https://hmsbuilds.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -38,16 +38,16 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Projects · Hamza AlSalamat" />
-  <meta name="twitter:description" content="Things I built start to finish: Nama Site Intelligence, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site." />
+  <meta name="twitter:description" content="Things I built start to finish: Nama Site Intelligence, now in private beta with the waitlist open, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site." />
   <meta name="twitter:image" content="https://hmsbuilds.com/assets/og-card.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="icon" id="favicon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23e7e5db'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="styles.css?v=37" />
-  <link rel="stylesheet" href="work.css?v=16" />
-  <link rel="stylesheet" href="heritage.css?v=19" />
+  <link rel="stylesheet" href="styles.css?v=38" />
+  <link rel="stylesheet" href="work.css?v=17" />
+  <link rel="stylesheet" href="heritage.css?v=20" />
   <link rel="stylesheet" href="about.css?v=8" />
   <link rel="stylesheet" href="type.css?v=9" />
   <script>
@@ -78,7 +78,15 @@
 
        · sameAs is how a person is disambiguated. GitHub alone is thin; the
          LinkedIn profile is the strongest identity edge available, and it is
-         already linked visibly from Contact, so the claim is corroborated. -->
+         already linked visibly from Contact, so the claim is corroborated.
+
+       · The Organization node exists because Nama is now a real destination
+         rather than a plan. Naming it here, on a domain Google already trusts
+         for this person, with founder and worksFor pointing at each other, is
+         what lets "Nama Site Intelligence" resolve as an entity instead of two
+         ordinary words. The same reasoning as "hmsbuilds": a coined name has to
+         be declared before it can be recognised, and the claim is corroborated
+         by the visible link on Projects and on Contact. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -96,7 +104,17 @@
           "https://github.com/HMS-portfolio",
           "https://www.linkedin.com/in/hamza-salamat/"
         ],
-        "knowsLanguage": ["en", "ar"]
+        "knowsLanguage": ["en", "ar"],
+        "worksFor": { "@id": "https://namasolutions.vercel.app/#nama" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://namasolutions.vercel.app/#nama",
+        "name": "Nama Site Intelligence",
+        "alternateName": ["Nama", "Nama Solutions", "نماء"],
+        "url": "https://namasolutions.vercel.app/",
+        "description": "Site intelligence for land. Reads a parcel's register, zoning and numbers, and returns sourced evidence in a day rather than six weeks.",
+        "founder": { "@id": "https://hmsbuilds.com/#hamza" }
       },
       {
         "@type": "WebSite",
@@ -120,7 +138,7 @@
           "@id": "https://hmsbuilds.com/projects#webpage",
           "url": "https://hmsbuilds.com/projects",
           "name": "Projects · Hamza AlSalamat",
-          "description": "Things I built start to finish: Nama Site Intelligence, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
+          "description": "Things I built start to finish: Nama Site Intelligence, now in private beta with the waitlist open, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
           "isPartOf": {
             "@id": "https://hmsbuilds.com/#website"
           },
@@ -323,6 +341,7 @@
         <button class="work-card" type="button" data-open="dossier-nama" aria-haspopup="dialog" aria-label="Open case file: Nama Site Intelligence">
           <div class="card-media card-media--nama">
             <span class="card-index">01</span>
+            <span class="card-flag">Waitlist open</span>
             <span class="najmeh-mark js-najmeh" aria-hidden="true"></span>
             <span class="nama-mark">نماء</span>
             <span class="card-open-cue">Open case file</span>
@@ -330,7 +349,7 @@
           <div class="card-body">
             <h3>Nama Site Intelligence</h3>
             <p>An AI engine that reads a piece of land and tells you what's worth building on it.</p>
-            <span class="card-tag">AI &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">nama-solutions.dev, soon</span></span>
+            <span class="card-tag">AI &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">private beta, waitlist open</span></span>
           </div>
         </button>
 
@@ -450,13 +469,20 @@
             <li><span>Role</span> Founder</li>
             <li><span>Build</span> Five agents, one shared contract</li>
             <li><span>Rule</span> Return nothing before returning a guess</li>
-            <li><span>Status</span> In active development, Riyadh first</li>
+            <li><span>Status</span> Private beta, waitlist open</li>
           </ul>
 
+          <!-- The announcement. This row was a dead "coming soon" label for as
+               long as there was nothing to send anyone to. There is now, so the
+               case file ends on something you can act on rather than wait for. -->
+          <p class="dossier-announce">
+            <span class="announce-tag">New</span>
+            <span>The engine is out of my hands and into other people's. Site Intelligence is in private beta, and the waitlist is open to anyone who values land for a living.</span>
+          </p>
+
           <div class="dossier-cta-row">
-            <a class="cta soon-link" data-nama-link aria-disabled="true" title="Site coming soon">
-              nama-solutions.dev <span class="soon-badge">soon</span>
-            </a>
+            <a class="cta" href="https://namasolutions.vercel.app" target="_blank" rel="noopener">Join the waitlist&nbsp;→</a>
+            <span class="cta-note">namasolutions.vercel.app</span>
           </div>
         </div>
       </div>
@@ -889,7 +915,7 @@
       <div class="now-inner">
         <p class="now-label rise">Right now</p>
         <ul class="now-list">
-          <li class="rise">Building Nama toward its launch in Riyadh.</li>
+          <li class="rise">Building Nama Site Intelligence, now in private beta. <a class="now-link" href="https://namasolutions.vercel.app" target="_blank" rel="noopener">The waitlist is open</a>.</li>
           <li class="rise">Learning whatever the next build turns out to need.</li>
           <li class="rise">On the mat most weeks, and in the mountains when I can get there.</li>
         </ul>
@@ -978,12 +1004,12 @@
               </a>
             </li>
             <li>
-              <div class="contact-card contact-card--soon">
+              <a class="contact-card" href="https://namasolutions.vercel.app" target="_blank" rel="noopener">
                 <span class="arena-ico js-najmeh" aria-hidden="true"></span>
                 <span class="contact-k">Nama Site Intelligence</span>
-                <span class="contact-v">nama-solutions.dev</span>
-                <span class="contact-note">The company I am building. It opens with the Riyadh launch.</span>
-              </div>
+                <span class="contact-v">namasolutions.vercel.app</span>
+                <span class="contact-note">The company I am building. In private beta now, and the waitlist is open.</span>
+              </a>
             </li>
           </ul>
         </div>

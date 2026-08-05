@@ -39,7 +39,7 @@ var SITE_ROUTES = {
     page: "page-work",
     path: "/projects",
     title: "Projects · Hamza AlSalamat",
-    desc: "Things I built start to finish: Nama Site Intelligence, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
+    desc: "Things I built start to finish: Nama Site Intelligence, now in private beta with the waitlist open, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
     breadcrumb: "Projects",
   },
   certs: {

@@ -82,6 +82,56 @@
   opacity: 0.5;
 }
 
+/* A live flag, stamped under the plate number like a status on a case file.
+   Only card 01 carries one, and only while there is genuinely something open
+   to act on. When that stops being true the span comes out, not the styling.
+
+   Top-LEFT, deliberately. The top-right corner belongs to .najmeh-mark on every
+   card, and the bottom belongs to .card-open-cue once you hover. Under the
+   number is the only corner that is free in both states.
+
+   Ink colours, because the work cards are ink-themed by heritage.css: paper
+   values here would read as a bright chip punched into a dark card. */
+.card-flag {
+  position: absolute;
+  top: 38px;
+  left: 14px;
+  z-index: 3;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 999px;
+  color: var(--ink-accent);
+  background: rgba(18, 22, 17, 0.55);
+  border: 1px solid rgba(230, 189, 124, 0.38);
+  backdrop-filter: blur(3px);
+}
+
+/* a slow pulse, so the eye finds it without being shouted at */
+.card-flag::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--ink-accent);
+  vertical-align: middle;
+  animation: flag-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes flag-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-flag::before { animation: none; opacity: 1; }
+}
+
 /* "Open case file" cue that slides up on hover */
 .card-open-cue {
   position: absolute;
@@ -312,28 +362,54 @@
   color: var(--muted);
 }
 
-.dossier-cta-row {
-  margin-top: 24px;
+/* The announcement, stated once, directly above the thing it asks you to do.
+   A rule over it separates it from the case file proper: the file describes
+   what the engine is, this line says where it currently stands. */
+.dossier-announce {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 12px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text);
 }
 
-/* Nama "coming soon" link — designed in, not bolted on */
-.soon-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  cursor: default;
-  opacity: 0.85;
-}
-
-.soon-link[aria-disabled="true"] { pointer-events: none; }
-
-.soon-badge {
+.announce-tag {
+  flex: none;
+  font-family: var(--font-body);
+  font-weight: 500;
   font-size: 0.55rem;
-  letter-spacing: 0.18em;
-  padding: 3px 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 9px;
   border-radius: 999px;
+  color: var(--accent);
   background: rgba(128, 80, 13, 0.14);
   border: 1px solid rgba(128, 80, 13, 0.35);
+}
+
+/* The Nama call to action. This was a dead "coming soon" label for as long as
+   there was nothing behind it. There is now, so it carries the same weight as
+   any other cta, and the address sits beside it in plain text for anyone who
+   would rather read it than click it. */
+.dossier-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: 20px;
+}
+
+.cta-note {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
 }
 
 /* ---------- Nama typographic face ---------- */
