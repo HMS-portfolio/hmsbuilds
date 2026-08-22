@@ -278,6 +278,10 @@
 .n-sec--sunk .n-fig-cap { color: var(--n-mute-on2); }
 
 .n-sec-head { max-width: 46ch; }
+/* label and status pill on one line. The pill used to sit against the
+   company lockup in the hero, where it read as though Nama Solutions were
+   the pilot rather than the product. */
+.n-sec-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .n-sec-head h2 { margin: 12px 0 0; }
 .n-legend { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
 

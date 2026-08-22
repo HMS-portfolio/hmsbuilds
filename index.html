@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="work.css?v=17" />
   <link rel="stylesheet" href="heritage.css?v=20" />
   <link rel="stylesheet" href="about.css?v=8" />
-  <link rel="stylesheet" href="nama.css?v=10" />
+  <link rel="stylesheet" href="nama.css?v=11" />
   <link rel="stylesheet" href="type.css?v=10" />
   <script>
     /* typography swap-in: fade the display faces in once they are ready, with a
@@ -87,10 +87,15 @@
        · The Organization node exists because Nama is now a real destination
          rather than a plan. Naming it here, on a domain Google already trusts
          for this person, with founder and worksFor pointing at each other, is
-         what lets "Nama Site Intelligence" resolve as an entity instead of two
-         ordinary words. The same reasoning as "hmsbuilds": a coined name has to
-         be declared before it can be recognised, and the claim is corroborated
-         by the visible link on Projects and on Contact. -->
+         what lets "Nama" resolve as an entity instead of an ordinary word. The
+         same reasoning as "hmsbuilds": a coined name has to be declared before
+         it can be recognised, and the claim is corroborated by the visible
+         link on Projects and on Contact.
+
+       · Site Intelligence has its OWN node rather than living inside the
+         company's alternateName, where it used to sit. A company and the
+         software it sells are two entities, and saying otherwise in markup
+         teaches a crawler the blur the page copy works to avoid. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -115,14 +120,25 @@
         "@type": "Organization",
         "@id": "https://nama.hmsbuilds.com/#nama",
         "name": "Nama Solutions",
-        "alternateName": ["Nama", "Nama Site Intelligence", "نماء"],
+        "alternateName": ["Nama", "نماء"],
         "url": "https://nama.hmsbuilds.com/",
         "logo": "https://hmsbuilds.com/assets/nama/mark.svg",
-        "description": "Nama Solutions builds data systems and AI architecture. Site Intelligence, its newest product, reads Madinah's public land registers and returns a sourced plot report the same day.",
+        "description": "Nama Solutions builds data systems and AI architecture: bringing an archive in, the reasoning layer over it, and the software a team works in. Site Intelligence is its pilot product.",
         "foundingDate": "2026",
         "areaServed": "Madinah, Saudi Arabia",
         "founder": { "@id": "https://hmsbuilds.com/#hamza" },
+        "owns": { "@id": "https://nama.hmsbuilds.com/#site-intelligence" },
         "subjectOf": { "@id": "https://hmsbuilds.com/nama#webpage" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://nama.hmsbuilds.com/#site-intelligence",
+        "name": "Site Intelligence",
+        "applicationCategory": "BusinessApplication",
+        "url": "https://nama.hmsbuilds.com/",
+        "description": "Reads Madinah's public land registers and returns a sourced plot report the same working day. Every figure is marked against the record behind it.",
+        "publisher": { "@id": "https://nama.hmsbuilds.com/#nama" },
+        "author": { "@id": "https://hmsbuilds.com/#hamza" }
       },
       {
         "@type": "WebSite",
@@ -323,7 +339,7 @@
 
       <div class="work-grid">
         <!-- 01 · Nama -->
-        <button class="work-card" type="button" data-open="dossier-nama" aria-haspopup="dialog" aria-label="Open case file: Nama Site Intelligence">
+        <button class="work-card" type="button" data-open="dossier-nama" aria-haspopup="dialog" aria-label="Open case file: Site Intelligence, by Nama Solutions">
           <div class="card-media card-media--nama">
             <span class="card-index">01</span>
             <span class="card-flag">Live in Madinah</span>
@@ -340,9 +356,9 @@
             <span class="card-open-cue">Open case file</span>
           </div>
           <div class="card-body">
-            <h3>Nama Site Intelligence</h3>
+            <h3>Site Intelligence</h3>
             <p>An AI engine that reads a piece of land and tells you what's worth building on it.</p>
-            <span class="card-tag">AI &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">running in Madinah</span></span>
+            <span class="card-tag">Nama Solutions &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">Madinah pilot</span></span>
           </div>
         </button>
 
@@ -451,7 +467,7 @@
 
         <div class="dossier-read">
           <p class="dossier-idx">Case File 01</p>
-          <h3 class="dossier-title" id="nama-title">Nama Site Intelligence</h3>
+          <h3 class="dossier-title" id="nama-title">Site Intelligence</h3>
           <p class="dossier-lede">The engine I am building right now. Point it at a piece of land and it works out what is worth building there: the rules, the numbers, the recommendation. Minutes instead of months. Madinah first.</p>
 
           <p class="dossier-body">Under the hood it is five agents in a line. One gathers the data and owns the archive, one interprets the zoning, one runs the numbers, one writes the deal sheet, and an orchestrator moves the work between them. They hand off through a single typed contract, so every stage knows exactly what it was given and what it owes the next one.</p>
@@ -459,10 +475,11 @@
           <p class="dossier-body">The discipline is in what it refuses to do. Every source row is kept exactly as it arrived, stamped with the hash and vintage of the file it came from, so any number on the finished sheet traces back to the row that produced it. Arabic is normalized before anything is matched, because a parcel written four different ways is still one parcel. And when a query only resolves as far as the district, that is not allowed to underwrite a specific plot. The engine returns nothing and says why. It is slower to build this way. It is the only version worth trusting.</p>
 
           <ul class="dossier-facts">
+            <li><span>Company</span> Nama Solutions</li>
             <li><span>Role</span> Founder</li>
             <li><span>Build</span> Five agents, one shared contract</li>
             <li><span>Rule</span> Return nothing before returning a guess</li>
-            <li><span>Status</span> Running in Madinah</li>
+            <li><span>Status</span> Pilot product, live in Madinah</li>
           </ul>
 
           <!-- The announcement. This row has tracked the build the whole way:
@@ -681,11 +698,10 @@
             <span class="n-lockup-rule" aria-hidden="true"></span>
             <span class="n-lockup-desc">Solutions</span>
           </span>
-          <span class="n-live"><span class="n-live-dot" aria-hidden="true"></span>Live &middot; Madinah pilot</span>
         </div>
 
-        <h2 class="rise">We build data systems, and the AI that reasons over them.</h2>
-        <p class="n-hero-lede rise">Nama Solutions takes an archive, proves it holds up, and builds the software a team works in. Site Intelligence is our first product.</p>
+        <h2 class="rise">We build data systems, and the intelligence that runs on them.</h2>
+        <p class="n-hero-lede rise">Nama Solutions brings an archive in, proves it holds up, and builds the software a team works in. Site Intelligence is our pilot product.</p>
 
         <div class="n-hero-actions rise">
           <a class="n-cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama <span aria-hidden="true">&rarr;</span></a>
@@ -701,7 +717,7 @@
       <div class="n-wrap">
         <div class="n-sec-head rise">
           <p class="n-label">What we build</p>
-          <h2>All three layers.</h2>
+          <h2>The archive, the reasoning, and the tools.</h2>
         </div>
 
         <div class="n-build">
@@ -734,7 +750,10 @@
     <section class="n-sec">
       <div class="n-wrap">
         <div class="n-sec-head rise">
-          <p class="n-label">Our first product</p>
+          <p class="n-sec-top">
+            <span class="n-label">Site Intelligence &middot; our pilot product</span>
+            <span class="n-live"><span class="n-live-dot" aria-hidden="true"></span>Live in Madinah</span>
+          </p>
           <h2>Six weeks of land research, in an afternoon.</h2>
           <p class="n-product-lede">Site Intelligence reads Madinah&rsquo;s public land registers and returns a plot report the same day. Every figure names the record it came from.</p>
         </div>
@@ -750,7 +769,7 @@
             <p class="n-beat-v">6 weeks</p>
           </div>
           <div class="n-beat n-beat--ours">
-            <p class="n-beat-k">Nama takes</p>
+            <p class="n-beat-k">Site Intelligence takes</p>
             <p class="n-beat-v">an afternoon</p>
           </div>
         </div>
@@ -811,7 +830,7 @@
     <section class="n-sec n-sec--sunk">
       <div class="n-wrap">
         <div class="n-sec-head rise">
-          <p class="n-label">Behind it</p>
+          <p class="n-label">The record</p>
           <h2>Three public registers, read end to end.</h2>
         </div>
 
@@ -832,7 +851,7 @@
       <div class="n-wrap">
         <p class="n-label rise">The company</p>
         <h2 class="rise">Built to solve.</h2>
-        <p class="rise">Nama Solutions builds data systems and AI architecture. Site Intelligence is the first product to run on that infrastructure.</p>
+        <p class="rise">Nama Solutions builds data systems and AI architecture. Site Intelligence is the pilot product running on that infrastructure.</p>
 
         <div class="n-hero-actions rise">
           <a class="n-cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama <span aria-hidden="true">&rarr;</span></a>
@@ -927,7 +946,7 @@
 
           <!-- no country, no city: the engine reads land, and naming a market
                here shrinks it to one. Madinah belongs on /nama. -->
-          <p class="about-para rise">Right now most of that is directed at AI. I have been building with it since it arrived, and I learned it the way I learn anything: by working with it until it made sense. It is a material to me now. I know where it gives, and I know where it will not hold. Nama Site Intelligence grew out of that.</p>
+          <p class="about-para rise">Right now most of that is directed at AI. I have been building with it since it arrived, and I learned it the way I learn anything: by working with it until it made sense. It is a material to me now. I know where it gives, and I know where it will not hold. Nama Solutions grew out of that.</p>
 
           <p class="about-para rise">That instinct has never confined itself to a screen. It is what put me on a mat, where I still compete in kickboxing, jiu-jitsu and wrestling, and where I have taken both gold and silver.</p>
 
@@ -1230,7 +1249,7 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
 
-  <script src="js/routes.js?v=4"></script>
+  <script src="js/routes.js?v=5"></script>
   <script src="js/router.js?v=18"></script>
   <script src="js/film.js?v=19"></script>
   <script src="js/hero.js?v=23"></script>

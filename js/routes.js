@@ -39,7 +39,7 @@ var SITE_ROUTES = {
     page: "page-work",
     path: "/projects",
     title: "Projects · Hamza AlSalamat",
-    desc: "Things I built start to finish: Nama Site Intelligence, now running in Madinah, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
+    desc: "Things I built start to finish: Nama Solutions and its pilot product Site Intelligence, now live in Madinah, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
     breadcrumb: "Projects",
   },
   nama: {
@@ -51,7 +51,7 @@ var SITE_ROUTES = {
        about a company, so it ships Nama's own artwork instead. The filename
        carries a date because platforms cache share cards by URL, and a new
        path is the only bust that does not need their debuggers. */
-    desc: "Nama Solutions builds data systems and AI architecture. Site Intelligence, our newest product, reads Madinah's public land registers and returns a sourced plot report the same day.",
+    desc: "Nama Solutions builds data systems and AI architecture. Site Intelligence, its pilot product, reads Madinah's public land registers and returns a sourced plot report the same day.",
     ogImage: "/assets/nama/og-2026-08.png",
     ogImageAlt: "Nama Solutions share card: the mark and wordmark above the line \u201cTen plots in the time one took.\u201d",
     breadcrumb: "Nama",
