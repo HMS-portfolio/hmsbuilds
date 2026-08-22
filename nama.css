@@ -428,6 +428,33 @@
   color: var(--n-mute-on2);
 }
 
+/* ============ WHAT THE COMPANY BUILDS ============
+   Restored. These rows were cut in a copy pass for being long, which was the
+   wrong call: they are the only place the page says what Nama does as a
+   business rather than what one of its products does. Losing them is what
+   turned a company page into a product page with a company footnote. */
+.n-build { margin-top: clamp(30px, 4vh, 46px); border-top: 1px solid var(--n-line); }
+.n-build-row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: clamp(16px, 3vw, 36px);
+  padding: 24px 0;
+  border-bottom: 1px solid var(--n-line);
+}
+.n-build-n {
+  font-family: var(--n-data);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--n-brass-on2);
+  padding-top: 6px;
+}
+.n-build-row h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+.n-build-row p { margin-top: 9px; max-width: 54ch; font-size: 0.99rem; }
+
+/* the product section leads with a sentence, unlike the other section heads */
+.n-product-lede { margin-top: 16px; max-width: 50ch; }
+
 /* ============ THE LIMIT ============
    One line, and it stays. Nama's whole argument is that it says where a
    figure stands, so the sentence naming what it will not claim is the pitch
@@ -474,6 +501,8 @@
      top padding were stacking to ~190px of empty paper between the gap strip
      and the sheet. Fixed pixels here, since on a phone the viewport height
      says nothing useful about how much air a section wants. */
+  .n-build-row { grid-template-columns: 1fr; gap: 6px; }
+  .n-build-n { padding-top: 0; }
   .n-hero { padding-bottom: 34px; }
   .n-sec { padding-block: 52px; }
   .n-close { padding-block: 56px; }

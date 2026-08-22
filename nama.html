@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="work.css?v=17" />
   <link rel="stylesheet" href="heritage.css?v=20" />
   <link rel="stylesheet" href="about.css?v=8" />
-  <link rel="stylesheet" href="nama.css?v=9" />
+  <link rel="stylesheet" href="nama.css?v=10" />
   <link rel="stylesheet" href="type.css?v=10" />
   <script>
     /* typography swap-in: fade the display faces in once they are ready, with a
@@ -697,19 +697,20 @@
     </div>
     </div><!-- /page-work -->
 
-    <!-- ============ PAGE · NAMA — the business, in ninety seconds ============
+    <!-- ============ PAGE · NAMA ============
          Nama's own paper, green and brass, hosted inside this site's shell
          rather than repainted in it. Tokens are scoped to .page--nama in
          nama.css so nothing green escapes into the rest of the site.
 
-         Ordered the way you would catch someone up out loud: what it does,
-         why anyone needs it, what actually arrives, what is behind it, what
-         it refuses to claim, and who built it. The deal sheet is the
-         centrepiece and it arrives early, because showing the tagged
-         document explains the product faster than a paragraph about it. -->
+         THE SPINE IS THE COMPANY, NOT THE PRODUCT. It read the other way
+         round for a while: four sections of Site Intelligence with one line
+         about Nama at the foot, which framed the company as a footnote to
+         its own product. The order now is who we are, what we build, what we
+         built with it, and the evidence under that. -->
     <div class="page page--nama is-active" id="page-nama" data-page="nama">
     <h1 class="sr-only">Nama Solutions and Site Intelligence</h1>
 
+    <!-- 1 · THE COMPANY -->
     <section class="n-hero">
       <div class="n-wrap">
         <div class="n-hero-head rise">
@@ -722,16 +723,62 @@
           <span class="n-live"><span class="n-live-dot" aria-hidden="true"></span>Live &middot; Madinah pilot</span>
         </div>
 
-        <h2 class="rise">Six weeks of land research, in an afternoon.</h2>
-        <p class="n-hero-lede rise">We build data systems and AI architecture. Site Intelligence, our newest product, reads Madinah&rsquo;s public land registers and returns a plot report the same day. Every figure names the record it came from.</p>
+        <h2 class="rise">We build data systems, and the AI that reasons over them.</h2>
+        <p class="n-hero-lede rise">Nama Solutions takes an archive, proves it holds up, and builds the software a team works in. Site Intelligence is our first product.</p>
 
         <div class="n-hero-actions rise">
           <a class="n-cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama <span aria-hidden="true">&rarr;</span></a>
           <span class="n-cost">nama.hmsbuilds.com</span>
         </div>
+      </div>
+    </section>
 
-        <!-- The whole business case as three beats. The gap between how fast
-             a deal moves and how slowly the record reads IS the product. -->
+    <!-- 2 · WHAT THE COMPANY BUILDS. Three layers, and we own all of them.
+         This is the section whose absence made the page read as a product
+         page with a company footnote. -->
+    <section class="n-sec n-sec--sunk">
+      <div class="n-wrap">
+        <div class="n-sec-head rise">
+          <p class="n-label">What we build</p>
+          <h2>All three layers.</h2>
+        </div>
+
+        <div class="n-build">
+          <div class="n-build-row rise">
+            <span class="n-build-n">01</span>
+            <div>
+              <h3>The archive</h3>
+              <p>Every source row is kept exactly as it arrived, stamped with the hash and vintage of the file it came from, so any figure traces back to the row that produced it.</p>
+            </div>
+          </div>
+          <div class="n-build-row rise">
+            <span class="n-build-n">02</span>
+            <div>
+              <h3>The reasoning over it</h3>
+              <p>Agents read the archive and hand off through one typed contract, so every stage knows what it was given and what it owes the next.</p>
+            </div>
+          </div>
+          <div class="n-build-row rise">
+            <span class="n-build-n">03</span>
+            <div>
+              <h3>The tools</h3>
+              <p>The software a team works in, and a document they can take into a room and defend line by line.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · THE PRODUCT, presented as something the company built. -->
+    <section class="n-sec">
+      <div class="n-wrap">
+        <div class="n-sec-head rise">
+          <p class="n-label">Our first product</p>
+          <h2>Six weeks of land research, in an afternoon.</h2>
+          <p class="n-product-lede">Site Intelligence reads Madinah&rsquo;s public land registers and returns a plot report the same day. Every figure names the record it came from.</p>
+        </div>
+
+        <!-- the business case, as three beats -->
         <div class="n-gap rise">
           <div class="n-beat">
             <p class="n-beat-k">A deal closes in</p>
@@ -746,22 +793,13 @@
             <p class="n-beat-v">an afternoon</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- WHAT ARRIVES. The specimen does the explaining. -->
-    <section class="n-sec">
-      <div class="n-wrap">
-        <div class="n-sec-head rise">
-          <p class="n-label">What arrives</p>
-          <h2>A document you can check.</h2>
-          <!-- The three states, shown rather than described. -->
-          <p class="n-legend">
-            <span class="n-tag n-tag-rec">From record</span>
-            <span class="n-tag n-tag-asm">Assumption</span>
-            <span class="n-tag n-tag-non">No figure</span>
-          </p>
-        </div>
+        <!-- the three states, shown rather than described -->
+        <p class="n-legend rise">
+          <span class="n-tag n-tag-rec">From record</span>
+          <span class="n-tag n-tag-asm">Assumption</span>
+          <span class="n-tag n-tag-non">No figure</span>
+        </p>
 
         <div class="n-sheet-wrap rise" data-print>
           <div class="n-sheet">
@@ -805,11 +843,10 @@
             <p class="n-sheet-foot">Specimen sheet</p>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- BEHIND IT. Proof, in one screen. -->
+    <!-- 4 · THE EVIDENCE UNDER THE PRODUCT -->
     <section class="n-sec n-sec--sunk">
       <div class="n-wrap">
         <div class="n-sec-head rise">
@@ -823,19 +860,18 @@
           <div class="n-fig"><p class="n-fig-n">2,590</p><p class="n-fig-cap">Recorded sales</p></div>
         </div>
 
-        <p class="n-src rise">Parcels and building rules come from Amanat Al Madinah, recorded sales from the Ministry of Justice, and rental indicators from REGA. Five agents we built read them: data, zoning, financial, report, and an orchestrator.</p>
+        <p class="n-src rise">Parcels and building rules come from Amanat Al Madinah, recorded sales from the Ministry of Justice, and rental indicators from REGA.</p>
 
-        <!-- The caveat stays. It is the argument, not a disclaimer bolted on. -->
         <p class="n-limit rise">Cost inputs are yours to set. The sheet sits alongside a chartered valuation, not instead of one.</p>
       </div>
     </section>
 
-    <!-- The close, in Hamza's voice rather than Nama's. -->
+    <!-- 5 · THE CLOSE -->
     <section class="n-close">
       <div class="n-wrap">
         <p class="n-label rise">The company</p>
         <h2 class="rise">Built to solve.</h2>
-        <p class="rise">Madinah is the pilot. The infrastructure underneath Site Intelligence was designed to carry more than one product.</p>
+        <p class="rise">Nama Solutions builds data systems and AI architecture. Site Intelligence is the first product to run on that infrastructure.</p>
 
         <div class="n-hero-actions rise">
           <a class="n-cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama <span aria-hidden="true">&rarr;</span></a>
