@@ -428,27 +428,31 @@
   color: var(--n-mute-on2);
 }
 
-/* ============ WHAT THE COMPANY BUILDS ============
-   The page showed a product and never said what the business is. These rows
-   carry the other half: data systems, the reasoning layer, and the tools. */
-.n-build { margin-top: clamp(30px, 4vh, 46px); border-top: 1px solid var(--n-line); }
-.n-build-row {
+/* ============ THE COMPANY AND THE PRODUCT ============
+   Two panes, hairline between them. The layout IS the argument: set side by
+   side, a reader gets the distinction without a sentence explaining it. The
+   mark sits on the company pane only, because the mark is the company's. */
+.n-pair {
+  margin-top: clamp(30px, 4vh, 46px);
   display: grid;
-  grid-template-columns: 3.2rem 1fr;
-  gap: clamp(16px, 3vw, 36px);
-  padding: 24px 0;
-  border-bottom: 1px solid var(--n-line);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--n-line);
+  border: 1px solid var(--n-line);
 }
-.n-build-n {
+.n-pane { background: var(--n-paper); padding: clamp(22px, 3vw, 30px); }
+.n-pane-top { display: flex; align-items: center; gap: 11px; min-height: 26px; }
+.n-pane-top h3 { font-size: clamp(1.2rem, 2.2vw, 1.5rem); }
+.n-pane-meta {
+  margin-top: 10px;
   font-family: var(--n-data);
-  font-size: 0.6rem;
-  font-weight: 600;
+  font-size: 0.57rem;
+  font-weight: 500;
   letter-spacing: 0.14em;
-  color: var(--n-brass-on2);
-  padding-top: 6px;
+  text-transform: uppercase;
+  color: var(--n-mute);
 }
-.n-build-row h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
-.n-build-row p { margin-top: 9px; max-width: 54ch; font-size: 0.99rem; }
+.n-pane > p:last-child { margin-top: 14px; font-size: 0.99rem; max-width: 44ch; }
 
 /* ============ THE LIMIT ============
    One line, and it stays. Nama's whole argument is that it says where a
@@ -496,8 +500,6 @@
      top padding were stacking to ~190px of empty paper between the gap strip
      and the sheet. Fixed pixels here, since on a phone the viewport height
      says nothing useful about how much air a section wants. */
-  .n-build-row { grid-template-columns: 1fr; gap: 6px; }
-  .n-build-n { padding-top: 0; }
   .n-hero { padding-bottom: 34px; }
   .n-sec { padding-block: 52px; }
   .n-close { padding-block: 56px; }
