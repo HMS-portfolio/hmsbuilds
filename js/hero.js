@@ -119,7 +119,7 @@
   }
 
   /* ---- re-triggering reveals: animate in every time they enter view ---- */
-  var risers = document.querySelectorAll(".work-head, .work-card, .about .rise, .about-teaser .rise, .arenas-group, .arena-tile, .const-head .rise, .const-converge, .now .rise, .branch-card, .page-sign, .outro-line, .outro-links, .outro-foot, .outro-arabic, .outro-note, .contact .rise, .certs-head, .cert-card");
+  var risers = document.querySelectorAll(".work-head, .work-card, .about .rise, .about-teaser .rise, .arenas-group, .arena-tile, .const-head .rise, .const-converge, .now .rise, .branch-card, .page-sign, .outro-line, .outro-links, .outro-foot, .outro-arabic, .outro-note, .contact .rise, .certs-head, .cert-card, .page--nama .rise, .home-news-card");
   risers.forEach(function (el) { el.classList.add("rise"); });
 
   /* add-only: reveal once and stay. Toggling .in off mid-reveal fought the

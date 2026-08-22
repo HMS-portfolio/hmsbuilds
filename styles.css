@@ -736,23 +736,12 @@ a:focus-visible {
   filter: saturate(1) contrast(1.04);
 }
 
-/* Nama: typographic card until the product face exists */
+/* Nama: the plate behind the logo */
 .card-media--nama {
   background:
     radial-gradient(70% 90% at 50% 10%, rgba(128, 80, 13, 0.16), transparent 70%),
     var(--mat);
 }
-
-.nama-mark {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 8vw, 6rem);
-  color: var(--accent);
-  opacity: 0.9;
-  filter: drop-shadow(0 0 18px rgba(128, 80, 13, 0.25));
-  transition: transform 0.8s var(--ease-pen);
-}
-
-.work-card:hover .nama-mark { transform: scale(1.06); }
 
 .card-body {
   padding: 22px 24px 26px;

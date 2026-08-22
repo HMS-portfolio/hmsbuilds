@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Nama">
+  <title>Nama</title>
+  <!-- The mark, per Nama Brand Guidelines v3 §3: a survey corner bracket with
+       the plot square at the OPPOSITE corner. Green bracket is the record.
+       Brass square is what was derived from it. Geometrically identical to
+       nama-site/public/favicon.svg; the two must never drift. -->
+  <rect width="32" height="32" fill="#FBFAF7"/>
+  <path d="M8 26V8h18" fill="none" stroke="#1F5C43" stroke-width="3.2"/>
+  <rect x="20" y="20" width="6" height="6" fill="#8F6A1C"/>
+</svg>

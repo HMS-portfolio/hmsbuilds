@@ -102,7 +102,6 @@ em, i,
   line-height: var(--leading-title);
   letter-spacing: var(--track-title);
 }
-.nama-strap { font-family: var(--font-body); }
 
 /* ---- 3 · READ AT LENGTH — Inter, upright, never italic ---- */
 /* the signature italic lede, restored. EB Garamond owns a true italic, so
@@ -169,10 +168,8 @@ em, i,
 }
 .card-tag, .dossier-facts span, .contact-why-head { font-size: var(--step--2); }
 
-/* ---- Arabic is Aref Ruqaa everywhere. The Nama mark inherited the
-       display token, which would have dropped نماء onto a fallback
-       the moment display became a Latin-only caps face. ---- */
-.nama-mark, .sig-arabic, .work-arabic, .about-arabic,
+/* ---- Arabic is Aref Ruqaa everywhere. ---- */
+.sig-arabic, .work-arabic, .about-arabic,
 .contact-arabic, .outro-arabic {
   font-family: "Aref Ruqaa", serif;
 }
@@ -298,6 +295,21 @@ html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
 @media (max-width: 720px) {
   .nav { top: 10px; padding: 3px 6px; }
   .nav-tabs a { padding: 10px 8px; font-size: 0.56rem; letter-spacing: 0.1em; }
+}
+
+/* A sixth tab does not fit the capsule on a narrow phone. Measured at 375px:
+   the row needed 346px inside 279px of track, so Contact fell off the right
+   edge entirely and the tab was unreachable.
+
+   The wordmark comes out rather than the tab. On a phone it and the Home tab
+   go to the same place, which makes the wordmark the redundant half, and it
+   returns 53px plus its gap. The remaining shortfall comes off the horizontal
+   padding, not the font size or the vertical padding: the type is already at
+   .56rem and the 44px touch target has to survive. */
+@media (max-width: 430px) {
+  .nav-logo { display: none; }
+  .nav { padding: 3px 5px; gap: 0; }
+  .nav-tabs a { padding: 10px 6px; letter-spacing: 0.06em; }
 }
 
 /* ---- the outro headline sits on the INK field, not on paper ----

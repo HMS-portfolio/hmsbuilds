@@ -425,21 +425,6 @@
     var(--mat);
 }
 
-.nama-mark--lg {
-  font-size: clamp(5rem, 14vw, 9rem);
-  line-height: 1;
-  display: block;
-  margin-bottom: 20px;
-}
-
-.nama-strap {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 /* ============ the deck: swipeable card stack ============ */
 .deck {
   position: relative;

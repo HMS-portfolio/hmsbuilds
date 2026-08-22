@@ -139,6 +139,20 @@ function build(name, route) {
     html = replaceOnce(html, pattern, replacement, label);
   }
 
+  /* A route may bring its own share card. Only /nama does today: it announces
+     a company rather than introducing a person, so the site card is the wrong
+     artwork for it. Left alone when a route declares nothing, which keeps the
+     other four on the site card without listing it four times. */
+  if (route.ogImage) {
+    const card = SITE + route.ogImage;
+    html = replaceOnce(html, /<meta property="og:image" content="[^"]*" \/>/,
+      `<meta property="og:image" content="${card}" />`, "og:image");
+    html = replaceOnce(html, /<meta name="twitter:image" content="[^"]*" \/>/,
+      `<meta name="twitter:image" content="${card}" />`, "twitter:image");
+    html = replaceOnce(html, /<meta property="og:image:alt" content="[^"]*" \/>/,
+      `<meta property="og:image:alt" content="${attr(route.ogImageAlt)}" />`, "og:image:alt");
+  }
+
   /* structured data for this page, alongside the site-wide graph */
   const block = JSON.stringify(pageGraph(route), null, 2)
     .split("\n")
