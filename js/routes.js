@@ -51,7 +51,7 @@ var SITE_ROUTES = {
        about a company, so it ships Nama's own artwork instead. The filename
        carries a date because platforms cache share cards by URL, and a new
        path is the only bust that does not need their debuggers. */
-    desc: "Site Intelligence is running in Madinah. The company I founded and build: data systems and AI architecture, and a land report where every figure names the record it came from.",
+    desc: "Nama Solutions builds data systems and AI architecture. Site Intelligence, our newest product, reads Madinah's public land registers and returns a sourced plot report the same day.",
     ogImage: "/assets/nama/og-2026-08.png",
     ogImageAlt: "Nama Solutions share card: the mark and wordmark above the line \u201cTen plots in the time one took.\u201d",
     breadcrumb: "Nama",
