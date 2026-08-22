@@ -17,6 +17,7 @@
   --accent: #8a5a18;         /* gold for type on paper, 5.9:1 */
   --accent-2: #5a3a0c;
   --brass: #7a5214;
+  --accent-on-tint: #794f15; /* .cta only: --accent drops to 3.74 on the hover tint */
   --rose: #9e3b26;
   --accent-soft: rgba(122, 82, 20, 0.4);
   --glow: rgba(122, 82, 20, 0.15);
@@ -550,7 +551,7 @@ a:focus-visible {
   letter-spacing: 0.24em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--accent);
+  color: var(--accent-on-tint);
   background: rgba(128, 80, 13, 0.09);
   border: 1px solid rgba(128, 80, 13, 0.45);
   padding: 15px 34px;
@@ -573,7 +574,7 @@ a:focus-visible {
 
 .cta.ghost:hover {
   border-color: rgba(128, 80, 13, 0.5);
-  color: var(--accent);
+  color: var(--accent-on-tint);
   box-shadow: 0 10px 36px rgba(128, 80, 13, 0.1);
 }
 

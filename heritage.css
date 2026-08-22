@@ -351,7 +351,7 @@
 .contact-primary .contact-k { color: rgba(243, 241, 230, 0.55); }
 .contact-primary-v { color: var(--ink-accent); }
 .contact-primary-note { color: rgba(243, 241, 230, 0.62); }
-.contact-primary .contact-go { color: var(--ink-accent); }
+.contact-primary .contact-go { color: var(--accent); }
 .contact-primary:hover { border-color: rgba(230, 189, 124, 0.5); }
 
 /* 5 · cards lift off the paper */

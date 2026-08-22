@@ -39,7 +39,7 @@ var SITE_ROUTES = {
     page: "page-work",
     path: "/projects",
     title: "Projects · Hamza AlSalamat",
-    desc: "Things I built start to finish: Nama Site Intelligence, now running in Madinah, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
+    desc: "Things I built start to finish: Nama Solutions and its pilot product Nama Site Intelligence, now live in Madinah, an electric car with MIT's Global Teaching Labs, Paperly, a self-learning outreach agent, and this site.",
     breadcrumb: "Projects",
   },
   nama: {
