@@ -318,7 +318,6 @@
 .card-media--nama {
   background: radial-gradient(70% 90% at 50% 10%, rgba(230, 189, 124, 0.2), transparent 70%), var(--ink);
 }
-.nama-mark { color: var(--ink-accent); filter: drop-shadow(0 0 22px rgba(230, 189, 124, 0.3)); }
 .card-index { color: var(--ink-text); opacity: 0.55; }
 .najmeh-mark { color: var(--ink-rose); opacity: 0.72; }
 .work-card:hover .najmeh-mark { color: var(--ink-accent); opacity: 1; }

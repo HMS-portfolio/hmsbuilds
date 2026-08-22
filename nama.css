@@ -1,0 +1,609 @@
+/* ============================================================
+   NAMA · SITE INTELLIGENCE — the company page
+   ============================================================
+
+   This page is a GUEST, not a convert. Everywhere else on this site the
+   ground is warm grey paper with gold ink; here it is Nama's own paper with
+   Nama's own green and brass, because a brand page that renders the brand in
+   somebody else's colours is not showing you the brand.
+
+   Every value below is lifted from nama-site/docs/brand-guidelines.md v3.0,
+   which is itself generated from the running product's globals.css. If a
+   token here disagrees with that file, that file wins.
+
+   TOKENS ARE SCOPED TO .page--nama ON PURPOSE. They are declared on the page
+   element rather than :root so nothing green can escape into the rest of the
+   site, and so the two systems can sit in one document without either one
+   having to know about the other.
+
+   The one rule from the brand guide that governs everything here:
+   never look more certain than the record is.                              */
+
+.page--nama,
+.home-news,
+.nama-logo {
+  /* --- the code: two colours that MEAN something --- */
+  --n-green: #1f5c43;        /* on the record */
+  --n-green-2: #2e7a5a;      /* hover, gradient partner */
+  --n-brass: #8f6a1c;        /* derived, a labelled assumption */
+  --n-rust: #9b3f32;         /* no figure: the record will not carry it */
+
+  /* --- field tints --- */
+  --n-green-wash: #e8efea;
+  --n-brass-wash: #f5eedc;
+  --n-rust-wash: #f6eae7;
+
+  /* --- paper --- */
+  --n-paper: #fbfaf7;        /* warm white, never pure */
+  --n-paper-2: #f3f2ed;      /* recessed slabs */
+  --n-ink: #121714;          /* near-black, biased green. 17.37:1 */
+  --n-ink-2: #3c443e;        /* supporting prose. 9.63:1 */
+  --n-mute: #6c736e;         /* mono microtype. 4.74:1 on paper */
+  --n-mute-2: #8a918b;
+  --n-line: #deddd5;         /* hairlines. 1px, always */
+
+  /* Surface-corrected pair. --n-mute measures 4.34:1 on --n-paper-2 and
+     --n-brass measures 4.41:1, both under the 4.5 that .57rem mono needs.
+     These are the same hues taken down exactly far enough to clear it, and
+     they are used ONLY on the recessed slabs. New tinted surface means
+     re-measure; never assume a token carries over. */
+  --n-mute-on2: #656c67;
+  /* Measured on every ground this page actually puts small brass mono on:
+     4.78 on the brass wash, 4.93 on paper-2, 5.30 on paper. The uncorrected
+     --n-brass fails two of those three at 9px (4.27 and 4.41), so ALL brass
+     microtype here uses this, not just the recessed slabs. The full-strength
+     brass stays for graphics and for text above 14px. */
+  --n-brass-on2: #85631a;
+
+  --n-display: "Fraunces", "EB Garamond", Georgia, serif;
+  --n-body: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --n-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --n-frame: 1120px;
+  --n-gutter: clamp(1.25rem, 5vw, 4rem);
+}
+
+.page--nama {
+  background: var(--n-paper);
+  color: var(--n-ink);
+  font-family: var(--n-body);
+  padding-top: clamp(84px, 11vh, 118px);
+}
+
+/* Fraunces has an optical-size axis and two character axes. WONK 1 gives the
+   single-storey g that keeps the serif from reading corporate, and it is
+   allowed on headlines ONLY: a large number set in WONK must never look
+   playful. See brand guidelines §2.
+
+   THE :where() IS LOAD-BEARING. These are page-wide defaults, and a default
+   must never outrank the component it is a default for. Written plainly,
+   ".page--nama p" scores class-plus-element and beats every single-class rule
+   below that sits on a <p>, which silently reset the register figures to body
+   size. :where() contributes no specificity, so the defaults still apply and
+   still lose to anything more specific. */
+:where(.page--nama) :where(h2),
+:where(.page--nama) :where(h3) {
+  font-family: var(--n-display);
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 10, "WONK" 1;
+  letter-spacing: -0.018em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+:where(.page--nama) :where(h2) { font-size: clamp(1.85rem, 4vw, 3rem); }
+:where(.page--nama) :where(h3) { font-size: clamp(1.3rem, 2.4vw, 1.75rem); }
+
+:where(.page--nama) :where(p) { font-size: 1.03rem; line-height: 1.68; color: var(--n-ink-2); }
+
+.n-wrap {
+  max-width: var(--n-frame);
+  margin: 0 auto;
+  padding-inline: var(--n-gutter);
+}
+
+/* ---------- the label: mono microtype, the surveyor's hand ---------- */
+.n-label {
+  font-family: var(--n-data);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--n-mute);
+}
+
+/* ---------- the mark: a survey corner bracket, plot square opposite -------
+   Drawn in CSS so it scales with type and costs no request. Geometrically
+   identical to assets/nama/mark.svg: square is ~37% of the bracket span,
+   stroke ~10%, and the bracket stays OPEN. Never close the box, never fill
+   it, and never recolour the square green, which would claim a derived
+   figure is on the record.                                                */
+.n-mark {
+  position: relative;
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  flex: none;
+  border-left: 2px solid var(--n-green);
+  border-top: 2px solid var(--n-green);
+}
+.n-mark::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 7px;
+  height: 7px;
+  background: var(--n-brass);
+}
+/* ---------- the lockup: Nama, a hairline, then the descriptor ----------
+   The descriptor is subordinate. It labels, it does not announce.        */
+.n-lockup { display: flex; align-items: center; gap: 12px; }
+.n-lockup-name {
+  font-family: var(--n-display);
+  font-variation-settings: "opsz" 96, "SOFT" 10, "WONK" 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--n-ink);
+  line-height: 1;
+}
+.n-lockup-rule { width: 1px; height: 20px; background: var(--n-line); }
+.n-lockup-desc {
+  font-family: var(--n-data);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--n-mute);
+  white-space: nowrap;
+}
+
+/* ============ HERO ============ */
+.n-hero {
+  padding: clamp(38px, 6vh, 70px) 0 clamp(50px, 8vh, 96px);
+  border-bottom: 1px solid var(--n-line);
+}
+.n-hero-head { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+
+/* the announcement, stated once and factually */
+.n-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px;
+  border: 1px solid rgba(31, 92, 67, 0.32);
+  background: var(--n-green-wash);
+  border-radius: 2px;
+  font-family: var(--n-data);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--n-green);
+}
+.n-live-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--n-green);
+  border-radius: 50%;
+  animation: n-pulse 2.4s ease-in-out infinite;
+}
+@keyframes n-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+.n-hero h2 {
+  margin: clamp(26px, 4vh, 40px) 0 0;
+  font-size: clamp(2.3rem, 5.4vw, 4.1rem);
+  line-height: 1.02;
+  max-width: 17ch;
+}
+.n-hero-lede { margin-top: 22px; max-width: 50ch; font-size: 1.1rem; }
+
+.n-hero-actions {
+  margin-top: clamp(28px, 4vh, 42px);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* The one control on the page that is filled. Paper on green measures
+   7.53:1. 44px minimum touch target, and the focus ring is never removed. */
+.n-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 13px 26px;
+  border-radius: 2px;
+  background: var(--n-green);
+  color: var(--n-paper);
+  font-family: var(--n-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.n-cta:hover { background: var(--n-green-2); transform: translateY(-1px); }
+.n-cta--ghost {
+  background: transparent;
+  color: var(--n-green);
+  border: 1px solid rgba(31, 92, 67, 0.4);
+}
+.n-cta--ghost:hover { background: var(--n-green-wash); }
+.page--nama a:focus-visible {
+  outline: 2px solid var(--n-green);
+  outline-offset: 3px;
+}
+.n-cost { font-family: var(--n-data); font-size: 0.57rem; letter-spacing: 0.12em;
+          text-transform: uppercase; color: var(--n-mute); }
+
+/* ============ THE GAP ============
+   The three numbers that are the entire reason the company exists, read as
+   one sentence broken across three columns. The label sits ABOVE its figure
+   so each column reads in order: "A deal closes in / 5 days". Only the third
+   is green, because green means on the record and the third beat is the only
+   one Nama is answerable for. */
+.n-gap {
+  margin-top: clamp(38px, 6vh, 64px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  border-top: 1px solid var(--n-line);
+}
+.n-beat { padding: 22px 26px 22px 0; }
+.n-beat + .n-beat { padding-left: 26px; border-left: 1px solid var(--n-line); }
+.n-beat-k {
+  font-family: var(--n-data);
+  font-size: 0.57rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--n-mute);
+}
+.n-beat-v {
+  margin-top: 9px;
+  font-family: var(--n-display);
+  /* WONK 0: a figure must never look playful */
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  font-size: clamp(1.5rem, 2.8vw, 2.05rem);
+  font-weight: 500;
+  color: var(--n-ink);
+  line-height: 1.05;
+}
+.n-beat--ours .n-beat-v { color: var(--n-green); }
+
+/* ============ shared section frame ============ */
+.n-sec { padding: clamp(52px, 8vh, 96px) 0; border-bottom: 1px solid var(--n-line); }
+.n-sec--sunk { background: var(--n-paper-2); }
+/* the corrected grey, on the surface it was measured against */
+.n-sec--sunk .n-label,
+.n-sec--sunk .n-fig-cap { color: var(--n-mute-on2); }
+
+.n-sec-head { max-width: 46ch; }
+.n-sec-head h2 { margin: 12px 0 0; }
+.n-legend { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+
+/* ============ THE REGISTER — figures ============ */
+.n-figs {
+  margin-top: clamp(34px, 5vh, 54px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+  gap: 1px;
+  background: var(--n-line);
+  border: 1px solid var(--n-line);
+}
+.n-fig { background: var(--n-paper-2); padding: 24px 22px; }
+.n-sec--sunk .n-fig { background: var(--n-paper); }
+.n-fig-n {
+  font-family: var(--n-display);
+  /* WONK 0 on any large number. A figure must never look playful. */
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--n-green);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.n-fig-cap {
+  margin-top: 10px;
+  font-family: var(--n-data);
+  font-size: 0.57rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--n-mute);
+  line-height: 1.5;
+}
+.n-src { margin-top: 26px; max-width: 58ch; font-size: 0.95rem; color: var(--n-ink-2); }
+
+/* ============ THE CODE — three tags, the promise made visible ============
+   Colour never carries the meaning alone. The WORD is always present,
+   because a share of the people reading a land report cannot separate green
+   from rust. Remove the word and the system is broken, not just uglier.  */
+.n-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--n-data);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 2px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.n-tag-rec { color: var(--n-green); background: var(--n-green-wash); border-color: rgba(31, 92, 67, 0.34); }
+.n-tag-asm { color: var(--n-brass-on2); background: var(--n-brass-wash); border-color: rgba(143, 106, 28, 0.36); }
+.n-tag-non { color: var(--n-rust);  background: var(--n-rust-wash);  border-color: rgba(155, 63, 50, 0.34); }
+/* The product ships a quiet fourth state for a field nobody looked at yet.
+   It is deliberately colourless: an unchecked row makes no claim at all. */
+.n-tag-nck { color: var(--n-mute); background: transparent; border-color: var(--n-line); }
+
+/* ============ THE DEAL SHEET — the specimen ============ */
+/* The sheet PRINTS onto the page: a clip-path wipe with a green leading
+   edge, 1.15s, no fade and no bounce. That is Nama's specified motion, and
+   the point of it is that the document arrives the way a document arrives.
+
+   FAILS VISIBLE, which is the brand's most-violated rule. The animation only
+   exists on .is-printed, so a JS failure, a blocked script or reduced motion
+   all leave a finished, readable sheet rather than an empty box. */
+.n-sheet-wrap {
+  position: relative;
+  margin-top: clamp(34px, 5vh, 54px);
+  max-width: 720px;
+}
+.n-sheet-wrap.is-printed .n-sheet {
+  animation: n-print 1.15s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes n-print {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+/* the leading edge rides outside the clipped element, so it stays visible */
+.n-sheet-wrap.is-printed::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--n-green);
+  animation: n-edge 1.15s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes n-edge {
+  0%   { left: 0;    opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+.n-sheet {
+  border: 1px solid var(--n-line);
+  background: var(--n-paper);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.n-sheet-head { padding: 22px 26px; border-bottom: 1px solid var(--n-line); }
+.n-sheet-plot {
+  font-family: var(--n-display);
+  font-variation-settings: "opsz" 96, "SOFT" 10, "WONK" 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--n-ink);
+}
+.n-sheet-ar {
+  display: block;
+  margin-top: 6px;
+  font-family: "Aref Ruqaa", serif;
+  font-size: 1.05rem;
+  color: var(--n-mute);
+  text-align: left;
+}
+.n-sheet-where { margin-top: 12px; font-size: 0.9rem; color: var(--n-mute); }
+
+.n-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 26px;
+  border-bottom: 1px solid var(--n-line);
+}
+.n-row:last-of-type { border-bottom: 0; }
+.n-row-k { font-size: 0.95rem; color: var(--n-ink-2); }
+.n-row-v {
+  font-family: var(--n-data);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--n-ink);
+  font-variant-numeric: tabular-nums;
+}
+.n-row--asm .n-row-v { color: var(--n-brass); }
+.n-row--nck .n-row-v { color: var(--n-mute); }
+.n-sheet-foot {
+  padding: 14px 26px;
+  border-top: 1px solid var(--n-line);
+  background: var(--n-paper-2);
+  font-family: var(--n-data);
+  font-size: 0.57rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--n-mute-on2);
+}
+
+/* ============ THE LIMIT ============
+   One line, and it stays. Nama's whole argument is that it says where a
+   figure stands, so the sentence naming what it will not claim is the pitch
+   rather than a disclaimer. Rust, the same colour the sheet uses for a figure
+   the record will not carry. */
+.n-limit {
+  margin-top: clamp(28px, 4vh, 44px);
+  padding-left: 20px;
+  border-left: 2px solid var(--n-rust);
+  max-width: 58ch;
+  font-size: 0.99rem;
+}
+
+/* ============ CLOSE ============ */
+.n-close { padding: clamp(56px, 9vh, 104px) 0; }
+.n-close h2 { max-width: 20ch; }
+.n-close p { margin-top: 20px; max-width: 50ch; }
+.n-close .n-hero-actions { margin-top: clamp(28px, 4vh, 40px); }
+
+/* Handing the page back. The signature belongs on Hamza's ground, not on
+   Nama's paper, so the strip returns to the site's own colour underneath. */
+.n-handback { background: var(--bg); border-top: 1px solid var(--line); }
+
+/* ---------- small screens ----------
+   Every clamp above needs its own floor here. The vw term collapses on a
+   phone and would otherwise serve the DESKTOP minimum to the smallest
+   screen, which is the exact bug the product's own site shipped once. */
+@media (max-width: 600px) {
+  :where(.page--nama) :where(h2) { font-size: 1.72rem; }
+  .n-hero h2 { font-size: 2.1rem; max-width: none; }
+  .n-hero-lede { font-size: 1.02rem; }
+  .n-fig-n { font-size: 1.5rem; }
+  .n-row { grid-template-columns: 1fr auto; row-gap: 8px; padding: 14px 18px; }
+  .n-row-v { grid-column: 2; }
+  .n-row .n-tag { grid-column: 2; justify-self: end; }
+  .n-sheet-head, .n-sheet-foot { padding-inline: 18px; }
+  .n-beat-v { font-size: 1.42rem; }
+  /* stacked, so the divider moves from the left edge to the top edge */
+  .n-beat { padding: 18px 0; }
+  .n-beat + .n-beat { padding-left: 0; border-left: 0; border-top: 1px solid var(--n-line); }
+
+  /* Block padding is clamped against vh, and a tall narrow phone makes every
+     vh term large at once: the hero's bottom padding and the next section's
+     top padding were stacking to ~190px of empty paper between the gap strip
+     and the sheet. Fixed pixels here, since on a phone the viewport height
+     says nothing useful about how much air a section wants. */
+  .n-hero { padding-bottom: 34px; }
+  .n-sec { padding-block: 52px; }
+  .n-close { padding-block: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .n-live-dot { animation: none; }
+  .n-cta:hover { transform: none; }
+  /* the finished sheet, with no wipe and no edge */
+  .n-sheet-wrap.is-printed .n-sheet { animation: none; }
+  .n-sheet-wrap.is-printed::after { display: none; }
+}
+
+
+/* ============================================================
+   THE ANNOUNCEMENT ON HOME
+   ============================================================
+   Kept in THIS file rather than styles.css on purpose. News goes stale, and
+   when this one does, the markup block on Home and these rules come out
+   together instead of leaving an orphan rule behind in the site's main
+   stylesheet.
+
+   It is a small sheet of Nama's paper laid on the site's warm grey ground,
+   which is also what lets the mark appear here at all: the brand forbids
+   setting it on a transparent or dark surface, so the card brings its own. */
+.home-news {
+  background: var(--bg);
+  padding: clamp(38px, 6vh, 66px) clamp(22px, 6vw, 80px) 0;
+  display: flex;
+  justify-content: center;
+}
+.home-news-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 620px;
+  padding: 18px 22px;
+  background: var(--n-paper);
+  border: 1px solid var(--n-line);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.3s ease, box-shadow 0.35s ease, transform 0.3s var(--ease-pen);
+}
+.home-news-card:hover {
+  border-color: rgba(31, 92, 67, 0.42);
+  box-shadow: 0 10px 32px rgba(31, 92, 67, 0.1);
+  transform: translateY(-2px);
+}
+.home-news-card:focus-visible { outline: 2px solid var(--n-green); outline-offset: 3px; }
+
+.home-news-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.home-news-tag {
+  font-family: var(--n-data);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--n-green);
+}
+.home-news-line {
+  font-family: var(--n-body);
+  font-size: 0.97rem;
+  line-height: 1.45;
+  color: var(--n-ink);
+}
+.home-news-go {
+  margin-left: auto;
+  flex: none;
+  font-size: 1.05rem;
+  color: var(--n-green);
+  transition: transform 0.3s var(--ease-pen);
+}
+.home-news-card:hover .home-news-go { transform: translateX(3px); }
+
+@media (max-width: 560px) {
+  .home-news { padding-inline: 18px; }
+  .home-news-card { gap: 13px; padding: 16px 17px; }
+  .home-news-line { font-size: 0.91rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-news-card:hover { transform: none; }
+  .home-news-card:hover .home-news-go { transform: none; }
+}
+
+
+/* ============================================================
+   THE LOGO ON PROJECTS CARD 01
+   ============================================================
+   Replaces the نماء wordmark that stood in before there was a real identity.
+
+   The card is an ink plate and the brand forbids the mark on a dark ground,
+   so the logo comes with its own paper. Reads as the logo printed on a card
+   and dropped on the desk, which is also why it carries a shadow rather than
+   a border. */
+.nama-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 21px;
+  background: var(--n-paper);
+  border-radius: 2px;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.42);
+  transition: transform 0.8s var(--ease-pen);
+}
+.work-card:hover .nama-logo { transform: scale(1.04); }
+
+/* the mark scales with the lockup, keeping the 37% square and open bracket */
+.nama-logo .n-mark { width: 26px; height: 26px; border-width: 3px; }
+.nama-logo .n-mark::after { width: 10px; height: 10px; }
+
+.nama-logo-name {
+  font-family: var(--n-display);
+  font-variation-settings: "opsz" 96, "SOFT" 10, "WONK" 0;
+  font-size: clamp(1.5rem, 3.4vw, 2.05rem);
+  font-weight: 500;
+  color: var(--n-ink);
+  line-height: 1;
+}
+.nama-logo-rule { width: 1px; align-self: stretch; background: var(--n-line); }
+.nama-logo-desc {
+  font-family: var(--n-data);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--n-mute);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-card:hover .nama-logo { transform: none; }
+}

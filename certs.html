@@ -44,12 +44,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Nama's three faces, for /nama only. Fraunces carries the opsz, SOFT
+       and WONK axes the brand system sets by hand. -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=JetBrains+Mono:wght@400..600&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
   <link rel="icon" id="favicon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23e7e5db'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="styles.css?v=38" />
   <link rel="stylesheet" href="work.css?v=17" />
   <link rel="stylesheet" href="heritage.css?v=20" />
   <link rel="stylesheet" href="about.css?v=8" />
-  <link rel="stylesheet" href="type.css?v=9" />
+  <link rel="stylesheet" href="nama.css?v=9" />
+  <link rel="stylesheet" href="type.css?v=10" />
   <script>
     /* typography swap-in: fade the display faces in once they are ready, with a
        hard ceiling so a slow or failed font fetch can never hide the text */
@@ -98,23 +102,27 @@
         "alternateName": ["حمزة السلامات", "Hamza Al Salamat", "Hamza Salamat"],
         "url": "https://hmsbuilds.com/",
         "jobTitle": "Founder",
-        "description": "Learns by working with a thing until it makes sense. Founder of Nama Site Intelligence, competes in kickboxing, jiu-jitsu and wrestling, and spends the rest of the time outdoors.",
+        "description": "Learns by working with a thing until it makes sense. Founder of Nama Solutions, competes in kickboxing, jiu-jitsu and wrestling, and spends the rest of the time outdoors.",
         "image": "https://hmsbuilds.com/assets/og-card.jpg",
         "sameAs": [
           "https://github.com/HMS-portfolio",
           "https://www.linkedin.com/in/hamza-salamat/"
         ],
         "knowsLanguage": ["en", "ar"],
-        "worksFor": { "@id": "https://namasolutions.vercel.app/#nama" }
+        "worksFor": { "@id": "https://nama.hmsbuilds.com/#nama" }
       },
       {
         "@type": "Organization",
-        "@id": "https://namasolutions.vercel.app/#nama",
-        "name": "Nama Site Intelligence",
-        "alternateName": ["Nama", "Nama Solutions", "نماء"],
-        "url": "https://namasolutions.vercel.app/",
-        "description": "Site intelligence for land. Reads a parcel's register, zoning and numbers, and returns sourced evidence in a day rather than six weeks.",
-        "founder": { "@id": "https://hmsbuilds.com/#hamza" }
+        "@id": "https://nama.hmsbuilds.com/#nama",
+        "name": "Nama Solutions",
+        "alternateName": ["Nama", "Nama Site Intelligence", "نماء"],
+        "url": "https://nama.hmsbuilds.com/",
+        "logo": "https://hmsbuilds.com/assets/nama/mark.svg",
+        "description": "Data systems and AI architecture. Site Intelligence, its first product, reads Madinah's public land registers and returns a sourced plot report in a day rather than six weeks.",
+        "foundingDate": "2026",
+        "areaServed": "Madinah, Saudi Arabia",
+        "founder": { "@id": "https://hmsbuilds.com/#hamza" },
+        "subjectOf": { "@id": "https://hmsbuilds.com/nama#webpage" }
       },
       {
         "@type": "WebSite",
@@ -178,6 +186,7 @@
     <nav class="nav-tabs" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/projects">Projects</a>
+      <a href="/nama">Nama</a>
       <a href="/certs" class="active" aria-current="page">Certs</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
@@ -273,6 +282,21 @@
       </div>
     </section>
 
+    <!-- ===== the announcement =====
+         One line, once, on the way out of the film. Styles live in nama.css
+         beside the page it points at, so when this stops being news the
+         markup and the rules come out in the same edit. -->
+    <aside class="home-news" aria-label="Latest">
+      <a class="home-news-card rise" href="/nama">
+        <span class="n-mark" aria-hidden="true"></span>
+        <span class="home-news-body">
+          <span class="home-news-tag">New</span>
+          <span class="home-news-line">Nama Site Intelligence is live. Six weeks of land research, in an afternoon.</span>
+        </span>
+        <span class="home-news-go" aria-hidden="true">&rarr;</span>
+      </a>
+    </aside>
+
     <!-- ===== About + contact live at the foot of HOME (scroll past the film) ===== -->
     <!-- tatreez hem — stitches itself in on scroll -->
     <div class="heritage-hem" aria-hidden="true">
@@ -341,15 +365,23 @@
         <button class="work-card" type="button" data-open="dossier-nama" aria-haspopup="dialog" aria-label="Open case file: Nama Site Intelligence">
           <div class="card-media card-media--nama">
             <span class="card-index">01</span>
-            <span class="card-flag">Waitlist open</span>
+            <span class="card-flag">Live in Madinah</span>
             <span class="najmeh-mark js-najmeh" aria-hidden="true"></span>
-            <span class="nama-mark">نماء</span>
+            <!-- The real logo. It arrives on its own sheet of paper because
+                 the brand forbids the mark on a dark ground, and every work
+                 card is an ink plate. -->
+            <span class="nama-logo" aria-hidden="true">
+              <span class="n-mark"></span>
+              <span class="nama-logo-name">Nama</span>
+              <span class="nama-logo-rule"></span>
+              <span class="nama-logo-desc">Solutions</span>
+            </span>
             <span class="card-open-cue">Open case file</span>
           </div>
           <div class="card-body">
             <h3>Nama Site Intelligence</h3>
             <p>An AI engine that reads a piece of land and tells you what's worth building on it.</p>
-            <span class="card-tag">AI &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">private beta, waitlist open</span></span>
+            <span class="card-tag">AI &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">running in Madinah</span></span>
           </div>
         </button>
 
@@ -433,7 +465,7 @@
               <span class="pipe-dot"></span><span class="pipe-dot"></span><span class="pipe-dot"></span>
               <span class="pipe-label">nama · orchestrator</span>
             </div>
-            <p class="pipe-query" lang="ar" dir="rtl">قطعة ٤٥٢ مخطط ٣١٢٥ حي الملقا</p>
+            <p class="pipe-query" lang="ar" dir="rtl">قطعة ٨٨٧ مخطط ٦\ف\١٤٠٨</p>
             <ol class="pipe-steps">
               <li class="pipe-step" data-pipe-step>
                 <span class="pipe-bead"></span><span class="pipe-name">Data</span>
@@ -459,7 +491,7 @@
         <div class="dossier-read">
           <p class="dossier-idx">Case File 01</p>
           <h3 class="dossier-title" id="nama-title">Nama Site Intelligence</h3>
-          <p class="dossier-lede">The engine I am building right now. Point it at a piece of land and it works out what is worth building there: the rules, the numbers, the recommendation. Minutes instead of months. Riyadh first.</p>
+          <p class="dossier-lede">The engine I am building right now. Point it at a piece of land and it works out what is worth building there: the rules, the numbers, the recommendation. Minutes instead of months. Madinah first.</p>
 
           <p class="dossier-body">Under the hood it is five agents in a line. One gathers the data and owns the archive, one interprets the zoning, one runs the numbers, one writes the deal sheet, and an orchestrator moves the work between them. They hand off through a single typed contract, so every stage knows exactly what it was given and what it owes the next one.</p>
 
@@ -469,20 +501,21 @@
             <li><span>Role</span> Founder</li>
             <li><span>Build</span> Five agents, one shared contract</li>
             <li><span>Rule</span> Return nothing before returning a guess</li>
-            <li><span>Status</span> Private beta, waitlist open</li>
+            <li><span>Status</span> Running in Madinah</li>
           </ul>
 
-          <!-- The announcement. This row was a dead "coming soon" label for as
-               long as there was nothing to send anyone to. There is now, so the
-               case file ends on something you can act on rather than wait for. -->
+          <!-- The announcement. This row has tracked the build the whole way:
+               a dead "coming soon" label, then a waitlist, and now a product
+               somebody can open. -->
           <p class="dossier-announce">
             <span class="announce-tag">New</span>
-            <span>The engine is out of my hands and into other people's. Site Intelligence is in private beta, and the waitlist is open to anyone who values land for a living.</span>
+            <span>Site Intelligence is finished and running. It reads Madinah's land registers end to end and returns a plot report the same working day, with every figure marked against the record behind it.</span>
           </p>
 
           <div class="dossier-cta-row">
-            <a class="cta" href="https://namasolutions.vercel.app" target="_blank" rel="noopener">Join the waitlist&nbsp;→</a>
-            <span class="cta-note">namasolutions.vercel.app</span>
+            <a class="cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama&nbsp;→</a>
+            <a class="cta ghost" href="/nama">The company</a>
+            <span class="cta-note">nama.hmsbuilds.com</span>
           </div>
         </div>
       </div>
@@ -664,6 +697,161 @@
     </div>
     </div><!-- /page-work -->
 
+    <!-- ============ PAGE · NAMA — the business, in ninety seconds ============
+         Nama's own paper, green and brass, hosted inside this site's shell
+         rather than repainted in it. Tokens are scoped to .page--nama in
+         nama.css so nothing green escapes into the rest of the site.
+
+         Ordered the way you would catch someone up out loud: what it does,
+         why anyone needs it, what actually arrives, what is behind it, what
+         it refuses to claim, and who built it. The deal sheet is the
+         centrepiece and it arrives early, because showing the tagged
+         document explains the product faster than a paragraph about it. -->
+    <div class="page page--nama" id="page-nama" data-page="nama">
+    <h1 class="sr-only">Nama Solutions and Site Intelligence</h1>
+
+    <section class="n-hero">
+      <div class="n-wrap">
+        <div class="n-hero-head rise">
+          <span class="n-lockup">
+            <span class="n-mark" aria-hidden="true"></span>
+            <span class="n-lockup-name">Nama</span>
+            <span class="n-lockup-rule" aria-hidden="true"></span>
+            <span class="n-lockup-desc">Solutions</span>
+          </span>
+          <span class="n-live"><span class="n-live-dot" aria-hidden="true"></span>Live &middot; Madinah</span>
+        </div>
+
+        <h2 class="rise">Six weeks of land research, in an afternoon.</h2>
+        <p class="n-hero-lede rise">Site Intelligence reads Madinah&rsquo;s public land registers and returns a plot report the same day. Every figure names the record it came from.</p>
+
+        <div class="n-hero-actions rise">
+          <a class="n-cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama <span aria-hidden="true">&rarr;</span></a>
+          <span class="n-cost">nama.hmsbuilds.com</span>
+        </div>
+
+        <!-- The whole business case as three beats. The gap between how fast
+             a deal moves and how slowly the record reads IS the product. -->
+        <div class="n-gap rise">
+          <div class="n-beat">
+            <p class="n-beat-k">A deal closes in</p>
+            <p class="n-beat-v">5 days</p>
+          </div>
+          <div class="n-beat">
+            <p class="n-beat-k">Reading the register took</p>
+            <p class="n-beat-v">6 weeks</p>
+          </div>
+          <div class="n-beat n-beat--ours">
+            <p class="n-beat-k">Nama takes</p>
+            <p class="n-beat-v">an afternoon</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT ARRIVES. The specimen does the explaining. -->
+    <section class="n-sec">
+      <div class="n-wrap">
+        <div class="n-sec-head rise">
+          <p class="n-label">What arrives</p>
+          <h2>A document you can check.</h2>
+          <!-- The three states, shown rather than described. -->
+          <p class="n-legend">
+            <span class="n-tag n-tag-rec">From record</span>
+            <span class="n-tag n-tag-asm">Assumption</span>
+            <span class="n-tag n-tag-non">No figure</span>
+          </p>
+        </div>
+
+        <div class="n-sheet-wrap rise" data-print>
+          <div class="n-sheet">
+            <div class="n-sheet-head">
+              <span class="n-sheet-plot">Plot 887 &middot; Plan <bdo dir="ltr">6\ف\1408</bdo></span>
+              <span class="n-sheet-ar" lang="ar" dir="rtl">قطعة 887 مخطط 6\ف\1408</span>
+              <p class="n-sheet-where">Amanat Al Madinah &middot; inside the Haram boundary</p>
+            </div>
+
+            <div class="n-row">
+              <span class="n-row-k">Plot area</span>
+              <span class="n-row-v">635.32 m&sup2;</span>
+              <span class="n-tag n-tag-rec">From record</span>
+            </div>
+            <div class="n-row">
+              <span class="n-row-k">Permitted use</span>
+              <span class="n-row-v">Residential</span>
+              <span class="n-tag n-tag-rec">From record</span>
+            </div>
+            <div class="n-row">
+              <span class="n-row-k">Envelope</span>
+              <span class="n-row-v">5 floors &times; 0.60</span>
+              <span class="n-tag n-tag-rec">From record</span>
+            </div>
+            <div class="n-row">
+              <span class="n-row-k">Land comparables</span>
+              <span class="n-row-v">2,590 sales</span>
+              <span class="n-tag n-tag-rec">From record</span>
+            </div>
+            <div class="n-row n-row--asm">
+              <span class="n-row-k">Construction cost</span>
+              <span class="n-row-v">placeholder</span>
+              <span class="n-tag n-tag-asm">Assumption</span>
+            </div>
+            <div class="n-row n-row--nck">
+              <span class="n-row-k">Distance to the Mosque</span>
+              <span class="n-row-v">not checked</span>
+              <span class="n-tag n-tag-nck">Not checked</span>
+            </div>
+
+            <p class="n-sheet-foot">Specimen sheet</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BEHIND IT. Proof, in one screen. -->
+    <section class="n-sec n-sec--sunk">
+      <div class="n-wrap">
+        <div class="n-sec-head rise">
+          <p class="n-label">Behind it</p>
+          <h2>Three public registers, read end to end.</h2>
+        </div>
+
+        <div class="n-figs rise">
+          <div class="n-fig"><p class="n-fig-n">402,656</p><p class="n-fig-cap">Plots on the register</p></div>
+          <div class="n-fig"><p class="n-fig-n">10,659</p><p class="n-fig-cap">Subdivision plans</p></div>
+          <div class="n-fig"><p class="n-fig-n">2,590</p><p class="n-fig-cap">Recorded sales</p></div>
+        </div>
+
+        <p class="n-src rise">Parcels and building rules come from Amanat Al Madinah, recorded sales from the Ministry of Justice, and rental indicators from REGA. Five agents read them: data, zoning, financial, report, and an orchestrator.</p>
+
+        <!-- The caveat stays. It is the argument, not a disclaimer bolted on. -->
+        <p class="n-limit rise">Cost inputs are yours to set. The sheet sits alongside a chartered valuation, not instead of one.</p>
+      </div>
+    </section>
+
+    <!-- The close, in Hamza's voice rather than Nama's. -->
+    <section class="n-close">
+      <div class="n-wrap">
+        <p class="n-label rise">The company</p>
+        <h2 class="rise">Built to solve.</h2>
+        <p class="rise">Nama Solutions builds data systems and AI architecture. Site Intelligence is the first product to run on that infrastructure.</p>
+
+        <div class="n-hero-actions rise">
+          <a class="n-cta" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">Open Nama <span aria-hidden="true">&rarr;</span></a>
+          <a class="n-cta n-cta--ghost" href="/projects">Read the case file</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="n-handback">
+      <div class="page-sign rise">
+        <span class="page-sign-ar" lang="ar" dir="rtl" aria-hidden="true">حمزة السلامات</span>
+        <p class="page-sign-en">Hamza AlSalamat, signed by hand.</p>
+      </div>
+    </div>
+    </div><!-- /page-nama -->
+
     <!-- ============ PAGE · CERTIFICATIONS ============ -->
     <div class="page page--certs is-active" id="page-certs" data-page="certs">
     <h1 class="sr-only">Certifications</h1>
@@ -741,7 +929,7 @@
           <p class="about-lede rise">The simplest way to describe me is that I have to find things out for myself. Being told has never been enough. I want to stay close to something long enough to learn how it actually behaves, rather than how it is described.</p>
 
           <!-- no country, no city: the engine reads land, and naming a market
-               here shrinks it to one. The Riyadh launch belongs on Projects. -->
+               here shrinks it to one. Madinah belongs on /nama. -->
           <p class="about-para rise">Right now most of that is directed at AI. I have been building with it since it arrived, and I learned it the way I learn anything: by working with it until it made sense. It is a material to me now. I know where it gives, and I know where it will not hold. Nama Site Intelligence grew out of that.</p>
 
           <p class="about-para rise">That instinct has never confined itself to a screen. It is what put me on a mat, where I still compete in kickboxing, jiu-jitsu and wrestling, and where I have taken both gold and silver.</p>
@@ -915,7 +1103,7 @@
       <div class="now-inner">
         <p class="now-label rise">Right now</p>
         <ul class="now-list">
-          <li class="rise">Building Nama Site Intelligence, now in private beta. <a class="now-link" href="https://namasolutions.vercel.app" target="_blank" rel="noopener">The waitlist is open</a>.</li>
+          <li class="rise">Running Nama Solutions. <a class="now-link" href="/nama">Site Intelligence is live in Madinah</a>.</li>
           <li class="rise">Learning whatever the next build turns out to need.</li>
           <li class="rise">On the mat most weeks, and in the mountains when I can get there.</li>
         </ul>
@@ -1004,11 +1192,11 @@
               </a>
             </li>
             <li>
-              <a class="contact-card" href="https://namasolutions.vercel.app" target="_blank" rel="noopener">
+              <a class="contact-card" href="https://nama.hmsbuilds.com" target="_blank" rel="noopener">
                 <span class="arena-ico js-najmeh" aria-hidden="true"></span>
-                <span class="contact-k">Nama Site Intelligence</span>
-                <span class="contact-v">namasolutions.vercel.app</span>
-                <span class="contact-note">The company I am building. In private beta now, and the waitlist is open.</span>
+                <span class="contact-k">Nama Solutions</span>
+                <span class="contact-v">nama.hmsbuilds.com</span>
+                <span class="contact-note">The company I founded. Site Intelligence is running in Madinah.</span>
               </a>
             </li>
           </ul>
@@ -1045,12 +1233,13 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
 
-  <script src="js/routes.js?v=1"></script>
-  <script src="js/router.js?v=16"></script>
+  <script src="js/routes.js?v=3"></script>
+  <script src="js/router.js?v=18"></script>
   <script src="js/film.js?v=19"></script>
-  <script src="js/hero.js?v=22"></script>
-  <script src="js/work.js?v=9"></script>
+  <script src="js/hero.js?v=23"></script>
+  <script src="js/work.js?v=10"></script>
   <script src="js/heritage.js?v=13"></script>
   <script src="js/about.js?v=4"></script>
+  <script src="js/nama.js?v=3"></script>
 </body>
 </html>

@@ -16,6 +16,13 @@
 
   var SITE = "https://hmsbuilds.com";
 
+  /* The card every route shares unless it declares its own. Held here so a
+     route that DOES declare one can be navigated away from again: without a
+     default to restore, Nama's card would follow you onto Contact. */
+  var DEFAULT_OG = SITE + "/assets/og-card.jpg";
+  var DEFAULT_OG_ALT =
+    "A falcon at full wingspan over a mountain valley at low sun.";
+
   /* The route table moved to js/routes.js so that tools/build-routes.mjs can
      require the same object and bake these strings into the four static route
      pages. Distinct copy per route is the whole point — five views competing as
@@ -119,6 +126,12 @@
     set('meta[name="twitter:title"]', "content", route.title);
     set('meta[name="twitter:description"]', "content", route.desc);
     set('link[rel="canonical"]', "href", SITE + route.path);
+    var card = route.ogImage ? SITE + route.ogImage : DEFAULT_OG;
+    set('meta[property="og:image"]', "content", card);
+    set('meta[name="twitter:image"]', "content", card);
+    /* the alt has to travel with the image, or a shared /nama link is
+       announced as a photograph of a falcon */
+    set('meta[property="og:image:alt"]', "content", route.ogImageAlt || DEFAULT_OG_ALT);
   }
 
   function show(name) {

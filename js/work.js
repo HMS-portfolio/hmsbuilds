@@ -300,12 +300,12 @@
     },
     {
       tag: "draft v2 · learned from replies",
-      text: "The White Land Tax invoices just landed in Riyadh. Nama triages a land bank (develop, sell, or JV) in minutes, not weeks.",
+      text: "The White Land Tax invoices just landed. Nama triages a land bank (develop, sell, or JV) in minutes, not weeks.",
       metric: "reply rate · 9%",
     },
     {
       tag: "draft v3 · learned from replies",
-      text: "I ran your Al-Malqa parcel live: buildable program, full pro forma, and the one data gap a consultant would’ve papered over. Worth 10 minutes?",
+      text: "I ran one of your Madinah parcels live: buildable program, full pro forma, and the one data gap a consultant would’ve papered over. Worth 10 minutes?",
       metric: "reply rate · 21%",
     },
   ];
