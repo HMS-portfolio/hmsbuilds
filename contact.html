@@ -48,9 +48,9 @@
        and WONK axes the brand system sets by hand. -->
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=JetBrains+Mono:wght@400..600&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
   <link rel="icon" id="favicon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23e7e5db'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="styles.css?v=38" />
+  <link rel="stylesheet" href="styles.css?v=39" />
   <link rel="stylesheet" href="work.css?v=17" />
-  <link rel="stylesheet" href="heritage.css?v=20" />
+  <link rel="stylesheet" href="heritage.css?v=21" />
   <link rel="stylesheet" href="about.css?v=8" />
   <link rel="stylesheet" href="nama.css?v=14" />
   <link rel="stylesheet" href="type.css?v=11" />
@@ -87,10 +87,15 @@
        · The Organization node exists because Nama is now a real destination
          rather than a plan. Naming it here, on a domain Google already trusts
          for this person, with founder and worksFor pointing at each other, is
-         what lets "Nama Site Intelligence" resolve as an entity instead of two
-         ordinary words. The same reasoning as "hmsbuilds": a coined name has to
-         be declared before it can be recognised, and the claim is corroborated
-         by the visible link on Projects and on Contact. -->
+         what lets "Nama" resolve as an entity instead of an ordinary word. The
+         same reasoning as "hmsbuilds": a coined name has to be declared before
+         it can be recognised, and the claim is corroborated by the visible
+         link on Projects and on Contact.
+
+       · Nama Site Intelligence has its OWN node rather than sitting in the
+         company's alternateName, where it used to. A company and the software
+         it sells are two entities, and saying otherwise in markup teaches a
+         crawler to treat them as one. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -115,14 +120,26 @@
         "@type": "Organization",
         "@id": "https://nama.hmsbuilds.com/#nama",
         "name": "Nama Solutions",
-        "alternateName": ["Nama", "Nama Site Intelligence", "نماء"],
+        "alternateName": ["Nama", "نماء"],
         "url": "https://nama.hmsbuilds.com/",
         "logo": "https://hmsbuilds.com/assets/nama/mark.svg",
         "description": "Data systems and AI architecture. Site Intelligence, its first product, reads Madinah's public land registers and returns a sourced plot report in a day rather than six weeks.",
         "foundingDate": "2026",
         "areaServed": "Madinah, Saudi Arabia",
         "founder": { "@id": "https://hmsbuilds.com/#hamza" },
+        "owns": { "@id": "https://nama.hmsbuilds.com/#site-intelligence" },
         "subjectOf": { "@id": "https://hmsbuilds.com/nama#webpage" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://nama.hmsbuilds.com/#site-intelligence",
+        "name": "Nama Site Intelligence",
+        "alternateName": "Site Intelligence",
+        "applicationCategory": "BusinessApplication",
+        "url": "https://nama.hmsbuilds.com/",
+        "description": "Turns three public land registers into a single plot report for land developers and valuers, with every figure traced to its source.",
+        "publisher": { "@id": "https://nama.hmsbuilds.com/#nama" },
+        "author": { "@id": "https://hmsbuilds.com/#hamza" }
       },
       {
         "@type": "WebSite",
@@ -381,7 +398,7 @@
           <div class="card-body">
             <h3>Nama Site Intelligence</h3>
             <p>An AI engine that reads a piece of land and tells you what's worth building on it.</p>
-            <span class="card-tag">AI &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">running in Madinah</span></span>
+            <span class="card-tag">Nama Solutions &nbsp;·&nbsp; Founder &nbsp;·&nbsp; <span class="soon">Madinah pilot</span></span>
           </div>
         </button>
 
@@ -498,10 +515,11 @@
           <p class="dossier-body">The discipline is in what it refuses to do. Every source row is kept exactly as it arrived, stamped with the hash and vintage of the file it came from, so any number on the finished sheet traces back to the row that produced it. Arabic is normalized before anything is matched, because a parcel written four different ways is still one parcel. And when a query only resolves as far as the district, that is not allowed to underwrite a specific plot. The engine returns nothing and says why. It is slower to build this way. It is the only version worth trusting.</p>
 
           <ul class="dossier-facts">
+            <li><span>Company</span> Nama Solutions</li>
             <li><span>Role</span> Founder</li>
             <li><span>Build</span> Five agents, one shared contract</li>
             <li><span>Rule</span> Return nothing before returning a guess</li>
-            <li><span>Status</span> Running in Madinah</li>
+            <li><span>Status</span> Pilot product, live in Madinah</li>
           </ul>
 
           <!-- The announcement. This row has tracked the build the whole way:
@@ -963,7 +981,7 @@
 
           <!-- no country, no city: the engine reads land, and naming a market
                here shrinks it to one. Madinah belongs on /nama. -->
-          <p class="about-para rise">Right now most of that is directed at AI. I have been building with it since it arrived, and I learned it the way I learn anything: by working with it until it made sense. It is a material to me now. I know where it gives, and I know where it will not hold. Nama Site Intelligence grew out of that.</p>
+          <p class="about-para rise">Right now most of that is directed at AI. I have been building with it since it arrived, and I learned it the way I learn anything: by working with it until it made sense. It is a material to me now. I know where it gives, and I know where it will not hold. Nama Solutions grew out of that.</p>
 
           <p class="about-para rise">That instinct has never confined itself to a screen. It is what put me on a mat, where I still compete in kickboxing, jiu-jitsu and wrestling, and where I have taken both gold and silver.</p>
 
@@ -1266,7 +1284,7 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
 
-  <script src="js/routes.js?v=3"></script>
+  <script src="js/routes.js?v=4"></script>
   <script src="js/router.js?v=18"></script>
   <script src="js/film.js?v=19"></script>
   <script src="js/hero.js?v=23"></script>
