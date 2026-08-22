@@ -452,7 +452,12 @@
   text-transform: uppercase;
   color: var(--n-mute);
 }
-.n-pane > p:last-child { margin-top: 14px; font-size: 0.99rem; max-width: 44ch; }
+:where(.n-pane p) { margin-top: 14px; font-size: 0.99rem; max-width: 44ch; }
+
+/* The closing beat on the product pane. Weight rather than colour: green
+   means "on the record" in this system and rust means "no figure", so
+   borrowing either one to emphasise a sentence would break the code. */
+.n-pane-punch { font-weight: 600; color: var(--n-ink); }
 
 /* ============ THE LIMIT ============
    One line, and it stays. Nama's whole argument is that it says where a
