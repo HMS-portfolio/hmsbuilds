@@ -308,8 +308,21 @@ html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
    .56rem and the 44px touch target has to survive. */
 @media (max-width: 430px) {
   .nav-logo { display: none; }
-  .nav { padding: 3px 5px; gap: 0; }
-  .nav-tabs a { padding: 10px 6px; letter-spacing: 0.06em; }
+  .nav { padding: 3px 4px; gap: 0; }
+  .nav-tabs a { padding: 10px 4px; letter-spacing: 0.03em; }
+
+  /* Safety net, and the reason this is not just tighter padding. The row was
+     measured as fitting once and did not: the measurement was taken before
+     Inter finished loading, and the real face is wider than the fallback, so
+     "Contact" ended up 12px past the capsule with no way to reach it.
+     Scrolling means a font that renders wider on some device degrades to a
+     swipe instead of a tab nobody can tap. */
+  .nav-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
 }
 
 /* ---- the outro headline sits on the INK field, not on paper ----
