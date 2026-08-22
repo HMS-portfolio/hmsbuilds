@@ -24,49 +24,44 @@
 
   var reduce =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce || !("IntersectionObserver" in window)) return;
+  if (reduce) return;
 
-  function print() {
-    if (wrap.classList.contains("is-printed")) return;
-    wrap.classList.add("is-printed");
-    io.disconnect();
-  }
+  /* The wipe is scrubbed by scroll position: the sheet draws itself as you
+     bring it into view, and undraws if you scroll back up.
 
-  var io = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) print();
-      });
-    },
-    { threshold: 0.3 }
-  );
-  io.observe(wrap);
+     Progress is a single custom property, so the only per-frame work is one
+     style write. Reads are batched into a rAF so a fast scroll cannot force
+     layout on every event.
 
-  /* The same fallback hero.js needs, for the same reason. Arriving at /nama
-     through the router means this page was display:none a moment ago, and an
-     IntersectionObserver does not report an element that became visible
-     without anything scrolling. On a tall window the sheet is already in view
-     at that moment, so the observer alone would never print it.
+     The class goes on only once a value has been written, which is what
+     keeps this fail-visible: an unstyled .n-sheet-wrap has no clip-path at
+     all, so a thrown error here leaves a finished sheet rather than an
+     empty box. */
+  var START = 0.90; // sheet top at 90% of the viewport: nothing drawn yet
+  var END = 0.35;   // sheet top at 35%: fully drawn, before you read it
+  var ticking = false;
 
-     Guarded by print()'s own check, so whichever path gets there first wins
-     and the wipe still only ever runs once. */
-  function printIfInView() {
-    var r = wrap.getBoundingClientRect();
+  function paint() {
+    ticking = false;
     var vh = window.innerHeight || document.documentElement.clientHeight || 800;
-    if (r.top < vh * 0.7 && r.bottom > 0) print();
+    var top = wrap.getBoundingClientRect().top;
+    var p = (vh * START - top) / (vh * START - vh * END);
+    if (p < 0) p = 0; else if (p > 1) p = 1;
+    wrap.style.setProperty("--print", p.toFixed(4));
+    wrap.classList.add("is-scrub");
   }
 
-  /* Checked three times, the way hero.js schedules its reveals: once now,
-     because layout may already be settled; once next frame; and once after a
-     timeout, which still fires when requestAnimationFrame is throttled in a
-     background tab. print() makes the repeats free. */
-  function schedule() {
-    printIfInView();
-    requestAnimationFrame(printIfInView);
-    setTimeout(printIfInView, 80);
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(paint);
   }
 
-  window.addEventListener("page:change", schedule);
-  window.addEventListener("load", printIfInView);
-  schedule();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  /* the router shows this page from display:none, so nothing has scrolled and
+     no frame is guaranteed; paint straight away as well as on the next one */
+  window.addEventListener("page:change", function () { paint(); onScroll(); });
+  window.addEventListener("load", paint);
+  paint();
 })();

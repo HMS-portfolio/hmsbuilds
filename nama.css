@@ -374,6 +374,35 @@
   100% { left: 100%; opacity: 0; }
 }
 
+/* ---- the same wipe, scrubbed by the scroll position ----
+   The sheet prints as you scroll it into view instead of firing once on a
+   clock, so the document assembles under your control and reverses if you
+   scroll back up.
+
+   Driven by a custom property rather than an animation-timeline. view()
+   timelines would run this off the main thread and were the first choice,
+   but they could not be verified in the preview environment, and untestable
+   motion is worse than a main-thread repaint on one element.
+
+   --print defaults to 1, so if the class is somehow present without the
+   script having set a value, the sheet is complete rather than clipped. */
+.n-sheet-wrap.is-scrub .n-sheet {
+  clip-path: inset(0 calc((1 - var(--print, 1)) * 100%) 0 0);
+}
+.n-sheet-wrap.is-scrub::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--n-green);
+  left: calc(var(--print, 1) * 100%);
+  /* the edge fades out over the last stretch so it does not park on the
+     right border once the sheet is fully drawn */
+  opacity: clamp(0, calc((1 - var(--print, 1)) * 12), 1);
+}
+
+
 .n-sheet {
   border: 1px solid var(--n-line);
   background: var(--n-paper);
@@ -516,6 +545,9 @@
   /* the finished sheet, with no wipe and no edge */
   .n-sheet-wrap.is-printed .n-sheet { animation: none; }
   .n-sheet-wrap.is-printed::after { display: none; }
+  /* scrub off entirely: finished sheet, no clip, no edge */
+  .n-sheet-wrap.is-scrub .n-sheet { clip-path: none; }
+  .n-sheet-wrap.is-scrub::after { display: none; }
 }
 
 
