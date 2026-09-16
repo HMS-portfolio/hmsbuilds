@@ -25,6 +25,8 @@
 
   function openDialog(dlg) {
     dlg.showModal();
+    // a file reopens at its first line, not wherever the last visit stopped
+    dlg.querySelectorAll(".dossier-shell, .dossier-read").forEach((el) => { el.scrollTop = 0; });
     // start the agent writer only while its case file is open
     if (dlg.id === "dossier-agent") writerStop = startWriter(dlg);
     // same for Nama's deal run

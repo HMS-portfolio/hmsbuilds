@@ -297,6 +297,7 @@
 .dossier-read {
   padding: clamp(30px, 4vw, 56px) clamp(26px, 3.5vw, 50px);
   overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -656,14 +657,35 @@
 @media (max-width: 860px) {
   .dossier {
     width: 96vw;
+    max-width: 96vw;
     height: 94svh;
     max-height: 94svh;
   }
+  /* One scroll for the whole file. A pinned gallery over a scrolling text pane
+     left under half the screen to read in, and a swipe that started on the
+     gallery went nowhere. The gallery is pan-y, so it scrolls away with the page. */
   .dossier-shell {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(240px, 42%) 1fr;
+    grid-template-rows: auto auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
-  .dossier-read { padding: 24px 22px 30px; }
+  .dossier-media { height: clamp(240px, 42svh, 380px); }
+  .dossier-read { padding: 24px 22px 30px; overflow: visible; }
+
+  /* Fade only, no lift: a transformed dialog would become the containing block
+     for the close button below, and it would scroll away with the text. */
+  .dossier,
+  .dossier[open] { transform: none; }
+  @starting-style {
+    .dossier[open] { transform: none; }
+  }
+  .dossier-close {
+    position: fixed;
+    top: calc(3svh + 12px);
+    right: calc(2vw + 12px);
+  }
   .dossier-facts { margin-top: 24px; }
 }
 

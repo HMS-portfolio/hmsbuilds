@@ -25,7 +25,7 @@ var SITE_ROUTES = {
        "<view> · Hamza AlSalamat", and og:site_name plus the Person and WebSite
        nodes in the JSON-LD graph all carry it, so a search for the name still
        has somewhere to land. */
-    title: "Do it... death ain't goin no where - It'll either be a great idea, or a great story",
+    title: "Explore",
     /* desc is the share card — the line under the title in a WhatsApp, LinkedIn
        or iMessage preview. It introduces the person, not the work: projects
        change, and a preview that lists them is out of date the moment one does.
