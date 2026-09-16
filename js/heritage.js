@@ -52,7 +52,7 @@
     fav.type = "image/svg+xml";
     var favSvg =
       "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>" +
-      "<rect width='24' height='24' fill='#1e241c'/>" +
+      "<rect width='24' height='24' fill='#202a1e'/>" +
       "<path d='" + starPath(12, 12, 10, 4.6, 7) + "' fill='#e6bd7c'/></svg>";
     fav.href = "data:image/svg+xml;utf8," + encodeURIComponent(favSvg);
     if (!fav.parentNode) document.head.appendChild(fav);

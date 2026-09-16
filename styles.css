@@ -23,8 +23,8 @@
   --glow: rgba(122, 82, 20, 0.15);
 
   /* --- the splashes: the film's moss taken to near-black --- */
-  --ink: #1e241c;
-  --mat: #20261e;            /* media plates */
+  --ink: #202a1e;
+  --mat: #222c20;            /* media plates */
   --ink-text: #f3f1e6;
   --ink-accent: #e6bd7c;     /* the iris gold, only ever against ink */
   --ink-rose: #d98f68;
