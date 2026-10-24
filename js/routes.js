@@ -60,7 +60,7 @@ var SITE_ROUTES = {
     page: "page-certs",
     path: "/certs",
     title: "Certifications · Hamza AlSalamat",
-    desc: "The paper trail behind the work: MIT MISTI programs and Anthropic Academy coursework, from Claude Code to the Model Context Protocol.",
+    desc: "The paper trail behind the work: a standard of my own, MIT MISTI programs, and Anthropic Academy coursework from Claude Code to the Model Context Protocol.",
     breadcrumb: "Certifications",
   },
   about: {
