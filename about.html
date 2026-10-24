@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="about.css?v=8" />
   <link rel="stylesheet" href="nama.css?v=16" />
   <link rel="stylesheet" href="type.css?v=11" />
+  <link rel="stylesheet" href="certs.css?v=1" />
   <script>
     /* typography swap-in: fade the display faces in once they are ready, with a
        hard ceiling so a slow or failed font fetch can never hide the text */
@@ -910,36 +911,268 @@
         <header class="certs-head">
           <p class="kicker">Certifications</p>
           <h2 class="certs-title">Earned, not <em>claimed</em>.</h2>
-          <p class="certs-sub">Open any one of them. No download, and no need to take my word for it.</p>
+          <p class="certs-sub">The paper trail behind the work. Shuffle through, or hold one up to the light.</p>
         </header>
 
-        <div class="certs-group" id="cert-misti">
-          <div class="certs-grid">
-            <!-- GTL 2026 — the program behind The Car.
-                 href is the no-JS fallback; JS opens it in the in-site viewer. -->
-            <a class="cert-card" id="cert-gtl" href="assets/certs/misti-cert-b.pdf"
-               data-cert-open data-cert-title="MISTI, Global Teaching Labs 2026" rel="noopener">
-              <span class="cert-icon js-najmeh" aria-hidden="true"></span>
-              <div class="cert-meta">
-                <h4>Global Teaching Labs 2026</h4>
-                <p>Certificate of participation and achievement</p>
-                <span class="cert-date">January 2026</span>
-              </div>
-              <span class="cert-open">View certificate →</span>
-            </a>
-
-            <!-- AI Vision Quest 2025 -->
-            <a class="cert-card" id="cert-avq" href="assets/certs/misti-cert-a.pdf"
-               data-cert-open data-cert-title="MISTI Bahrain, AI Vision Quest 2025" rel="noopener">
-              <span class="cert-icon js-najmeh" aria-hidden="true"></span>
-              <div class="cert-meta">
-                <h4>AI Vision Quest 2025</h4>
-                <p>Certificate of excellence and achievement</p>
-                <span class="cert-date">January 2025</span>
-              </div>
-              <span class="cert-open">View certificate →</span>
-            </a>
+        <!-- the pile: built by js/certs.js from the contact sheet below, so the
+             certificates are listed once. Hidden until JS is there to run it. -->
+        <div class="cert-pile" data-cert-pile hidden>
+          <div class="cert-pile-stage" data-pile-stage tabindex="0" role="group"
+               aria-roledescription="carousel" aria-label="Certificate pile. Arrow keys flick through, Enter opens."></div>
+          <div class="cert-pile-caption" aria-live="polite">
+            <span class="cert-pile-issuer" data-pile-issuer></span>
+            <span class="cert-pile-title" data-pile-title></span>
+            <span class="cert-date" data-pile-date></span>
           </div>
+          <div class="cert-pile-controls">
+            <button class="deck-nav cert-pile-nav" type="button" data-pile-prev aria-label="Previous certificate">&larr;</button>
+            <button class="cta ghost cert-pile-shuffle" type="button" data-pile-shuffle>Shuffle</button>
+            <button class="cta cert-pile-view" type="button" data-pile-view>Take a closer look</button>
+            <button class="deck-nav cert-pile-nav" type="button" data-pile-next aria-label="Next certificate">&rarr;</button>
+          </div>
+        </div>
+
+        <div class="certs-group" id="cert-misti">
+          <h3 class="certs-program">MIT MISTI <span>&middot; programs</span></h3>
+          <!-- href is the no-JS fallback; JS opens each in the in-site viewer. -->
+          <ul class="cert-sheet">
+            <li>
+              <a class="cert-print" id="cert-gtl" href="assets/certs/misti-cert-b.webp" data-cert
+                 data-title="Global Teaching Labs 2026" data-issuer="MIT MISTI" data-date="January 2026"
+                 data-pdf="assets/certs/misti-cert-b.pdf">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/misti-cert-b-thumb.webp"
+                       srcset="assets/certs/misti-cert-b-thumb.webp 900w, assets/certs/misti-cert-b.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="637"
+                       alt="Certificate of participation and achievement: Global Teaching Labs 2026, MIT MISTI" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Global Teaching Labs 2026</span>
+                  <span class="cert-date">January 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" id="cert-avq" href="assets/certs/misti-cert-a.webp" data-cert
+                 data-title="AI Vision Quest 2025" data-issuer="MIT MISTI Bahrain" data-date="January 2025"
+                 data-pdf="assets/certs/misti-cert-a.pdf">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/misti-cert-a-thumb.webp"
+                       srcset="assets/certs/misti-cert-a-thumb.webp 900w, assets/certs/misti-cert-a.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="637"
+                       alt="Certificate of excellence and achievement: AI Vision Quest 2025, MIT MISTI Bahrain" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">AI Vision Quest 2025</span>
+                  <span class="cert-date">January 2025</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="certs-group" id="cert-anthropic">
+          <h3 class="certs-program">Anthropic Academy <span>&middot; courses</span></h3>
+          <ul class="cert-sheet">
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-101.webp" data-cert
+                 data-title="Claude 101" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-101.pdf"
+                 data-verify="https://verify.skilljar.com/c/z2k7tfbqir7b">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-101-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-101-thumb.webp 900w, assets/certs/anthropic-claude-101.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Claude 101, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Claude 101</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-code-101.webp" data-cert
+                 data-title="Claude Code 101" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-code-101.pdf"
+                 data-verify="https://verify.skilljar.com/c/izn3nq59vvtm">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-code-101-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-code-101-thumb.webp 900w, assets/certs/anthropic-claude-code-101.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Claude Code 101, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Claude Code 101</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-platform-101.webp" data-cert
+                 data-title="Claude Platform 101" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-platform-101.pdf"
+                 data-verify="https://verify.skilljar.com/c/soa6g2tb52qs">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-platform-101-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-platform-101-thumb.webp 900w, assets/certs/anthropic-claude-platform-101.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Claude Platform 101, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Claude Platform 101</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-ai-fluency-foundations.webp" data-cert
+                 data-title="AI Fluency: Framework &amp; Foundations" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-ai-fluency-foundations.pdf"
+                 data-verify="https://verify.skilljar.com/c/oktshsr25dac">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-ai-fluency-foundations-thumb.webp"
+                       srcset="assets/certs/anthropic-ai-fluency-foundations-thumb.webp 900w, assets/certs/anthropic-ai-fluency-foundations.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: AI Fluency: Framework &amp; Foundations, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">AI Fluency: Framework &amp; Foundations</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-cowork.webp" data-cert
+                 data-title="Introduction to Claude Cowork" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-cowork.pdf"
+                 data-verify="https://verify.skilljar.com/c/7fsd3xq6onh5">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-cowork-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-cowork-thumb.webp 900w, assets/certs/anthropic-claude-cowork.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Introduction to Claude Cowork, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Introduction to Claude Cowork</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-api.webp" data-cert
+                 data-title="Building with the Claude API" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-api.pdf"
+                 data-verify="https://verify.skilljar.com/c/9muxdyobuiai">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-api-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-api-thumb.webp 900w, assets/certs/anthropic-claude-api.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Building with the Claude API, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Building with the Claude API</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-code-in-action.webp" data-cert
+                 data-title="Claude Code in Action" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-code-in-action.pdf"
+                 data-verify="https://verify.skilljar.com/c/5c33w39r3u4k">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-code-in-action-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-code-in-action-thumb.webp 900w, assets/certs/anthropic-claude-code-in-action.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Claude Code in Action, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Claude Code in Action</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-mcp.webp" data-cert
+                 data-title="Introduction to Model Context Protocol" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-mcp.pdf"
+                 data-verify="https://verify.skilljar.com/c/iuykn8uowsnq">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-mcp-thumb.webp"
+                       srcset="assets/certs/anthropic-mcp-thumb.webp 900w, assets/certs/anthropic-mcp.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Introduction to Model Context Protocol, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Introduction to Model Context Protocol</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-claude-enterprise.webp" data-cert
+                 data-title="Deploying Claude Enterprise with Confidence" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-claude-enterprise.pdf"
+                 data-verify="https://verify.skilljar.com/c/a7cgrejr7q6w">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-claude-enterprise-thumb.webp"
+                       srcset="assets/certs/anthropic-claude-enterprise-thumb.webp 900w, assets/certs/anthropic-claude-enterprise.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: Deploying Claude Enterprise with Confidence, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">Deploying Claude Enterprise with Confidence</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-ai-fluency-creative.webp" data-cert
+                 data-title="AI Fluency for Creative Work" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-ai-fluency-creative.pdf"
+                 data-verify="https://verify.skilljar.com/c/8iimyfttocb6">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-ai-fluency-creative-thumb.webp"
+                       srcset="assets/certs/anthropic-ai-fluency-creative-thumb.webp 900w, assets/certs/anthropic-ai-fluency-creative.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: AI Fluency for Creative Work, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">AI Fluency for Creative Work</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="cert-print" href="assets/certs/anthropic-ai-fluency-educators.webp" data-cert
+                 data-title="AI Fluency for Educators" data-issuer="Anthropic Academy" data-date="October 2026"
+                 data-pdf="assets/certs/anthropic-ai-fluency-educators.pdf"
+                 data-verify="https://verify.skilljar.com/c/ezozvp5jooye">
+                <span class="cert-print-mat">
+                  <img src="assets/certs/anthropic-ai-fluency-educators-thumb.webp"
+                       srcset="assets/certs/anthropic-ai-fluency-educators-thumb.webp 900w, assets/certs/anthropic-ai-fluency-educators.webp 2400w"
+                       sizes="(max-width: 640px) 90vw, 340px" width="900" height="696"
+                       alt="Certificate of completion: AI Fluency for Educators, Anthropic Academy" loading="lazy" decoding="async" />
+                </span>
+                <span class="cert-print-cap">
+                  <span class="cert-print-title">AI Fluency for Educators</span>
+                  <span class="cert-date">October 2026</span>
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -1267,15 +1500,30 @@
     </div>
     </div><!-- /page-contact -->
 
-    <!-- in-site certificate viewer: presents the PDF inside the website -->
-    <dialog class="cert-viewer" id="cert-viewer" aria-label="Certificate viewer">
-      <div class="cert-viewer-shell">
-        <div class="cert-viewer-bar">
-          <span class="cert-viewer-title" data-cert-viewer-title>Certificate</span>
-          <a class="cert-viewer-download" data-cert-viewer-download href="#" target="_blank" rel="noopener">Open full PDF ↗</a>
-          <button class="cert-viewer-close" type="button" data-close aria-label="Close certificate">&times;</button>
+    <!-- in-site certificate viewer: the certificate as an image, grown out of
+         the print that was clicked. js/certs.js drives it. -->
+    <dialog class="cert-lightbox" id="cert-lightbox" aria-label="Certificate viewer">
+      <!-- the shell is what goes full screen: browsers refuse a <dialog> itself -->
+      <div class="lb-shell" data-lb-shell>
+      <div class="lb-bar">
+        <div class="lb-meta" aria-live="polite">
+          <span class="lb-issuer" data-lb-issuer></span>
+          <span class="lb-title" data-lb-title>Certificate</span>
         </div>
-        <iframe class="cert-viewer-frame" data-cert-viewer-frame title="Certificate document" src="about:blank"></iframe>
+        <div class="lb-actions">
+          <a class="lb-link" data-lb-verify href="#" target="_blank" rel="noopener">Verify ↗</a>
+          <a class="lb-link" data-lb-pdf href="#" target="_blank" rel="noopener">PDF ↗</a>
+          <button class="lb-btn" type="button" data-lb-fullscreen aria-label="Full screen" hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+          <button class="lb-btn lb-close" type="button" data-lb-close aria-label="Close certificate" autofocus>&times;</button>
+        </div>
+      </div>
+      <div class="lb-stage" data-lb-stage>
+        <img class="lb-img" data-lb-img alt="" />
+      </div>
+      <button class="lb-nav lb-prev" type="button" data-lb-prev aria-label="Previous certificate">&larr;</button>
+      <button class="lb-nav lb-next" type="button" data-lb-next aria-label="Next certificate">&rarr;</button>
       </div>
     </dialog>
   </main>
@@ -1292,5 +1540,6 @@
   <script src="js/heritage.js?v=13"></script>
   <script src="js/about.js?v=4"></script>
   <script src="js/nama.js?v=5"></script>
+  <script src="js/certs.js?v=1"></script>
 </body>
 </html>

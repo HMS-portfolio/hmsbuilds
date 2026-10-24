@@ -76,50 +76,14 @@
       // spotlight the program's cert (CSS :target can't fire on the #certs route)
       const target = document.getElementById("cert-gtl");
       if (target) {
-        document.querySelectorAll(".cert-card.is-linked")
+        document.querySelectorAll(".cert-print.is-linked")
           .forEach((c) => c.classList.remove("is-linked"));
         window.setTimeout(() => target.classList.add("is-linked"), 60);
       }
     });
   });
 
-  /* ---- in-site certificate viewer: present the PDF inside the site ---- */
-  const certViewer = document.getElementById("cert-viewer");
-  if (certViewer && typeof certViewer.showModal === "function") {
-    const frame = certViewer.querySelector("[data-cert-viewer-frame]");
-    const titleEl = certViewer.querySelector("[data-cert-viewer-title]");
-    const dl = certViewer.querySelector("[data-cert-viewer-download]");
-
-    function openCert(src, title) {
-      if (!src) return;
-      if (titleEl) titleEl.textContent = title || "Certificate";
-      if (dl) dl.href = src;
-      if (frame) frame.src = src; // browser's built-in PDF view, inline
-      certViewer.showModal();
-    }
-
-    function closeCert() {
-      certViewer.close();
-      if (frame) frame.src = "about:blank"; // stop rendering the PDF
-    }
-
-    document.querySelectorAll("[data-cert-open]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault(); // don't follow the fallback href into a new tab
-        openCert(el.getAttribute("href"), el.getAttribute("data-cert-title"));
-      });
-    });
-
-    certViewer.querySelectorAll("[data-close]").forEach((b) =>
-      b.addEventListener("click", closeCert));
-    certViewer.addEventListener("click", (e) => {
-      if (e.target === certViewer) closeCert();
-    });
-    certViewer.addEventListener("cancel", (e) => {
-      e.preventDefault();
-      closeCert();
-    });
-  }
+  // the certificate pile and viewer live in js/certs.js
 
   /* ============================================================
      2. DECKS — swipeable card-stack galleries

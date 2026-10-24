@@ -1,0 +1,367 @@
+/* ============================================================
+   Certifications — the pile, the contact sheet, the viewer.
+   Behaviour lives in js/certs.js. Loaded after type.css so it
+   has the last word over the shared card rules there.
+   ============================================================ */
+
+/* ---- a print: the certificate on a white mat, like a photo ---- */
+.cert-print-mat {
+  display: block;
+  padding: clamp(6px, 1.1vw, 10px);
+  background: #fff;
+  border-radius: 4px;
+  box-shadow:
+    0 1px 1px rgba(28, 31, 26, 0.06),
+    0 6px 14px rgba(28, 31, 26, 0.08),
+    0 22px 44px rgba(28, 31, 26, 0.12);
+  transition: box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.cert-print-mat img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+/* ============ the pile ============ */
+.cert-pile {
+  max-width: 760px;
+  margin: 0 auto clamp(70px, 10vw, 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.cert-pile[hidden] { display: none; }
+
+.cert-pile-stage {
+  position: relative;
+  width: min(560px, 84vw);
+  aspect-ratio: 1.36;
+  margin: 12px 0 clamp(26px, 4vw, 40px);  /* the deeper prints hang below the stage */
+  isolation: isolate;         /* keep the pile's z-indexes from reaching the caption */
+  touch-action: pan-y;        /* horizontal drags are ours, vertical ones still scroll */
+  outline: none;
+}
+.cert-pile-stage:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 22px;
+  border-radius: 6px;
+}
+
+.pile-card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  /* --x/--y/--r: how this print happens to lie; --d: how deep in the pile */
+  transform:
+    translate(calc(var(--x) * 1px), calc(var(--y) * 1px + var(--d) * 7px))
+    rotate(calc(var(--r) * 1deg))
+    scale(calc(1 - var(--d) * 0.025));
+  transition: transform 0.55s var(--ease-pen), opacity 0.4s ease;
+  will-change: transform;
+}
+.pile-card .cert-print-mat { width: 100%; }
+.pile-card img { pointer-events: none; }
+
+/* the top print sits nearly square to the viewer, the rest stay loose */
+.pile-card.top {
+  transform:
+    translate(calc(var(--x) * 0.25px), calc(var(--y) * 0.25px))
+    rotate(calc(var(--r) * 0.2deg));
+  cursor: grab;
+}
+.pile-card.top .cert-print-mat {
+  box-shadow:
+    0 2px 3px rgba(28, 31, 26, 0.06),
+    0 14px 28px rgba(28, 31, 26, 0.1),
+    0 40px 80px rgba(28, 31, 26, 0.16);
+}
+.pile-card.dragging { transition: none; cursor: grabbing; }
+.pile-card[data-gone] { opacity: 0; pointer-events: none; }
+
+/* shuffle: every print skids out across the table, then gathers back */
+.is-shuffling .pile-card {
+  opacity: 1;
+  transform:
+    translate(calc(var(--sx) * 1px), calc(var(--sy) * 1px))
+    rotate(calc(var(--sr) * 1deg));
+  transition-delay: calc(var(--k) * 22ms);
+}
+
+.cert-pile-caption {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-height: 5.4em;          /* long titles wrap without jolting the controls */
+  text-align: center;
+  padding-inline: 12px;
+}
+.cert-pile-issuer {
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cert-pile-title {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  line-height: 1.2;
+  color: var(--text);
+  max-width: 30ch;
+}
+
+.cert-pile-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.cert-pile-controls .cta { cursor: pointer; }
+.cert-pile-nav { width: 44px; height: 44px; }
+
+/* ============ the contact sheet ============ */
+.certs-group {
+  max-width: 1040px;
+  margin: 0 auto clamp(48px, 7vw, 84px);
+}
+.certs-program span { color: var(--muted); }
+
+.cert-sheet {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  gap: clamp(28px, 3.4vw, 40px) clamp(18px, 2.6vw, 30px);
+}
+
+.cert-print {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--text);
+  text-decoration: none;
+  scroll-margin-top: 120px;
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+/* a hand-laid sheet: nothing quite square, nothing in a pattern you notice */
+.cert-sheet li:nth-child(5n + 1) .cert-print { --tilt: -1.4deg; }
+.cert-sheet li:nth-child(5n + 2) .cert-print { --tilt: 0.9deg; }
+.cert-sheet li:nth-child(5n + 3) .cert-print { --tilt: -0.5deg; }
+.cert-sheet li:nth-child(5n + 4) .cert-print { --tilt: 1.5deg; }
+.cert-sheet li:nth-child(5n + 5) .cert-print { --tilt: -1deg; }
+
+.cert-print:hover,
+.cert-print:focus-visible {
+  transform: translateY(-6px) rotate(0deg) scale(1.025);
+}
+.cert-print:hover .cert-print-mat,
+.cert-print:focus-visible .cert-print-mat {
+  box-shadow:
+    0 2px 3px rgba(28, 31, 26, 0.06),
+    0 14px 28px rgba(28, 31, 26, 0.1),
+    0 36px 70px rgba(28, 31, 26, 0.16);
+}
+.cert-print:focus-visible { outline: none; }
+.cert-print:focus-visible .cert-print-mat { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* the deep-linked cert (arrived from The Car) gets a brass ring */
+.cert-print.is-linked .cert-print-mat,
+.cert-print:target .cert-print-mat {
+  box-shadow:
+    0 0 0 2px rgba(138, 90, 24, 0.75),
+    0 14px 28px rgba(28, 31, 26, 0.1),
+    0 6px 34px rgba(128, 80, 13, 0.2);
+}
+
+.cert-print-cap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-inline: 2px;
+}
+.cert-print-title {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+/* ============ the viewer ============ */
+.cert-lightbox {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  --lb-chrome: 140px;         /* bar + stage padding, kept clear of the picture */
+  color: var(--ink-text);
+  background-color: rgba(20, 24, 19, 0.94);
+  transition: background-color 0.34s ease;
+}
+.lb-shell {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.cert-lightbox::backdrop { background: transparent; }
+.lb-shell:fullscreen { background-color: #0e110d; }
+.lb-shell:-webkit-full-screen { background-color: #0e110d; }
+
+/* `backwards`, not `both`: once the fade-in is done the transition has to own
+   background-color again, or the close fade would have nothing to animate */
+@keyframes lb-ground { from { background-color: rgba(20, 24, 19, 0); } }
+@keyframes lb-chrome { from { opacity: 0; transform: translateY(-6px); } }
+.cert-lightbox.is-open { animation: lb-ground 0.38s ease backwards; }
+.cert-lightbox.is-open .lb-bar,
+.cert-lightbox.is-open .lb-nav { animation: lb-chrome 0.36s 0.14s ease backwards; }
+
+.cert-lightbox.is-closing { background-color: rgba(20, 24, 19, 0); }
+.cert-lightbox.is-closing .lb-bar,
+.cert-lightbox.is-closing .lb-nav { opacity: 0; transition: opacity 0.18s ease; }
+
+.lb-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px clamp(14px, 3vw, 28px);
+}
+.lb-meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.lb-issuer {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-accent);
+}
+.lb-title {
+  font-family: var(--font-title);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lb-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lb-link {
+  padding: 12px 8px;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-accent);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+.lb-link:hover { opacity: 0.75; }
+.lb-link[hidden],
+.lb-btn[hidden] { display: none; }
+
+.lb-btn,
+.lb-nav {
+  display: grid;
+  place-items: center;
+  color: var(--ink-text);
+  background: rgba(243, 241, 230, 0.06);
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease, transform 0.3s var(--ease-pen);
+}
+.lb-btn { width: 42px; height: 42px; font-size: 1.5rem; line-height: 1; }
+.lb-btn:hover,
+.lb-nav:hover {
+  border-color: var(--ink-accent);
+  color: var(--ink-accent);
+  background: rgba(230, 189, 124, 0.12);
+}
+.lb-close:hover { transform: rotate(90deg); }
+.lb-btn:focus-visible,
+.lb-nav:focus-visible,
+.lb-link:focus-visible { outline: 2px solid var(--ink-accent); outline-offset: 2px; }
+
+.lb-stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: clamp(6px, 1.5vw, 18px) clamp(12px, 8vw, 110px) clamp(20px, 4vw, 44px);
+  touch-action: pan-y pinch-zoom;
+}
+.lb-img {
+  width: auto;
+  height: auto;
+  max-width: min(100%, 1700px);
+  /* a % height would resolve against an indefinite grid track and do nothing,
+     so cap against the viewport minus the bar and the stage padding */
+  max-height: calc(100vh - var(--lb-chrome));
+  max-height: calc(100dvh - var(--lb-chrome));
+  object-fit: contain;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  font-size: 1.3rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.lb-prev { left: clamp(10px, 2.4vw, 32px); }
+.lb-next { right: clamp(10px, 2.4vw, 32px); }
+
+@media (max-width: 640px) {
+  .cert-lightbox { --lb-chrome: 220px; }
+  .lb-bar { flex-wrap: wrap; row-gap: 4px; }
+  .lb-meta { flex-basis: 100%; order: -1; }
+  .lb-actions { margin-left: auto; }
+  .lb-stage { padding: 6px 12px 92px; }
+  /* thumbs reach the bottom of a phone, not its middle edges */
+  .lb-nav { top: auto; bottom: 22px; margin-top: 0; }
+  .lb-prev { left: calc(50% - 64px); }
+  .lb-next { right: calc(50% - 64px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pile-card,
+  .cert-print,
+  .cert-print-mat,
+  .cert-lightbox,
+  .lb-btn { transition: none !important; }
+  .cert-lightbox.is-open,
+  .cert-lightbox.is-open .lb-bar,
+  .cert-lightbox.is-open .lb-nav { animation: none; }
+}
