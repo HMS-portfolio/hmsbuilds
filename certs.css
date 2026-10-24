@@ -41,6 +41,7 @@
   margin: 12px 0 clamp(26px, 4vw, 40px);  /* the deeper prints hang below the stage */
   isolation: isolate;         /* keep the pile's z-indexes from reaching the caption */
   touch-action: pan-y;        /* horizontal drags are ours, vertical ones still scroll */
+  overscroll-behavior-x: contain;  /* a sideways trackpad swipe here is not "go back" */
   outline: none;
 }
 .cert-pile-stage:focus-visible {
@@ -207,6 +208,7 @@
   padding: 0;
   border: 0;
   overflow: hidden;
+  overscroll-behavior: contain;
   --lb-chrome: 140px;         /* bar + stage padding, kept clear of the picture */
   color: var(--ink-text);
   background-color: rgba(20, 24, 19, 0.94);

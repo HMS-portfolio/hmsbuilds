@@ -43,6 +43,34 @@
   const n = items.length;
   const wrap = (i) => (i + n) % n;
 
+  /* ---- two-finger trackpad swipes ----
+     A Mac trackpad swipe is not a pointer drag: it arrives as a stream of
+     horizontal wheel events, then keeps coming as momentum for up to a
+     second after the fingers lift. So: act once the swipe has travelled
+     far enough, then stay locked until the stream goes quiet, or a single
+     swipe would flick through half the pile. Vertical-leaning wheels are
+     left alone so the page still scrolls. */
+  const WHEEL_SWIPE = 40;     // px of horizontal travel that counts as a swipe
+  const WHEEL_IDLE_MS = 180;  // quiet gap that marks the end of one swipe's momentum
+
+  function onTrackpadSwipe(el, onSwipe) {
+    let travel = 0;
+    let locked = false;
+    let idle = null;
+    el.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();       // no page side-scroll, no browser back/forward
+      window.clearTimeout(idle);
+      idle = window.setTimeout(() => { travel = 0; locked = false; }, WHEEL_IDLE_MS);
+      if (locked) return;
+      travel += e.deltaX;
+      if (Math.abs(travel) < WHEEL_SWIPE) return;
+      locked = true;
+      onSwipe(travel > 0 ? 1 : -1);   // +1: fingers moved left, so go forward
+      travel = 0;
+    }, { passive: false });
+  }
+
   /* ============================================================
      2. VIEWER — grow out of the print, swap to full-res when ready
      ============================================================ */
@@ -248,6 +276,7 @@
       }
     });
     lbStage.addEventListener("pointercancel", () => { swipeX = null; });
+    onTrackpadSwipe(lb, (dir) => go(dir));
   }
 
   // the contact sheet: each print opens the viewer instead of the raw image
@@ -422,6 +451,10 @@
   pile.querySelector("[data-pile-shuffle]").addEventListener("click", shuffle);
   pile.querySelector("[data-pile-view]").addEventListener("click", () =>
     openViewer(order[0], topImg()));
+
+  // fingers left: the top print is tossed off to the left; fingers right:
+  // the last one slides back in from the left, the way prev() animates
+  onTrackpadSwipe(stage, (dir) => (dir > 0 ? next(-1) : prev()));
 
   stage.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") { e.preventDefault(); next(1); }
