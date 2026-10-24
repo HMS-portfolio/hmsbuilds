@@ -94,7 +94,7 @@ em, i,
   line-height: var(--leading-title);
   letter-spacing: var(--track-title);
 }
-.card-body h3, .cert-meta h4, .contact-v, .branch-t, .arenas-label {
+.card-body h3, .contact-v, .branch-t, .arenas-label {
   font-family: var(--font-title);
   font-style: normal;
   font-weight: 600;
@@ -115,7 +115,7 @@ em, i,
   letter-spacing: 0;
   text-wrap: pretty;
 }
-.card-body p, .cert-meta p, .dossier-body, .contact-note,
+.card-body p, .dossier-body, .contact-note,
 .contact-primary-note, .arena-note, .outro-note,
 .film-hint, .deck-hint, .outro-foot, .contact-why li, .now-list li {
   font-family: var(--font-body);
@@ -123,7 +123,7 @@ em, i,
   font-weight: 400;
   line-height: var(--leading-body);
 }
-.card-body p, .cert-meta p {
+.card-body p {
   font-family: var(--font-title);
   font-style: italic;
   font-size: var(--step-1);
@@ -157,7 +157,7 @@ em, i,
 .about-beat em { font-style: normal; color: var(--accent); }
 
 /* ---- small caps labels — Inter, always ---- */
-.kicker, .card-tag, .cert-date, .cert-open, .nav-tabs a, .cta,
+.kicker, .card-tag, .cert-date, .nav-tabs a, .cta,
 .contact-k, .contact-why-head, .dossier-idx, .dossier-facts span,
 .branch-k, .card-index, .card-open-cue, .now-label {
   font-family: var(--font-body);
@@ -191,11 +191,10 @@ html.fonts-ready .about-head,
 html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
 
 /* interactive type moves, never jumps */
-.nav-tabs a, .cta, .card-body h3, .contact-v, .branch-t, .cert-meta h4 {
+.nav-tabs a, .cta, .card-body h3, .contact-v, .branch-t {
   transition: color 0.35s ease, letter-spacing 0.35s ease, opacity 0.3s ease;
 }
-.work-card:hover .card-body h3,
-.cert-card:hover .cert-meta h4 { letter-spacing: -0.004em; }
+.work-card:hover .card-body h3 { letter-spacing: -0.004em; }
 
 @media (prefers-reduced-motion: reduce) {
   .work-title, .certs-title, .contact-title, .about-head, .outro-line {
@@ -229,8 +228,8 @@ html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
       wraps to two lines grew taller than its neighbours, so the row's
       bottom edge stepped. Make the card a flex column, let the body
       absorb the slack, and pin the tag to a shared baseline. */
-.work-grid, .certs-grid, .contact-grid { align-items: stretch; }
-.work-card, .cert-card, .contact-card { display: flex; flex-direction: column; height: 100%; }
+.work-grid, .contact-grid { align-items: stretch; }
+.work-card, .contact-card { display: flex; flex-direction: column; height: 100%; }
 .card-media { flex: none; }
 .card-body { flex: 1; display: flex; flex-direction: column; }
 .card-tag { margin-top: auto; padding-top: 14px; }
@@ -244,7 +243,7 @@ html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
 
 /* 3 · SHADOW — a single wide blur reads flat. Real depth is layered:
       a tight contact shadow, a mid lift, then a wide ambient. */
-.work-card, .cert-card, .contact-card, .branch-card, .proof-tile, .arena-tile {
+.work-card, .contact-card, .branch-card, .proof-tile, .arena-tile {
   box-shadow:
     0 1px 1px rgba(28, 31, 26, 0.04),
     0 4px 8px rgba(28, 31, 26, 0.05),
@@ -253,7 +252,7 @@ html.fonts-ready .outro-line { letter-spacing: var(--track-display); }
               box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
               border-color 0.35s ease;
 }
-.work-card:hover, .cert-card:hover, .contact-card:hover, .branch-card:hover {
+.work-card:hover, .contact-card:hover, .branch-card:hover {
   transform: translateY(-5px);
   box-shadow:
     0 2px 3px rgba(28, 31, 26, 0.05),

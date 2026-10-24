@@ -1157,7 +1157,7 @@ html { scroll-padding-top: clamp(78px, 12vh, 112px); }
   .cta { padding: 15px 26px; font-size: 0.7rem; }
   .deck-nav { width: 44px; height: 44px; }
   .dossier-close,
-  .cert-viewer-close { width: 44px; height: 44px; }
+  .lb-btn { width: 44px; height: 44px; }
 }
 
 @media (max-width: 560px) {
