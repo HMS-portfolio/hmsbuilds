@@ -57,18 +57,63 @@
      shows the next one, so hovering again rewards the second look. */
   var turn = {};
 
-  function nextSrc(star) {
-    var list = (star.getAttribute("data-photo") || "")
+  function photosOf(star) {
+    return (star.getAttribute("data-photo") || "")
       .split(",")
       .map(function (s) { return s.trim(); })
       .filter(Boolean);
+  }
 
+  /* the photo this star will show on its next visit, without spending the turn */
+  function peekSrc(star) {
+    var list = photosOf(star);
+    return list.length ? list[turn[list[0]] || 0] : null;
+  }
+
+  function nextSrc(star) {
+    var list = photosOf(star);
     if (!list.length) return null;
 
     var key = list[0];
     var at = turn[key] || 0;
     turn[key] = (at + 1) % list.length;
     return list[at];
+  }
+
+  /* ---- loading ahead of the pointer ----
+     The hover used to wait on the network: nothing was fetched until a star
+     was first lit, so the wash arrived late. Now a photo is fetched AND
+     decoded before it is needed — each star's first photo as the sky nears
+     the viewport, and a star's next photo as soon as its current one shows.
+     The decoded images are held so the browser does not drop them again. */
+  var loading = {};   // url -> callbacks waiting on it
+  var held = [];
+
+  function load(src, done) {
+    if (known[src] === false) return;
+    if (known[src] === true) { if (done) done(); return; }
+    if (loading[src]) { if (done) loading[src].push(done); return; }
+
+    loading[src] = done ? [done] : [];
+    var img = new Image();
+    img.decoding = "async";
+    img.onload = function () {
+      var finish = function () {
+        known[src] = true;
+        held.push(img);
+        var waiting = loading[src] || [];
+        delete loading[src];
+        waiting.forEach(function (fn) { fn(); });
+      };
+      // decode before the fade, so its first frame already has the photo
+      if (img.decode) img.decode().then(finish, finish);
+      else finish();
+    };
+    img.onerror = function () {
+      known[src] = false;
+      delete loading[src];
+    };
+    img.src = src;
   }
 
   function showWash(src) {
@@ -86,23 +131,10 @@
   /* Only wash once we know the file exists — a missing photo should be
      invisible to the visitor, not a broken frame. */
   function requestWash(src) {
-    if (known[src] === false) return;
-
-    if (known[src] === true) {
-      showWash(src);
-      return;
-    }
-
-    var probe = new Image();
-    probe.onload = function () {
-      known[src] = true;
+    load(src, function () {
       // the pointer may have moved on while this loaded
       if (pending === src) showWash(src);
-    };
-    probe.onerror = function () {
-      known[src] = false;
-    };
-    probe.src = src;
+    });
   }
 
   /* pointerenter and focus can both fire for one visit (clicking a star does
@@ -118,6 +150,10 @@
     pending = src;
     if (src) requestWash(src);
     else if (activeSrc) clearWash();
+
+    // the next visit to this star shows its next photo: have it ready
+    var upcoming = peekSrc(star);
+    if (upcoming && upcoming !== src) load(upcoming);
   }
 
   function unlight() {
@@ -136,4 +172,21 @@
 
   /* leaving the whole sky always resets it */
   stage.addEventListener("pointerleave", unlight);
+
+  /* Warm every star's first photo once the sky is about to be seen. Only
+     where the wash can actually show: phones hide it (about.css), and a
+     touch screen has no hover to light a star, so they download nothing. */
+  var washes = wash && window.getComputedStyle(wash).display !== "none";
+  var hovers = window.matchMedia("(hover: hover)").matches;
+  if (washes && hovers && "IntersectionObserver" in window) {
+    var warmer = new IntersectionObserver(function (entries) {
+      if (!entries.some(function (e) { return e.isIntersecting; })) return;
+      warmer.disconnect();
+      stars.forEach(function (star) {
+        var first = peekSrc(star);
+        if (first) load(first);
+      });
+    }, { rootMargin: "600px 0px" });
+    warmer.observe(stage);
+  }
 })();

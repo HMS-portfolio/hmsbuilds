@@ -100,7 +100,9 @@
   background-repeat: no-repeat;
   opacity: 0;
   filter: saturate(0.9);
-  transition: opacity 0.75s ease, transform 1.2s var(--ease-pen);
+  /* quick to arrive, slow to settle: the photo is there almost at once, and
+     the slight zoom keeps drifting in after it has landed */
+  transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.9s var(--ease-pen);
   transform: scale(1.03);
   pointer-events: none;
   /* fade the photo out at the edges so it reads as atmosphere */
