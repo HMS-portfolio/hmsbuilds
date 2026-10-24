@@ -7,7 +7,8 @@ behind the constellation.
 | Star                                | Filename                                                           | Status     |
 |-------------------------------------|--------------------------------------------------------------------|------------|
 | Horsemanship                        | `horsemanship-4/-5/-6.webp` then `horsemanship.webp` · `-2` · `-3`  | live (6)   |
-| Wrestling · Jiu-jitsu · Kickboxing  | `mma.webp` · `mma-2.webp`                                           | live (2)   |
+| Wrestling · Jiu-jitsu               | `mma.webp` · `mma-2.webp` · `mma-3.webp`                            | live (3)   |
+| Kickboxing                          | `kickboxing.webp` then the three `mma` shots                       | live (4)   |
 | Wildlife & Outdoors                 | `outdoors.webp` · `-2` · `-3` · `-4` · `-5`                         | live (5)   |
 | Hunting                             | `hunting.webp` · `hunting-2.webp`                                   | live (2)   |
 | Archery                             | `archery.webp`                                                      | empty slot |
@@ -23,11 +24,19 @@ projects rather than here, and are named directly in `index.html`:
 | AI native builds    | `assets/paperly/paperly-1.jpeg` · `paperly-2.jpeg`          |
 | STEM & engineering  | `assets/misti/misti-1.jpg` · `misti-9.jpg` · `misti-4.jpg`  |
 
-**The three combat stars share the `mma.*` photos.** They are one pursuit, and both photos are
+**The three combat stars share the `mma.*` photos.** They are one pursuit, and those photos are
 team shots of the gym rather than of a single discipline, so assigning one to each would invent
 a distinction the images do not contain. Useful side effect: `about.js` keys its rotation
-counter on the *first* filename in the list, so all three share one counter and moving between
-them alternates the photos instead of repeating the same frame.
+counter on the *first* filename in the list, so Wrestling and Jiu-jitsu share one counter and
+moving between them alternates the photos instead of repeating the same frame.
+
+**Kickboxing leads with its own frame.** `kickboxing.webp` is stand-up drilling in stance, a
+photo that genuinely is that discipline, so it comes first and gives Kickboxing its own counter;
+the shared team shots follow it.
+
+**Size.** The wash shows at 30% opacity behind a soft mask, so these are encoded at 1280–1600px
+wide (cwebp q65–74). Anything heavier only slows the hover. `about.js` also fetches and decodes
+each star's first photo as the sky nears the viewport, so keep new files in the same range.
 
 An empty slot is invisible to visitors: `js/about.js` checks whether the file
 loads and simply skips the photo wash if it is missing, so the star still lights
