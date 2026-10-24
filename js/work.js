@@ -67,18 +67,59 @@
     });
   });
 
+  /* ---- the seal: The Standard, pressed at the foot of a case file ----
+     Only on dossiers marked data-standard (the work that is wholly mine).
+     One template, stamped into each, so the seal is defined exactly once.
+     It is a quiet mark, not a banner: it sits under the facts and only
+     announces itself on hover. */
+  const SEAL_HREF = "/certs";
+  const heptagram = (r) => {
+    const pts = Array.from({ length: 7 }, (_, i) => {
+      const a = (-90 + (i * 360) / 7) * (Math.PI / 180);
+      return [r * Math.cos(a), r * Math.sin(a)];
+    });
+    return "M" + Array.from({ length: 7 }, (_, i) => pts[(i * 3) % 7])
+      .map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" L") + " Z";
+  };
+  const STAR = heptagram(11);
+
+  document.querySelectorAll(".dossier[data-standard] .dossier-read").forEach((read, i) => {
+    const ring = `seal-ring-${i}`;   // textPath needs an id, so each seal gets its own
+    const seal = document.createElement("a");
+    seal.className = "dossier-seal";
+    seal.href = SEAL_HREF;
+    seal.setAttribute("data-certs-link", "");
+    seal.setAttribute("data-cert-target", "cert-standard");
+    seal.setAttribute("data-cert-reveal", "");
+    seal.setAttribute("aria-label", "Built to The Standard. See the certificate");
+    seal.innerHTML =
+      `<svg class="dossier-seal-mark" viewBox="0 0 64 64" aria-hidden="true">` +
+        `<defs><path id="${ring}" d="M32,32 m-23,0 a23,23 0 1,1 46,0 a23,23 0 1,1 -46,0"/></defs>` +
+        `<circle cx="32" cy="32" r="30.5" fill="none" stroke="currentColor" stroke-width="1"/>` +
+        `<circle cx="32" cy="32" r="17" fill="none" stroke="currentColor" stroke-width="0.5"/>` +
+        `<text><textPath href="#${ring}" textLength="142" lengthAdjust="spacing">THE STANDARD · BY HIS OWN MEASURE ·</textPath></text>` +
+        `<path transform="translate(32 32)" fill="currentColor" d="${STAR}"/>` +
+      `</svg>` +
+      `<span class="dossier-seal-text"><span>Built to</span>The Standard</span>`;
+    read.appendChild(seal);
+  });
+
   // a certs link inside a dossier: close the case file so it doesn't sit on top
-  // of the certifications page. The link's href="#certs" still routes the page.
+  // of the certifications page. The link's href="/certs" still routes the page.
+  // data-cert-target picks the cert to spotlight; data-cert-reveal also opens it.
+  const REVEAL_AFTER_MS = 420;   // let the certs page settle in before the viewer grows
   document.querySelectorAll("[data-certs-link]").forEach((link) => {
     link.addEventListener("click", () => {
       const dlg = link.closest(".dossier");
       if (dlg && dlg.open) closeDialog(dlg);
-      // spotlight the program's cert (CSS :target can't fire on the #certs route)
-      const target = document.getElementById("cert-gtl");
-      if (target) {
-        document.querySelectorAll(".cert-print.is-linked")
-          .forEach((c) => c.classList.remove("is-linked"));
-        window.setTimeout(() => target.classList.add("is-linked"), 60);
+      // spotlight the cert (CSS :target can't fire on the /certs route)
+      const target = document.getElementById(link.dataset.certTarget || "cert-gtl");
+      if (!target) return;
+      document.querySelectorAll(".cert-print.is-linked")
+        .forEach((c) => c.classList.remove("is-linked"));
+      window.setTimeout(() => target.classList.add("is-linked"), 60);
+      if (link.hasAttribute("data-cert-reveal")) {
+        window.setTimeout(() => target.click(), REVEAL_AFTER_MS);
       }
     });
   });
